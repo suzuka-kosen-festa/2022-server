@@ -8,7 +8,7 @@ on:
 jobs:
   format:
     name: run lint:fix
-    runs-on:ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
