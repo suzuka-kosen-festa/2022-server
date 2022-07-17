@@ -1,4 +1,4 @@
-name: lint
+name: lint and test
 
 on:
    push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
    eslint:
-      name: CI, Lint
+      name: CI, Lint, Test
       runs-on: ubuntu-latest
       steps:
          - name: Checkout branch
@@ -39,3 +39,6 @@ jobs:
 
          - name: Lint types and code
            run: yarn lint
+         
+         - name: Run tests
+           run: yarn test
