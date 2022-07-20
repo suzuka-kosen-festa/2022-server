@@ -1,0 +1,15 @@
+parser: '@typescript-eslint/parser'
+parserOptions:
+   project: ./tsconfig.json
+extends:
+   - eslint:recommended
+   - plugin:import/typescript
+   - plugin:import/errors
+   - plugin:import/warnings
+   - prettier
+plugins:
+   - unused-imports
+rules:
+   no-unused-vars: off
+   no-undef: off
+   unused-imports/no-unused-imports: error
