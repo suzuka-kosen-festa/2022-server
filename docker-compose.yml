@@ -2,6 +2,8 @@ version: '3'
 services:
   server:
     container_name: server
+    image: node:16-alpine
+    working_dir: /server
     tty: true
     volumes:
       - .:/server:cached
