@@ -34,7 +34,8 @@ jobs:
                  ${{ runner.os }}-yarn-
 
          - name: Install dependencies
-           run: yarn install --frozen-lockfile --ignore-engines
+           run: yarn install --frozen-lockfile
+
 
          - name: Lint types and code
            run: yarn lint
