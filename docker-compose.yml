@@ -2,15 +2,12 @@ version: '3'
 services:
   server:
     container_name: server
-    build: 
-      context: .
-      dockerfile: ./Dockerfile
     tty: true
     volumes:
       - .:/server:cached
       - /server/node_modules
     ports:
-      - 3000:3000
+      - 6000
 
   db:
     image: postgres:14.4
