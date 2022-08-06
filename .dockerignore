@@ -1,2 +1,9 @@
 ./node_modules
 ./dist
+./.github
+./eslintrc.yml
+./.prettierrc
+./README.md
+./renovate.json
+./Dockerfile_build
+./docker-compose.yml

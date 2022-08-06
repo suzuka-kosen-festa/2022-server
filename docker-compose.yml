@@ -2,12 +2,12 @@ version: '3'
 services:
   server:
     container_name: server
-    image: node:16-alpine
-    working_dir: /server
+    build: 
+      context: .
+      dockerfile: ./Dockerfile_build
     tty: true
     volumes:
-      - .:/server:cached
-      - /server/node_modules
+      - /server
     ports:
       - 6000
 
