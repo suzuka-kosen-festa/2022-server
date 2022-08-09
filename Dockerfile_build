@@ -2,7 +2,7 @@ FROM gcr.io/distroless/nodejs:16
 
 WORKDIR /server
 
-COPY package*.json ./
+COPY package.json ./
 
 COPY yarn.lock ./
 
