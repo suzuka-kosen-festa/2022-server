@@ -9,8 +9,8 @@ on:
          - main
 
 jobs:
-   eslint:
-      name: CI, Lint, Test
+   Setup:
+      name: CI 
       runs-on: ubuntu-latest
       steps:
          - name: Checkout branch
@@ -36,9 +36,13 @@ jobs:
          - name: Install dependencies
            run: yarn install --frozen-lockfile
 
-
+    eslint:  
+      name: lint 
+      runs-on: ubuntu-latest
          - name: Lint types and code
            run: yarn lint
-         
+    test:  
+      name: test 
+      runs-on: ubuntu-latest        
          - name: Run tests
            run: yarn test
