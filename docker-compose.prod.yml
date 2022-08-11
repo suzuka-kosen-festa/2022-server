@@ -1,0 +1,4 @@
+web:
+  build: 
+    context: .
+    dockerfile: ./Dockerfiles/ProdDockerfile
