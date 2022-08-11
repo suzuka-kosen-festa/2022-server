@@ -4,7 +4,7 @@ services:
     container_name: server
     build: 
       context: .
-      dockerfile: ./Dockerfile_build
+      dockerfile: ./ProdDockerfile
     tty: true
     volumes:
       - /server
