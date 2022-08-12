@@ -7,15 +7,19 @@ services:
       dockerfile: ./Dockerfiles/DevDockerfile
     tty: true
     volumes:
-      - .:/server
+      - type: bind
+        source: "./"
+        target: "/server"
+    depends_on:
+      - db
     ports:
-      - 6000
+      - 6000:6000
 
   db:
     image: postgres:14.4
     container_name: db
     ports:
-      - 3306
+      - 3306:3306
     volumes:
       - ./db/init:/docker-db.d
     environment:

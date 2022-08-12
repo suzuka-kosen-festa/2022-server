@@ -8,4 +8,6 @@ COPY package.json yarn.lock ./
 
 COPY . .
 
-RUN yarn start:dev
+EXPOSE 6000
+
+CMD [ "yarn", "start:dev" ]

@@ -28,4 +28,6 @@ ENV NODE_ENV=production
 COPY --from=build /build/dist /app/dist
 COPY --from=deps /deps/node_modules /app/node_modules
 
-CMD ["dist/main"]
+EXPOSE 6000
+
+CMD ["node","dist/main"]
