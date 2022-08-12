@@ -2,3 +2,5 @@ web:
   build: 
     context: .
     dockerfile: ./Dockerfiles/ProdDockerfile
+  volumes:
+    - ./app

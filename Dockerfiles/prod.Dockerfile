@@ -5,7 +5,7 @@ WORKDIR /build
 ENV NODE_ENV=development
 
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN yarn install --immutable
 
 COPY . ./
 RUN yarn build
@@ -17,7 +17,7 @@ WORKDIR /deps
 ENV NODE_ENV=production
 
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN yarn install --immutable
 
 FROM gcr.io/distroless/nodejs:16
 

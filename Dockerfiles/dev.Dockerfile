@@ -7,3 +7,5 @@ ENV NODE_ENV=development
 COPY package.json yarn.lock ./
 
 COPY . .
+
+RUN yarn start:dev
