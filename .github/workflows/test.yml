@@ -10,7 +10,7 @@ on:
          - dev
 
 jobs:
-   Setup:
+   CI:
       runs-on: ubuntu-latest
       steps:
          - name: Checkout branch
@@ -26,7 +26,7 @@ jobs:
               node-version: 16.x
 
          - uses: actions/cache@v3
-           id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+           id: yarn-cache
            with:
               path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
               key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -34,13 +34,7 @@ jobs:
                  ${{ runner.os }}-yarn-
 
          - name: Install dependencies
-           run: yarn install --frozen-lockfile
+           run: yarn install --immutable
 
-    eslint:  
-      runs-on: ubuntu-latest
-         - name: Lint types and code
-           run: yarn lint
-    test:   
-      runs-on: ubuntu-latest        
          - name: Run tests
            run: yarn test
