@@ -1,6 +1,6 @@
 web:
   build: 
     context: .
-    dockerfile: ./Dockerfiles/ProdDockerfile
+    dockerfile: ./Dockerfiles/prod.Dockerfile
   volumes:
     - ./app

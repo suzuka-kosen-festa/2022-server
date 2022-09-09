@@ -4,7 +4,7 @@ services:
     container_name: server
     build: 
       context: .
-      dockerfile: ./Dockerfiles/DevDockerfile
+      dockerfile: ./Dockerfiles/dev.Dockerfile
     tty: true
     volumes:
       - type: bind
