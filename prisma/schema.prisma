@@ -17,35 +17,24 @@ enum Sex {
 }
 
 model Student {
-  uuid     String     @id @default(uuid())
-  Relation Relation[]
-  RealName RealName[]
+  uuid          String    @id @default(uuid())
+  StudentId     String    @unique
+  RealName      String
+  inviteVisitor Visitor[]
 }
 
 model Visitor {
-  uuid     String     @id @default(uuid())
-  sex      Sex
-  age      Int
-  nickname String
-  History  History[]
-  Relation Relation[]
+  uuid        String    @id @default(uuid())
+  sex         Sex
+  age         Int
+  nickname    String
+  host        Student   @relation(fields: [studentUuid], references: [uuid])
+  studentUuid String
+  History     History[]
 }
 
 model History {
-  User      Visitor  @relation(fields: [uuid], references: [uuid])
+  Visitor   Visitor  @relation(fields: [uuid], references: [uuid])
   uuid      String   @unique
   timeStamp DateTime @default(now())
-}
-
-model Relation {
-  Student     Student @relation(fields: [studentUuid], references: [uuid])
-  studentUuid String  @unique
-  Vistor      Visitor @relation(fields: [visitorUuid], references: [uuid])
-  visitorUuid String
-}
-
-model RealName {
-  Student     Student @relation(fields: [studentUuid], references: [uuid])
-  studentUuid String  @unique
-  RealName    String
 }
