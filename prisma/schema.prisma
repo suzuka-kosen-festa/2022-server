@@ -16,6 +16,13 @@ enum Sex {
   Xgender
 }
 
+enum Job {
+  School
+  College
+  Society
+  Others
+}
+
 model Student {
   uuid          String    @id @default(uuid())
   StudentId     String    @unique
@@ -27,7 +34,10 @@ model Visitor {
   uuid        String    @id @default(uuid())
   sex         Sex
   age         Int
+  jobs        Job
   nickname    String
+  JHS         Boolean?
+  Sponsor     Boolean?
   host        Student   @relation(fields: [studentUuid], references: [uuid])
   studentUuid String
   History     History[]
