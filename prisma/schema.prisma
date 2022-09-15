@@ -25,7 +25,6 @@ enum Job {
 
 model Student {
   uuid          String    @id @default(uuid())
-  StudentId     String    @unique
   RealName      String
   inviteVisitor Visitor[]
 }
