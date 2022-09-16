@@ -56,4 +56,4 @@ jobs:
               git add .
               git commit --author=. -m 'auto commit'
               git push
-            if: steps.diff.outcome == 'failure'
+           if: steps.diff.outcome == 'failure'
