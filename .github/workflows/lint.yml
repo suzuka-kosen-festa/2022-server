@@ -40,7 +40,7 @@ jobs:
          - name: Lint types and code
            run: yarn lint:fix
 
-         - name: Diff
+         - name: check diff
            id: diff
            run: |
               git add -N .
