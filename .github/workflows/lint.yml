@@ -40,6 +40,13 @@ jobs:
          - name: Lint types and code
            run: yarn lint:fix
 
+         - name: Diff
+           id: diff
+           run: |
+              git add -N .
+              git diff --name-only --exit-code
+           continue-on-error: true
+
          - name: commit
            run: |
               set -e
@@ -49,3 +56,4 @@ jobs:
               git add .
               git commit --author=. -m 'auto commit'
               git push
+            if: steps.diff.outcome == 'failure'
