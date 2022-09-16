@@ -9,9 +9,13 @@ jobs:
    format:
       name: run lint:fix
       runs-on: ubuntu-latest
+      timeout-minutes: 3
+
       steps:
          - name: Checkout branch
            uses: actions/checkout@v3
+           with:
+              ref: ${{ github.head_ref }}
 
          - name: Get yarn cache directory path
            id: yarn-cache-dir-path
@@ -23,7 +27,7 @@ jobs:
               node-version: 16.x
 
          - uses: actions/cache@v3
-           id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+           id: yarn-cache
            with:
               path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
               key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -36,7 +40,20 @@ jobs:
          - name: Lint types and code
            run: yarn lint:fix
 
-         - name: auto commit
-           uses: stefanzweifel/git-auto-commit-action@v4
-           with:
-              commit_message: 'lint: auto format by github actions'
+         - name: check diff
+           id: diff
+           run: |
+              git add -N .
+              git diff --name-only --exit-code
+           continue-on-error: true
+
+         - name: commit
+           run: |
+              set -e
+              git add .
+              git config user.name github-actions[bot]
+              git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+              git add .
+              git commit --author=. -m 'auto commit'
+              git push
+           if: steps.diff.outcome == 'failure'
