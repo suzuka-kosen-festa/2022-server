@@ -7,3 +7,8 @@
 ./renovate.json
 ./Dockerfile_build
 ./docker-compose.yml
+./docker-compose.prod.yml
+./.gitignore
+./yarnrc.yml
+./.yarn
+./yarn-error.log
