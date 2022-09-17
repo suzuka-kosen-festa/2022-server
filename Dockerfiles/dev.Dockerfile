@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:16-buster
 
 WORKDIR /app
 
@@ -9,5 +9,3 @@ COPY package.json yarn.lock ./
 COPY . .
 
 EXPOSE 6000
-
-CMD [ "yarn", "start:dev" ]
