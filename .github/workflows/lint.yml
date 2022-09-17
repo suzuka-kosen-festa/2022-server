@@ -49,10 +49,11 @@ jobs:
 
          - name: commit
            run: |
-              set -e
+              set -ex
               git add .
               git config user.name github-actions[bot]
               git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+              git fetch --depth=1;
               git add .
               git commit --author=. -m 'auto commit'
               git push

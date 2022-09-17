@@ -2,6 +2,7 @@ version: '3'
 services:
   server:
     container_name: server
+    image: node:16-buster
     build: 
       context: .
       dockerfile: ./Dockerfiles/dev.Dockerfile
@@ -21,7 +22,9 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./db/init:/docker-db.d
+      - type: bind
+        source: "./db/init"
+        target: "/docker-db.d"
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
