@@ -25,7 +25,7 @@ enum Job {
 
 model Student {
   uuid          String    @id @default(uuid())
-  RealName      String
+  kana          String
   inviteVisitor Visitor[]
 }
 
@@ -35,10 +35,8 @@ model Visitor {
   age         Int
   jobs        Job
   nickname    String
-  JHS         Boolean?
-  Sponsor     Boolean?
-  host        Student   @relation(fields: [studentUuid], references: [uuid])
-  studentUuid String
+  host        Student?  @relation(fields: [studentUuid], references: [uuid])
+  studentUuid String?
   History     History[]
 }
 
