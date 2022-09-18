@@ -29,7 +29,7 @@ model All {
   History   History[]
   Student   Student?
   Guest     Guest?
-  Sponser   Sponser?
+  Sponsor   Sponsor?
   JHStudent JHStudent?
 }
 
@@ -55,8 +55,8 @@ model Guest {
 }
 
 //スポンサー用テーブル。とりま取る情報知らんからemailだけ入れといた
-model Sponser {
-  Sponser   All     @relation(fields: [sponsorId], references: [uuid])
+model Sponsor {
+  Sponsor   All     @relation(fields: [sponsorId], references: [uuid])
   sponsorId String  @unique
   email     String? @unique
 }
