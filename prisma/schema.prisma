@@ -23,25 +23,54 @@ enum Job {
   Others
 }
 
-model Student {
-  uuid          String    @id @default(uuid())
-  kana          String
-  inviteVisitor Visitor[]
+//全部をまとめるテーブル。入場可能の判別はこのテーブルで行う
+model All {
+  uuid      String     @id @default(uuid())
+  History   History[]
+  Student   Student?
+  Guest     Guest?
+  Sponser   Sponser?
+  JHStudent JHStudent?
 }
 
-model Visitor {
-  uuid        String    @id @default(uuid())
-  sex         Sex
-  age         Int
-  jobs        Job
-  nickname    String
-  host        Student?  @relation(fields: [studentUuid], references: [uuid])
-  studentUuid String?
-  History     History[]
+//学生用テーブル。QRコードを送り返すときと招待客との関係性もここで確認する。
+model Student {
+  Stundent  All     @relation(fields: [studentId], references: [uuid])
+  studentId String  @unique
+  kana      String
+  email     String  @unique
+  Guest     Guest[]
+}
+
+//招待客テーブル。情報を残すために色々項目が多い
+model Guest {
+  Guest    All     @relation(fields: [guestId], references: [uuid])
+  guestId  String  @unique
+  sex      Sex
+  age      Int
+  jobs     Job
+  nickname String
+  host     Student @relation(fields: [hostId], references: [studentId])
+  hostId   String  @unique
+}
+
+//スポンサー用テーブル。とりま取る情報知らんからemailだけ入れといた
+model Sponser {
+  Sponser   All     @relation(fields: [sponsorId], references: [uuid])
+  sponsorId String  @unique
+  email     String? @unique
+}
+
+//中学生用テーブル。とりあえず年齢と送り返す用のメルアドだけ
+model JHStudent {
+  JHStudent All    @relation(fields: [jhsId], references: [uuid])
+  jhsId     String @unique
+  age       Int
+  email     String @unique
 }
 
 model History {
-  Visitor   Visitor  @relation(fields: [uuid], references: [uuid])
-  uuid      String   @unique
+  Visitors  All      @relation(fields: [visitorId], references: [uuid])
+  visitorId String   @unique
   timeStamp DateTime @default(now())
 }
