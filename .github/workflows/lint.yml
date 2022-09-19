@@ -1,4 +1,4 @@
-name: fmt
+name: Lint:fix
 
 on:
    push:
@@ -19,11 +19,8 @@ jobs:
          - name: Setup Node.js
            uses: actions/setup-node@v3
            with:
-             node-version: 16
-             cache: yarn
+              node-version: 16
+              cache: yarn
 
          - name: Install dependencies
            run: yarn install --immutable
-
-         - name: Lint:fix
-           run: echo "run lint:fix"
