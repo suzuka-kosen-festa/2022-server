@@ -10,40 +10,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Sex {
-  Man
-  Woman
-  Xgender
-}
-
-enum Job {
-  School
-  College
-  Society
-  Others
-}
-
+//学生用テーブル。QRコードを送り返すときと招待客との関係性もここで確認する。
 model Student {
-  uuid          String    @id @default(uuid())
-  RealName      String
-  inviteVisitor Visitor[]
+  studentId String  @unique @default(uuid())
+  kana      String
+  email     String  @unique
+  Guest     Guest[]
 }
 
-model Visitor {
-  uuid        String    @id @default(uuid())
-  sex         Sex
-  age         Int
-  jobs        Job
-  nickname    String
-  JHS         Boolean?
-  Sponsor     Boolean?
-  host        Student   @relation(fields: [studentUuid], references: [uuid])
-  studentUuid String
-  History     History[]
+//招待客テーブル。情報を残すために色々項目が多い
+model Guest {
+  guestId  String    @unique @default(uuid())
+  sex      String
+  jobs     String
+  RealName String
+  host     Student   @relation(fields: [hostId], references: [studentId])
+  hostId   String    @unique
+  History  History[]
+}
+
+//スポンサー用テーブル。とりま取る情報知らんからemailだけ入れといた
+model Sponsor {
+  sponsorId String    @unique @default(uuid())
+  email     String    @unique
+  History   History[]
+}
+
+//中学生用テーブル。とりあえず年齢と送り返す用のメルアドだけ
+model JHStudent {
+  jhsId   String    @unique @default(uuid())
+  age     Int
+  email   String    @unique
+  History History[]
 }
 
 model History {
-  Visitor   Visitor  @relation(fields: [uuid], references: [uuid])
-  uuid      String   @unique
-  timeStamp DateTime @default(now())
+  id           Int        @id @default(autoincrement())
+  timeStamp    DateTime   @default(now())
+  Guest        Guest?     @relation(fields: [guestGuestId], references: [guestId])
+  guestGuestId String?
+  Sponsor      Sponsor?   @relation(fields: [sponsorId], references: [sponsorId])
+  sponsorId    String?
+  JHStudent    JHStudent? @relation(fields: [JHStudentId], references: [jhsId])
+  JHStudentId  String?
 }
