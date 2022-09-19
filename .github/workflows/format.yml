@@ -14,7 +14,7 @@ jobs:
       permissions:
          contents: write
       steps:
-           run: echo "run fix"
+         - run: echo "run fix"
 
          - name: Checkout
            uses: actions/checkout@v3
