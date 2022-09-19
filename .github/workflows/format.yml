@@ -1,4 +1,4 @@
-name: Lint:fix
+name: fix and format
 
 on:
    workflow_run:
