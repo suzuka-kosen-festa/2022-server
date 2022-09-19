@@ -4,6 +4,8 @@ on:
    workflow_run:
       workflows:
          - Lint:fix
+      types:
+         - completed
 
 jobs:
    run-prettier:
