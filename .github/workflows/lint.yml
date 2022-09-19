@@ -10,7 +10,6 @@ jobs:
       name: run lint:fix
       runs-on: ubuntu-latest
       timeout-minutes: 3
-
       steps:
          - name: Checkout branch
            uses: actions/checkout@v3
