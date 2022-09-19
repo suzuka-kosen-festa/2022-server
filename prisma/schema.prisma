@@ -10,33 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Sex {
-  Man
-  Woman
-  Xgender
-}
-
-enum Job {
-  School
-  College
-  Society
-  Others
-}
-
-//全部をまとめるテーブル。入場可能の判別はこのテーブルで行う
-model All {
-  uuid      String     @id @default(uuid())
-  History   History[]
-  Student   Student?
-  Guest     Guest?
-  Sponsor   Sponsor?
-  JHStudent JHStudent?
-}
-
 //学生用テーブル。QRコードを送り返すときと招待客との関係性もここで確認する。
 model Student {
-  Stundent  All     @relation(fields: [studentId], references: [uuid])
-  studentId String  @unique
+  studentId String  @unique @default(uuid())
   kana      String
   email     String  @unique
   Guest     Guest[]
@@ -44,33 +20,37 @@ model Student {
 
 //招待客テーブル。情報を残すために色々項目が多い
 model Guest {
-  Guest    All     @relation(fields: [guestId], references: [uuid])
-  guestId  String  @unique
-  sex      Sex
-  age      Int
-  jobs     Job
-  nickname String
-  host     Student @relation(fields: [hostId], references: [studentId])
-  hostId   String  @unique
+  guestId  String    @unique @default(uuid())
+  sex      String
+  jobs     String
+  RealName String
+  host     Student   @relation(fields: [hostId], references: [studentId])
+  hostId   String    @unique
+  History  History[]
 }
 
 //スポンサー用テーブル。とりま取る情報知らんからemailだけ入れといた
 model Sponsor {
-  Sponsor   All     @relation(fields: [sponsorId], references: [uuid])
-  sponsorId String  @unique
-  email     String? @unique
+  sponsorId String    @unique @default(uuid())
+  email     String    @unique
+  History   History[]
 }
 
 //中学生用テーブル。とりあえず年齢と送り返す用のメルアドだけ
 model JHStudent {
-  JHStudent All    @relation(fields: [jhsId], references: [uuid])
-  jhsId     String @unique
-  age       Int
-  email     String @unique
+  jhsId   String    @unique @default(uuid())
+  age     Int
+  email   String    @unique
+  History History[]
 }
 
 model History {
-  Visitors  All      @relation(fields: [visitorId], references: [uuid])
-  visitorId String   @unique
-  timeStamp DateTime @default(now())
+  id           Int        @id @default(autoincrement())
+  timeStamp    DateTime   @default(now())
+  Guest        Guest?     @relation(fields: [guestGuestId], references: [guestId])
+  guestGuestId String?
+  Sponsor      Sponsor?   @relation(fields: [sponsorId], references: [sponsorId])
+  sponsorId    String?
+  JHStudent    JHStudent? @relation(fields: [JHStudentId], references: [jhsId])
+  JHStudentId  String?
 }
