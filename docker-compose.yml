@@ -26,6 +26,7 @@ services:
         source: "./db/init"
         target: "/docker-db.d"
     environment:
+      TZ: Asia/Tokyo
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
