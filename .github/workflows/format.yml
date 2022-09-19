@@ -8,12 +8,14 @@ on:
          - completed
 
 jobs:
-   run-prettier:
+   run-lint:
       runs-on: ubuntu-latest
       if: github.event.workflow_run.conclusion == 'success'
       permissions:
          contents: write
       steps:
+           run: echo "run fix"
+
          - name: Checkout
            uses: actions/checkout@v3
            with:
