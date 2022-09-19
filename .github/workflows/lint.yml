@@ -1,4 +1,4 @@
-name: format
+name: lint:fix
 
 on:
    push:
@@ -6,15 +6,16 @@ on:
          - 'feature/**'
 
 jobs:
-   format:
+   CI:
       name: run lint:fix
       runs-on: ubuntu-latest
       timeout-minutes: 3
       steps:
+         - run: echo ${{ github.ref }}
          - name: Checkout branch
            uses: actions/checkout@v3
            with:
-              ref: ${{ github.head_ref }}
+              ref: ${{ github.ref }}
 
          - name: Setup Node.js
            uses: actions/setup-node@v3
