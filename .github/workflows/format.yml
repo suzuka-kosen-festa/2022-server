@@ -1,14 +1,14 @@
-name: Lint:fix
+name: fix and format
 
 on:
    workflow_run:
       workflows:
-         - Lint:fix
+         - lint:fix
       types:
          - completed
 
 jobs:
-   run-prettier:
+   run-lint:
       runs-on: ubuntu-latest
       if: github.event.workflow_run.conclusion == 'success'
       permissions:
@@ -17,16 +17,20 @@ jobs:
          - name: Checkout
            uses: actions/checkout@v3
            with:
-              ref: ${{ github.head_ref }}
+            ref: ${{ github.event.pull_request.head.ref }}
+
          - name: Setup Node.js
            uses: actions/setup-node@v3
            with:
               node-version: 16
               cache: yarn
+
          - name: Install Dependencies
            run: yarn install --immutable
+
          - name: Format the code
-           run: yarn run fmt
+           run: yarn run lint:fix
+
          - name: Auto commit
            run: |
               git config user.name "${GITHUB_ACTOR}"
