@@ -1,6 +1,6 @@
 FROM node:16-buster
 
-WORKDIR /app
+WORKDIR /server
 
 ENV NODE_ENV=development
 
