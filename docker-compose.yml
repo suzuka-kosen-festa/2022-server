@@ -10,7 +10,7 @@ services:
     volumes:
       - type: bind
         source: "./"
-        target: "/server:cached"
+        target: "/server"
       - "/server/node_modules"
     depends_on:
       - db
