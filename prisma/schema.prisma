@@ -24,8 +24,8 @@ model Guest {
   sex      String
   jobs     String
   RealName String
-  host     Student   @relation(fields: [hostId], references: [studentId])
-  hostId   String    @unique
+  host     Student?  @relation(fields: [hostId], references: [studentId])
+  hostId   String?   @unique
   History  History[]
 }
 
