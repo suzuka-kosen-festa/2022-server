@@ -1,0 +1,38 @@
+version: '3'
+services:
+  server:
+    container_name: server
+    image: node:16-buster
+    build: 
+      context: .
+      dockerfile: ./Dockerfiles/dev.Dockerfile
+    tty: true
+    volumes:
+      - type: bind
+        source: "./"
+        target: "/server:cached"
+      - type: bind
+        source: "./node_modules"
+        target: "/server/node_modules"
+    depends_on:
+      - db
+    ports:
+      - 6000:6000
+
+  db:
+    image: postgres:14.4
+    container_name: db
+    ports:
+      - 5432:5432
+    volumes:
+      - type: bind
+        source: "./db/init"
+        target: "/docker-db.d"
+    environment:
+      TZ: Asia/Tokyo
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    hostname: postgres
+    restart: always
+    user: root

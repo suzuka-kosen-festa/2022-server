@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//学生用テーブル。QRコードを送り返すときと招待客との関係性もここで確認する。
+model Student {
+  studentId String  @unique @default(uuid())
+  kana      String
+  email     String  @unique
+  Guest     Guest[]
+}
+
+//招待客テーブル。情報を残すために色々項目が多い
+model Guest {
+  guestId  String    @unique @default(uuid())
+  sex      String
+  jobs     String
+  RealName String
+  host     Student   @relation(fields: [hostId], references: [studentId])
+  hostId   String    @unique
+  History  History[]
+}
+
+//スポンサー用テーブル。とりま取る情報知らんからemailだけ入れといた
+model Sponsor {
+  sponsorId String    @unique @default(uuid())
+  email     String    @unique
+  History   History[]
+}
+
+//中学生用テーブル。とりあえず年齢と送り返す用のメルアドだけ
+model JHStudent {
+  jhsId   String    @unique @default(uuid())
+  age     Int
+  email   String    @unique
+  History History[]
+}
+
+model History {
+  id           Int        @id @default(autoincrement())
+  timeStamp    DateTime   @default(now())
+  Guest        Guest?     @relation(fields: [guestGuestId], references: [guestId])
+  guestGuestId String?
+  Sponsor      Sponsor?   @relation(fields: [sponsorId], references: [sponsorId])
+  sponsorId    String?
+  JHStudent    JHStudent? @relation(fields: [JHStudentId], references: [jhsId])
+  JHStudentId  String?
+}

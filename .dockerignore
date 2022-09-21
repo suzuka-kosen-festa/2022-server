@@ -1,0 +1,14 @@
+./node_modules
+./dist
+./.github
+./eslintrc.yml
+./.prettierrc
+./README.md
+./renovate.json
+./Dockerfile_build
+./docker-compose.yml
+./docker-compose.prod.yml
+./.gitignore
+./yarnrc.yml
+./.yarn
+./yarn-error.log
