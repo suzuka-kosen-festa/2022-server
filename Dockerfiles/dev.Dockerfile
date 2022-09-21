@@ -8,4 +8,4 @@ COPY package.json yarn.lock ./
 
 COPY . .
 
-EXPOSE 6000
+EXPOSE 7000

@@ -7,8 +7,6 @@ services:
       context: .
       dockerfile: ./Dockerfiles/dev.Dockerfile
     tty: true
-    networks:
-      - net
     volumes:
       - type: bind
         source: "./"
@@ -17,15 +15,13 @@ services:
     depends_on:
       - db
     ports:
-      - 6000:6000
+      - 7000:7000
 
   db:
     image: postgres:14.4
     container_name: db
     ports:
       - 5432:5432
-    networks:
-      - net
     volumes:
       - type: bind
         source: "./db/init"
@@ -38,6 +34,3 @@ services:
     restart: always
     hostname: db
     user: root
-
-networks:
-  net:
