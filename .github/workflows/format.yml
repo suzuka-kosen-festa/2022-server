@@ -3,7 +3,7 @@ name: fix and format
 on:
    workflow_run:
       workflows:
-         - lint:fix
+         - Setup
       types:
          - completed
 

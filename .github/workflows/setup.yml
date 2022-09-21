@@ -1,4 +1,4 @@
-name: lint:fix
+name: Setup
 
 on:
    pull_request:
