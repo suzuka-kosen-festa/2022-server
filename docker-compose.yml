@@ -11,7 +11,7 @@ services:
       - type: bind
         source: ./
         target: /server
-      - server_node_modules:/node_modules
+      - server_node_modules:/server/node_modules
     depends_on:
       - db
     ports:
