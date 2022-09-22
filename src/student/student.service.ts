@@ -12,7 +12,14 @@ export class StudentService {
          data,
       });
    }
-
+   
+   async checkexistStudent(uuid: Prisma.StudentWhereUniqueInput): Promise<Student>{
+    const isexist = this.prisma.student.findUnique({
+      where: uuid,
+    })
+    console.log(isexist)
+    return isexist
+   }
    // Studentテーブルの全レコードを返す
    async getStudents(): Promise<Student[]> {
       return this.prisma.student.findMany({

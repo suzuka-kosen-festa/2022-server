@@ -9,9 +9,9 @@ services:
     tty: true
     volumes:
       - type: bind
-        source: "./"
-        target: "/server"
-      - "/server/node_modules"
+        source: ./
+        target: /server
+      - server_node_modules:/node_modules
     depends_on:
       - db
     ports:
@@ -24,8 +24,9 @@ services:
       - 5432:5432
     volumes:
       - type: bind
-        source: "./db/init"
-        target: "/docker-db.d"
+        source: ./db/init
+        target: /docker-db.d
+      - postgres_volume:/var/lib/postgresql/data
     environment:
       TZ: Asia/Tokyo
       POSTGRES_USER: root
@@ -34,3 +35,7 @@ services:
     restart: always
     hostname: db
     user: root
+
+volumes:
+  postgres_volume:
+  server_node_modules:

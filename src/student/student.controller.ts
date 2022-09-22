@@ -1,6 +1,6 @@
 //'Body' is already defined as a built-in global variable. が出る
 // eslint-disable-next-line no-redeclare
-import { Post, Controller, Body, Get, Put } from '@nestjs/common';
+import { Post, Controller, Body, Get, Put, Param } from '@nestjs/common';
 import { Student } from '@prisma/client';
 import { StudentService } from './student.service';
 
@@ -11,6 +11,11 @@ export class StudentController {
    @Get('getall')
    async getAllStudent(): Promise<Student[]> {
       return this.studentService.getStudents();
+   }
+
+   @Get('check/:uuid')
+   async checkUuid(@Param("uuid") id:string): Promise<Student>{
+      return this.studentService.checkexistStudent({ studentId: id})
    }
 
    // 学生のレコード作成用APIルート
@@ -25,7 +30,6 @@ export class StudentController {
          email,
       });
    }
-
    @Put('update')
    async updateStudent(
       @Body()
