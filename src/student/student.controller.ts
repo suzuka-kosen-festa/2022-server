@@ -41,7 +41,7 @@ export class StudentController {
       },
    ): Promise<Student> {
       const { email, sex, jobs, RealName } = data;
-      //serviceの部分の引数の型を変えればdataに代入できるかもしれない
+      //serviceの部分の引数の型を変えればdataをそのまま代入できるかもしれない
       return this.studentService.updateStudent({
          where: { email },
          data: {

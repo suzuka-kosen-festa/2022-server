@@ -33,7 +33,7 @@ export class StudentService {
    // StudentテーブルにGuestとリレーションを作る
    async updateStudent(params: {
       where: Prisma.StudentWhereUniqueInput;
-      data: Prisma.StudentUpdateInput;
+      data: Prisma.StudentUpdateInput
    }): Promise<Student> {
       const { where, data } = params;
       return this.prisma.student.update({
