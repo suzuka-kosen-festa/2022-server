@@ -14,10 +14,11 @@ jobs:
       permissions:
          contents: write
       steps:
+         - run: echo ${{ github.event.pull_request.head.ref}}
          - name: Checkout
            uses: actions/checkout@v3
            with:
-              ref: ${{ github.head.ref }}
+              ref: ${{ github.event.pull_request.head.ref }}
 
          - name: Setup Node.js
            uses: actions/setup-node@v3
