@@ -14,8 +14,8 @@ export class StudentController {
    }
 
    @Get('check/:uuid')
-   async checkUuid(@Param("uuid") id:string): Promise<Student>{
-      return this.studentService.checkStudentExist({ studentId: id})
+   async checkUuid(@Param('uuid') id: string): Promise<Student> {
+      return this.studentService.checkStudentExist({ studentId: id });
    }
 
    // 学生のレコード作成用APIルート
