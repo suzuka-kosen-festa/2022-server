@@ -14,8 +14,8 @@ export class StudentService {
    }
    
    //uuidの照合
-   async checkexistStudent(uuid: Prisma.StudentWhereUniqueInput): Promise<Student>{
-    //情報が存在する場合はそのレコードが、ない場合はnullを返す
+   async checkStudentExist(uuid: Prisma.StudentWhereUniqueInput): Promise<Student>{
+    //情報が存在する場合はそのレコードを、ない場合はnullを返す
     return this.prisma.student.findUnique({
       where: uuid,
     })
