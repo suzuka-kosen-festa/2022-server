@@ -10,7 +10,7 @@ export class StudentController {
 
    @Get('getall')
    async getAllStudent(): Promise<Student[]> {
-      return this.studentService.getStudents();
+      return this.studentService.getAllStudents();
    }
 
    @Get('check/:uuid')
@@ -41,7 +41,7 @@ export class StudentController {
       },
    ): Promise<Student> {
       const { email, sex, jobs, RealName } = data;
-      //serviceの部分の引数の型をdataに分割代入できるかもしれない
+      //serviceの部分の引数の型を変えればdataに代入できるかもしれない
       return this.studentService.updateStudent({
          where: { email },
          data: {

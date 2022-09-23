@@ -18,10 +18,10 @@ const singleRecord = studentArray[0]
 const singleRecordwithGuest = studentArray[1]
 
 const db = {
-   cat: {
+   student: {
      findMany: jest.fn().mockResolvedValue(studentArray),
      findUnique: jest.fn().mockResolvedValue(singleRecord),
-     create: jest.fn().mockReturnValue(singleRecord),
+     create: jest.fn().mockResolvedValue(singleRecord),
      update: jest.fn().mockResolvedValue(singleRecordwithGuest),
    },
  };
@@ -29,6 +29,7 @@ const db = {
 
 describe('StudentService', () => {
    let service: StudentService;
+   let prisma: PrismaService;
 
    beforeEach(async () => {
       const module: TestingModule = await Test.createTestingModule({
@@ -39,6 +40,7 @@ describe('StudentService', () => {
       }).compile();
 
       service = module.get<StudentService>(StudentService);
+      prisma = module.get<PrismaService>(PrismaService);
    });
 
    test('createStudent',async () => {
@@ -51,13 +53,13 @@ describe('StudentService', () => {
    })
    
    test('getStudents', async () =>{
-      const students = await service.getStudents();
+      const students = await service.getAllStudents();
       expect(students).toEqual(studentArray)
    })
 
    test('checkStudentExist',async () => {
       const singleStudent = await service.checkStudentExist({studentId: "uuid1"})
-      expect(singleRecord).toEqual(singleRecord)
+      expect(singleStudent).toEqual(singleRecord)
    })
 
    test('updateStudent', async () =>{
