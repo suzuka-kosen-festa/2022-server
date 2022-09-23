@@ -14,7 +14,7 @@ jobs:
       permissions:
          contents: write
       steps:
-         - run: echo ${{ github.event.pull_request.head.ref}}
+         - run: echo "${{ github.event.pull_request.head.ref}}"
          - name: Checkout
            uses: actions/checkout@v3
            with:
