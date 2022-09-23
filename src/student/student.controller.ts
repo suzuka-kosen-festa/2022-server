@@ -15,7 +15,7 @@ export class StudentController {
 
    @Get('check/:uuid')
    async checkUuid(@Param("uuid") id:string): Promise<Student>{
-      return this.studentService.checkexistStudent({ studentId: id})
+      return this.studentService.checkStudentExist({ studentId: id})
    }
 
    // 学生のレコード作成用APIルート
@@ -41,8 +41,9 @@ export class StudentController {
       },
    ): Promise<Student> {
       const { email, sex, jobs, RealName } = data;
+      //serviceの部分の引数の型をdataに分割代入できるかもしれない
       return this.studentService.updateStudent({
-         where: { email: email },
+         where: { email },
          data: {
             Guest: {
                create: {
