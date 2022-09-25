@@ -8,18 +8,18 @@ import { StudentService } from './student.service';
 export class StudentController {
    constructor(private readonly studentService: StudentService) {}
 
-   @Get('getall')
+   @Get()
    async getAllStudent(): Promise<Student[]> {
       return this.studentService.getAllStudents();
    }
 
-   @Get('/check/:uuid')
+   @Get('check/:uuid')
    async checkUuid(@Param('uuid') id: string): Promise<Student> {
       return this.studentService.checkStudentExist({ studentId: id });
    }
 
    // 学生のレコード作成用APIルート
-   @Post('create')
+   @Post()
    async createStudent(
       @Body() data: { kana: string; email: string },
    ): Promise<Student> {
@@ -30,7 +30,7 @@ export class StudentController {
          email,
       });
    }
-   @Put('update')
+   @Put()
    async updateStudent(
       @Body()
       data: {
