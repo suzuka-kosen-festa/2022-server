@@ -1,7 +1,12 @@
 //'Body' is already defined as a built-in global variable. が出る
 // eslint-disable-next-line no-redeclare
 import { Post, Controller, Body, Get, Put, Param } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+   ApiCreatedResponse,
+   ApiOkResponse,
+   ApiOperation,
+   ApiTags,
+} from '@nestjs/swagger';
 import { Student } from '@prisma/client';
 import { createStudentDto, updateStudentDto } from './dto/studentDto';
 import { StudentEntity, StudentwithGuestEntity } from './entities/student';
@@ -28,10 +33,8 @@ export class StudentController {
 
    @Post()
    @ApiOperation({ summary: '学生の作成' })
-   @ApiCreatedResponse({type: StudentEntity})
-   async createStudent(
-      @Body() data: createStudentDto,
-   ): Promise<Student> {
+   @ApiCreatedResponse({ type: StudentEntity })
+   async createStudent(@Body() data: createStudentDto): Promise<Student> {
       console.log(data);
       const { kana, email } = data;
       return this.studentService.createStudent({
@@ -41,7 +44,7 @@ export class StudentController {
    }
    @Put()
    @ApiOperation({ summary: '学生のデータに招待客のデータを加える' })
-   @ApiCreatedResponse({ type : StudentwithGuestEntity})
+   @ApiCreatedResponse({ type: StudentwithGuestEntity })
    async updateStudent(
       @Body()
       data: updateStudentDto,
