@@ -9,6 +9,7 @@ export class StudentEntity {
   email:string;
 }
 
+//TODO: Guest Moduleを作ったときに統合
 class GuestEntirty {
   @ApiProperty()
   guestId : string;
