@@ -13,7 +13,7 @@ export class StudentController {
       return this.studentService.getAllStudents();
    }
 
-   @Get('check/:uuid')
+   @Get('/check/:uuid')
    async checkUuid(@Param('uuid') id: string): Promise<Student> {
       return this.studentService.checkStudentExist({ studentId: id });
    }
