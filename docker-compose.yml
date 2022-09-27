@@ -26,7 +26,6 @@ services:
       - type: bind
         source: ./db/init
         target: /docker-db.d
-      - postgres_volume:/var/lib/postgresql/data
     environment:
       TZ: Asia/Tokyo
       POSTGRES_USER: root
@@ -37,5 +36,4 @@ services:
     user: root
 
 volumes:
-  postgres_volume:
   server_node_modules:
