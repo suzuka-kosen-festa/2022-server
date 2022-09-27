@@ -18,7 +18,7 @@ class GuestEntirty {
    @ApiProperty()
    jobs: string;
    @ApiProperty()
-   RealName: string;
+   name: string;
    @ApiProperty()
    hostId: string;
 }

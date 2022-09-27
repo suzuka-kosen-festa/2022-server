@@ -4,3 +4,10 @@ web:
     dockerfile: ./Dockerfiles/prod.Dockerfile
   volumes:
     - ./app
+
+db:
+  volumes:
+    - postgres_volume:/var/lib/postgresql/data
+
+volumes:
+    postgres_volume:

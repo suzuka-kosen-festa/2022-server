@@ -13,7 +13,7 @@ const studentArray = [
          guestId: 'uuid_guest',
          sex: '男',
          jobs: '祖父',
-         RealName: 'テストゲスト',
+         name: 'テストゲスト',
          hostId: 'uuid2',
       },
    },
@@ -84,7 +84,7 @@ describe('StudentController', () => {
          email: 'example2.com',
          sex: '男',
          jobs: '祖父',
-         RealName: 'テストゲスト',
+         name: 'テストゲスト',
       });
       await expect(data).toEqual(singleRecordwithGuest);
    });
