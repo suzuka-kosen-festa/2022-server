@@ -1,4 +1,6 @@
+import { TerminusModule } from '@nestjs/terminus';
 import { Test, TestingModule } from '@nestjs/testing';
+import { PrismaModule } from '../prisma/prisma.module';
 import { HealthController } from './health.controller';
 
 describe('HealthController', () => {
@@ -6,6 +8,8 @@ describe('HealthController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      //TODO:Prisma ModuleはGlobalなのに定義しないとエラーが出るので原因を時間があるときに調べる
+      imports: [TerminusModule, PrismaModule],
       controllers: [HealthController],
     }).compile();
 
