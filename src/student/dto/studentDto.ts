@@ -15,5 +15,5 @@ export class updateStudentDto {
    @ApiProperty()
    jobs: string;
    @ApiProperty()
-   RealName: string;
+   name: string;
 }

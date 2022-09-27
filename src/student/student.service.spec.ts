@@ -12,7 +12,7 @@ const studentArray = [
          guestId: 'uuid_guest',
          sex: '男',
          jobs: '祖父',
-         RealName: 'テストゲスト',
+         name: 'テストゲスト',
          hostId: 'uuid2',
       },
    },
@@ -75,7 +75,7 @@ describe('StudentService', () => {
       const guestData = {
          sex: '男',
          jobs: '祖父',
-         RealName: 'テストゲスト',
+         name: 'テストゲスト',
       };
       const singleStudentwithGuest = await service.updateStudent({
          where: { studentId: 'uuid2' },
@@ -84,7 +84,7 @@ describe('StudentService', () => {
                create: {
                   sex: guestData.sex,
                   jobs: guestData.jobs,
-                  RealName: guestData.RealName,
+                  name: guestData.name,
                },
             },
          },

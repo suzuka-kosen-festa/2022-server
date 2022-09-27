@@ -50,7 +50,7 @@ export class StudentController {
       @Body()
       data: updateStudentDto,
    ): Promise<Student> {
-      const { email, sex, jobs, RealName } = data;
+      const { email, sex, jobs, name } = data;
       //serviceの部分の引数の型を変えればdataをそのまま代入できるかもしれない
       return this.studentService.updateStudent({
          where: { email },
@@ -59,7 +59,7 @@ export class StudentController {
                create: {
                   sex: sex,
                   jobs: jobs,
-                  RealName: RealName,
+                  name: name,
                },
             },
          },
