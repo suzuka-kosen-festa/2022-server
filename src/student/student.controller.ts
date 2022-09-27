@@ -42,7 +42,7 @@ export class StudentController {
          email,
       });
    }
-   
+
    @Put()
    @ApiOperation({ summary: '学生のデータに招待客のデータを加える' })
    @ApiCreatedResponse({ type: StudentwithGuestEntity })
