@@ -17,16 +17,15 @@ export class HealthController {
    @Get('db')
    @HealthCheck()
    dbHealthCheck() {
-      return this.health.check([
-         () => this.prismaHealth.isHealthy('db') 
-      ]);
+      return this.health.check([() => this.prismaHealth.isHealthy('db')]);
    }
 
    @Get('http')
    @HealthCheck()
    httpHealthCheck() {
       return this.health.check([
-         () => this.httpHealth.pingCheck('httpHealth', 'https://docs.nestjs.com')
+         () =>
+            this.httpHealth.pingCheck('httpHealth', 'https://docs.nestjs.com'),
       ]);
    }
 }
