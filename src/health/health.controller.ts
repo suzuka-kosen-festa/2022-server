@@ -1,9 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import {
-   HealthCheck,
-   HealthCheckService,
-   HttpHealthIndicator,
-} from '@nestjs/terminus';
+import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/terminus';
 import { PrismaHealthIndicator } from '../prisma/prisma.health';
 
 @Controller('health')
@@ -23,9 +19,6 @@ export class HealthController {
    @Get('http')
    @HealthCheck()
    httpHealthCheck() {
-      return this.health.check([
-         () =>
-            this.httpHealth.pingCheck('httpHealth', 'https://docs.nestjs.com'),
-      ]);
+      return this.health.check([() => this.httpHealth.pingCheck('httpHealth', 'https://docs.nestjs.com')]);
    }
 }

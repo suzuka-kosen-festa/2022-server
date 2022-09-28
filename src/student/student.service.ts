@@ -14,9 +14,7 @@ export class StudentService {
    }
 
    //uuidの照合
-   async checkStudentExist(
-      uuid: Prisma.StudentWhereUniqueInput,
-   ): Promise<Student> {
+   async checkStudentExist(uuid: Prisma.StudentWhereUniqueInput): Promise<Student> {
       //情報が存在する場合はそのレコードを、ない場合はnullを返す
       //TODO: 値の返し方はQRコード読み取り側と相談したい
       return this.prisma.student.findUnique({

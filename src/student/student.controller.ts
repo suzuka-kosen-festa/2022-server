@@ -1,12 +1,7 @@
 //'Body' is already defined as a built-in global variable. が出る
 // eslint-disable-next-line no-redeclare
 import { Post, Controller, Body, Get, Put, Param } from '@nestjs/common';
-import {
-   ApiCreatedResponse,
-   ApiOkResponse,
-   ApiOperation,
-   ApiTags,
-} from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Student } from '@prisma/client';
 import { createStudentDto, updateStudentDto } from './dto/studentDto';
 import { StudentEntity, StudentwithGuestEntity } from './entities/student';
