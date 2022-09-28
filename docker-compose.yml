@@ -23,10 +23,6 @@ services:
     container_name: db
     ports:
       - 5432:5432
-    volumes:
-      - type: bind
-        source: ./db/init
-        target: /docker-db.d
     environment:
       TZ: Asia/Tokyo
       POSTGRES_USER: root
