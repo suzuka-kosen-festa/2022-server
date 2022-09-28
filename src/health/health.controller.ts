@@ -19,6 +19,7 @@ export class HealthController {
    @Get('http')
    @HealthCheck()
    httpHealthCheck() {
-      return this.health.check([() => this.httpHealth.pingCheck('httpHealth', 'https://docs.nestjs.com')]);
+      //TODO:一旦アドレスをstudentにする。後々、ルートにapiを生やすのでそこにhealthcheck用のapiをたてる
+      return this.health.check([() => this.httpHealth.pingCheck('httpHealth', 'http://localhost:7000/student')]);
    }
 }
