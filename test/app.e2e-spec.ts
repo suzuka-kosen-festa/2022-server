@@ -19,37 +19,37 @@ describe('AppController (e2e)', () => {
    });
    it('check httpHealth', () => {
       const result = {
-         "status": "ok",
-         "info": {
-             "httpHealth": {
-                 "status": "up"
-             }
+         status: 'ok',
+         info: {
+            httpHealth: {
+               status: 'up',
+            },
          },
-         "error": {},
-         "details": {
-             "httpHealth": {
-                 "status": "up"
-             }
-         }
-     }
+         error: {},
+         details: {
+            httpHealth: {
+               status: 'up',
+            },
+         },
+      };
       return request(app.getHttpServer()).get('/health/http').expect(200).expect(result);
    });
 
-   it('check dbHealth',()=>{
+   it('check dbHealth', () => {
       const result = {
-         "status": "ok",
-         "info": {
-             "db": {
-                 "status": "up"
-             }
+         status: 'ok',
+         info: {
+            db: {
+               status: 'up',
+            },
          },
-         "error": {},
-         "details": {
-             "db": {
-                 "status": "up"
-             }
-         }
-     }
+         error: {},
+         details: {
+            db: {
+               status: 'up',
+            },
+         },
+      };
       return request(app.getHttpServer()).get('/health/db').expect(200).expect(result);
    })
 
