@@ -52,4 +52,8 @@ describe('AppController (e2e)', () => {
      }
       return request(app.getHttpServer()).get('/health/db').expect(200).expect(result);
    })
+
+   it("check getStudent", async ()=>{
+      return await request(app.getHttpServer()).get('/student').expect(200).expect([])
+   })
 });

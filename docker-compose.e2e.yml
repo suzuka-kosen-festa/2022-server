@@ -1,0 +1,12 @@
+version: '3'
+services:
+  server:
+    build: 
+      context: .
+      dockerfile: ./Dockerfiles/e2e.Dockerfile
+    working_dir: /server
+    volumes:
+      - server_data:/server
+
+volumes:
+  server_data:

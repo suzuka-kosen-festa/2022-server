@@ -7,6 +7,7 @@ services:
       context: .
       dockerfile: ./Dockerfiles/dev.Dockerfile
     tty: true
+    working_dir: /server
     volumes:
       - type: bind
         source: ./
