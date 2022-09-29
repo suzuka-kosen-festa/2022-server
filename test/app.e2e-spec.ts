@@ -17,10 +17,43 @@ describe('AppController (e2e)', () => {
    afterAll(async () => {
       await app.close();
    });
-   it('/ (GET)', () => {
-      return request(app.getHttpServer())
-         .get('/')
-         .expect(200)
-         .expect('Hello World!');
+   it('check httpHealth', () => {
+      const result = {
+         status: 'ok',
+         info: {
+            httpHealth: {
+               status: 'up',
+            },
+         },
+         error: {},
+         details: {
+            httpHealth: {
+               status: 'up',
+            },
+         },
+      };
+      return request(app.getHttpServer()).get('/health/http').expect(200).expect(result);
+   });
+
+   it('check dbHealth', () => {
+      const result = {
+         status: 'ok',
+         info: {
+            db: {
+               status: 'up',
+            },
+         },
+         error: {},
+         details: {
+            db: {
+               status: 'up',
+            },
+         },
+      };
+      return request(app.getHttpServer()).get('/health/db').expect(200).expect(result);
+   });
+
+   it('check getStudent', async () => {
+      return await request(app.getHttpServer()).get('/student').expect(200).expect([]);
    });
 });

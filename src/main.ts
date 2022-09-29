@@ -17,6 +17,7 @@ async function bootstrap() {
    const prismaService = app.get(PrismaService);
    await prismaService.enableShutdownHooks(app);
 
+   //TODO:環境変数化する
    await app.listen(7000);
 }
 bootstrap();
