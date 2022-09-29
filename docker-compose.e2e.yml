@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./Dockerfiles/e2e.Dockerfile
     env_file:
-      - ./.env.actions
+      - ./.env.test
     working_dir: /server
     volumes:
       - server_data:/server
