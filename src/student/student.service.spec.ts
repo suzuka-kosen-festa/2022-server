@@ -50,6 +50,10 @@ describe('StudentService', () => {
       prisma = module.get<PrismaService>(PrismaService);
    });
 
+   test('service should be Defined', () => {
+      expect(service).toBeDefined();
+   });
+   
    test('createStudent', async () => {
       const studentData = {
          kana: 'テスト1',

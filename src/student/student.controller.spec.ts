@@ -55,10 +55,6 @@ describe('StudentController', () => {
       expect(controller).toBeDefined();
    });
 
-   test('service should be Defined', () => {
-      expect(service).toBeDefined();
-   });
-
    test('get all students', async () => {
       const data = await controller.getAllStudent();
       await expect(data).toEqual(studentArray);
