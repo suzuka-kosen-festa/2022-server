@@ -1,14 +1,14 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class GuestEntity {
-  @ApiProperty()
-  guestId: string;
-  @ApiProperty()
-  sex: string;
-  @ApiProperty()
-  jobs: string;
-  @ApiProperty()
-  name: string;
-  @ApiProperty()
-  hostId: string;
+   @ApiProperty()
+   guestId: string;
+   @ApiProperty()
+   sex: string;
+   @ApiProperty()
+   jobs: string;
+   @ApiProperty()
+   name: string;
+   @ApiProperty()
+   hostId: string;
 }

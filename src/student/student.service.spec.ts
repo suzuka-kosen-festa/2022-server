@@ -53,7 +53,7 @@ describe('StudentService', () => {
    test('service should be Defined', () => {
       expect(service).toBeDefined();
    });
-   
+
    test('createStudent', async () => {
       const studentData = {
          kana: 'テスト1',
