@@ -7,7 +7,6 @@ import { JhsController } from './jhs/jhs.controller';
 import { JhsModule } from './jhs/jhs.module';
 
 @Module({
-   imports: [StudentModule, PrismaModule, HealthModule, GuestModule, JhsModule],
-   controllers: [JhsController],
+   imports: [StudentModule, PrismaModule, HealthModule, GuestModule],
 })
 export class AppModule {}
