@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
+import { Prisma } from '@prisma/client';
 
 describe('AppController (e2e)', () => {
    let app: INestApplication;
@@ -53,7 +54,27 @@ describe('AppController (e2e)', () => {
       return request(app.getHttpServer()).get('/health/db').expect(200).expect(result);
    });
 
+   it('create student record and get it', async () => {
+      const record : Prisma.StudentCreateInput = {
+         email: 'test@example.com',
+         kana: 'てすと'
+      } 
+      const res = await request(app.getHttpServer()).post('/student').send({email: record.email , kana: record.kana})
+
+      console.log(res.body)
+      const result  = [{
+         studentId : res.body.studentId,
+         kana : res.body.kana,
+         email : res.body.email,
+         Guest: []
+      }]
+      
+      return request(app.getHttpServer()).get('/student').expect(200).expect(result)
+   })
+
+   
+
    it('check getStudent', async () => {
-      return await request(app.getHttpServer()).get('/student').expect(200).expect([]);
+      
    });
 });
