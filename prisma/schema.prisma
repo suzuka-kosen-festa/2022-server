@@ -27,7 +27,7 @@ model Guest {
   jobs      String?
   name      String
   host      Student?   @relation(fields: [hostId], references: [studentId])
-  hostId    String?    @unique
+  hostId    String?
   History   History[]
   hostJhs   JHStudent? @relation(fields: [hostJhsId], references: [jhsId])
   hostJhsId String?
