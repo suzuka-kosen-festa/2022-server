@@ -108,5 +108,40 @@ describe('AppController (e2e)', () => {
          const { Guest , ...testResult } = result[0]
          expect(res).toEqual(testResult)
       });
+
+      it('check uuid exist',async () => {
+         const res = await request(app.getHttpServer()).get(`/student/check/${result[0].studentId}`).then(res => res.body)
+
+         const { Guest , ...testResult } = result[0]
+
+         expect(res).toEqual(testResult)
+         
+      })
    });
+
+   describe('test guest module' , () =>{
+      type GuestTestRecord = Omit<Prisma.StudentCreateInput, 'Guest'> & {
+         Guest?: Prisma.GuestCreateManyInput[];
+      };
+
+      let result = new Array<GuestTestRecord>(null);
+      it('get Guest record', async () =>{
+         result = await request(app.getHttpServer()).get('/student').then(res => res.body)
+
+         const testRecord = await request(app.getHttpServer()).get('/guest').then(res => res.body)
+
+         const { Guest } = result[0]
+
+         expect(testRecord).toEqual(Guest)
+      })
+
+      it('check uuid exist',async () => {
+         const testRecord = await request(app.getHttpServer()).get(`/guest/check/${result[0].Guest[0].guestId}`).then(res => res.body)
+         
+         const { Guest } = result[0]
+
+         expect(testRecord).toEqual(Guest[0])
+
+      })
+   })
 });
