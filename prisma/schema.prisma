@@ -45,6 +45,7 @@ model Sponsor {
 model JHStudent {
   jhsId   String    @unique @default(uuid())
   age     Int
+  name    String
   email   String    @unique
   parents Guest[]
   History History[]
