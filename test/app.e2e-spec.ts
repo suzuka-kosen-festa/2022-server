@@ -36,8 +36,8 @@ describe('AppController (e2e)', () => {
             },
          };
 
-         const testResult = await request(app.getHttpServer()).get('/health/http').expect(200)
-         expect(testResult.body).toEqual(result)
+         const testResult = await request(app.getHttpServer()).get('/health/http').expect(200);
+         expect(testResult.body).toEqual(result);
       });
 
       it('check dbHealth', async () => {
@@ -57,7 +57,7 @@ describe('AppController (e2e)', () => {
          };
 
          const testResult = await request(app.getHttpServer()).get('/health/db').expect(200);
-         expect(testResult.body).toEqual(result)
+         expect(testResult.body).toEqual(result);
       });
    });
 
@@ -87,9 +87,9 @@ describe('AppController (e2e)', () => {
             },
          ];
 
-         const testResult  = await request(app.getHttpServer()).get('/student').expect(200)
+         const testResult = await request(app.getHttpServer()).get('/student').expect(200);
 
-         expect(testResult.body).toEqual(result)
+         expect(testResult.body).toEqual(result);
       });
 
       it('update student record and get it', async () => {
@@ -104,44 +104,50 @@ describe('AppController (e2e)', () => {
             .put('/student')
             .send(guestRecord)
             .then((res) => res.body);
-         
-         const { Guest , ...testResult } = result[0]
-         expect(res).toEqual(testResult)
+
+         const { Guest, ...testResult } = result[0];
+         expect(res).toEqual(testResult);
       });
 
-      it('check uuid exist',async () => {
-         const res = await request(app.getHttpServer()).get(`/student/check/${result[0].studentId}`).then(res => res.body)
+      it('check uuid exist', async () => {
+         const res = await request(app.getHttpServer())
+            .get(`/student/check/${result[0].studentId}`)
+            .then((res) => res.body);
 
-         const { Guest , ...testResult } = result[0]
+         const { Guest, ...testResult } = result[0];
 
-         expect(res).toEqual(testResult)
-         
-      })
+         expect(res).toEqual(testResult);
+      });
    });
 
-   describe('test guest module' , () =>{
+   describe('test guest module', () => {
       type GuestTestRecord = Omit<Prisma.StudentCreateInput, 'Guest'> & {
          Guest?: Prisma.GuestCreateManyInput[];
       };
 
       let result = new Array<GuestTestRecord>(null);
-      it('get Guest record', async () =>{
-         result = await request(app.getHttpServer()).get('/student').then(res => res.body)
+      it('get Guest record', async () => {
+         result = await request(app.getHttpServer())
+            .get('/student')
+            .then((res) => res.body);
 
-         const testRecord = await request(app.getHttpServer()).get('/guest').then(res => res.body)
+         const testRecord = await request(app.getHttpServer())
+            .get('/guest')
+            .then((res) => res.body);
 
-         const { Guest } = result[0]
+         const { Guest } = result[0];
 
-         expect(testRecord).toEqual(Guest)
-      })
+         expect(testRecord).toEqual(Guest);
+      });
 
-      it('check uuid exist',async () => {
-         const testRecord = await request(app.getHttpServer()).get(`/guest/check/${result[0].Guest[0].guestId}`).then(res => res.body)
-         
-         const { Guest } = result[0]
+      it('check uuid exist', async () => {
+         const testRecord = await request(app.getHttpServer())
+            .get(`/guest/check/${result[0].Guest[0].guestId}`)
+            .then((res) => res.body);
 
-         expect(testRecord).toEqual(Guest[0])
+         const { Guest } = result[0];
 
-      })
-   })
+         expect(testRecord).toEqual(Guest[0]);
+      });
+   });
 });

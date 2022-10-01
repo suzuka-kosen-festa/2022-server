@@ -3,8 +3,8 @@ import { JhsController } from './jhs.controller';
 import { JhsService } from './jhs.service';
 
 @Module({
-  providers: [JhsService],
-  controllers: [JhsController],
-  exports: [JhsController, JhsService]
+   providers: [JhsService],
+   controllers: [JhsController],
+   exports: [JhsController, JhsService],
 })
 export class JhsModule {}

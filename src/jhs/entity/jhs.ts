@@ -1,0 +1,18 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { GuestEntity } from '../../guest/entity/guest';
+
+//TODO:Parents型の追加
+export class JhsEntity {
+   @ApiProperty()
+   jhsId: string;
+   @ApiProperty()
+   name: string;
+   @ApiProperty()
+   age: number;
+   @ApiProperty()
+   email: string;
+}
+export class JhswithParentEntity extends JhsEntity {
+   @ApiProperty()
+   guest: GuestEntity;
+}
