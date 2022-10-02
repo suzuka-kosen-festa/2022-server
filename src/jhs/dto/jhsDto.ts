@@ -19,5 +19,5 @@ export class updateJhsStudentDto {
    @ApiProperty()
    name: string;
    @ApiProperty()
-   age:number
+   age: number;
 }
