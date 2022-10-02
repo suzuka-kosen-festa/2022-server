@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-redeclare
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { JHStudent } from '@prisma/client';
