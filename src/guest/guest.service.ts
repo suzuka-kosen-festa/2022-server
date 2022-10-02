@@ -7,7 +7,6 @@ export class GuestService {
    constructor(private readonly prisma: PrismaService) {}
 
    // ゲストは単独で存在してはいけないため(ホストとなるレコードが必要)、必要な関数はこれだけ
-   // OBは例外のため別の場所で処理
 
    // Guestのデータの全件取得
    async getAllGuests(): Promise<Guest[]> {
