@@ -4,6 +4,8 @@ import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { Prisma } from '@prisma/client';
 
+// どっかのタイミングでファイル分けしたいけど依存考えて分けるのだるい
+
 describe('AppController (e2e)', () => {
    let app: INestApplication;
 
