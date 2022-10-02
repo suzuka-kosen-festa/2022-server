@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class Ob {
+export class ObEntity {
   @ApiProperty()
   obId :string
   @ApiProperty()
