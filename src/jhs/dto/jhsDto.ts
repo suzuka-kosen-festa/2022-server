@@ -18,4 +18,6 @@ export class updateJhsStudentDto {
    jobs: string;
    @ApiProperty()
    name: string;
+   @ApiProperty()
+   age:number
 }

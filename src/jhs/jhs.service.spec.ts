@@ -81,7 +81,7 @@ describe('jhsService', () => {
          jobs:'保護者',
       };
       const singleJhswithParents = await service.updateJhs({
-         where: { jhsId: 'uuid2' },
+         where: { email: 'test2@example.com' },
          data: {
             parents: {
                create: guestData,
