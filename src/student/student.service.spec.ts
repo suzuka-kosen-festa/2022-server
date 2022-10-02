@@ -85,11 +85,7 @@ describe('StudentService', () => {
          where: { studentId: 'uuid2' },
          data: {
             Guest: {
-               create: {
-                  sex: guestData.sex,
-                  jobs: guestData.jobs,
-                  name: guestData.name,
-               },
+               create: guestData,
             },
          },
       });
