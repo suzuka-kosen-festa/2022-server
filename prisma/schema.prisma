@@ -53,10 +53,11 @@ model JHStudent {
 //OBテーブル。難しい事考えたくないので招待客とテーブル分けた
 //あとGuestテーブルが単独で存在するの嫌だし
 model OB {
-  obId  String @unique @default(uuid())
-  age   Int
-  name  String
-  email String @unique
+  obId    String    @unique @default(uuid())
+  age     Int
+  name    String
+  email   String    @unique
+  History History[]
 }
 
 model History {
@@ -68,4 +69,6 @@ model History {
   sponsorId    String?
   JHStudent    JHStudent? @relation(fields: [JHStudentId], references: [jhsId])
   JHStudentId  String?
+  OB           OB?        @relation(fields: [oBObId], references: [obId])
+  oBObId       String?
 }
