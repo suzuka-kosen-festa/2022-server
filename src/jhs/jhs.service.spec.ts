@@ -75,7 +75,7 @@ describe('jhsService', () => {
    });
 
    test('checkJhstExist', async () => {
-      const singleStudent = await service.checkJhsExist({
+      const singleStudent = await service.checkUuid({
          jhsId: 'uuid1',
       });
       expect(singleStudent).toEqual(singleRecord);
