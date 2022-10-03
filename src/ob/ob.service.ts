@@ -4,19 +4,19 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class ObService {
-  constructor(private readonly prisma : PrismaService){}
+   constructor(private readonly prisma: PrismaService) {}
 
-  async getall(): Promise<OB[]>{
-    return this.prisma.oB.findMany()
-  }
+   async getall(): Promise<OB[]> {
+      return this.prisma.oB.findMany();
+   }
 
-  async create(data : Prisma.OBCreateInput): Promise<OB>{
-    return this.prisma.oB.create({data})
-  }
+   async create(data: Prisma.OBCreateInput): Promise<OB> {
+      return this.prisma.oB.create({ data });
+   }
 
-  async chekUuid(uuid : Prisma.OBWhereUniqueInput): Promise<OB>{
-    return this.prisma.oB.findUnique({
-      where : uuid
-    })
-  }
+   async checkObExist(uuid: Prisma.OBWhereUniqueInput): Promise<OB> {
+      return this.prisma.oB.findUnique({
+         where: uuid,
+      });
+   }
 }

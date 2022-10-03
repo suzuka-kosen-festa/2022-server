@@ -1,10 +1,10 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateObDto{
-  @ApiProperty()
-  email : string
-  @ApiProperty()
-  name : string
-  @ApiProperty()
-  age  : number
+export class CreateObDto {
+   @ApiProperty()
+   email: string;
+   @ApiProperty()
+   name: string;
+   @ApiProperty()
+   age: number;
 }

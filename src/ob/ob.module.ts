@@ -3,7 +3,7 @@ import { ObController } from './ob.controller';
 import { ObService } from './ob.service';
 
 @Module({
-  controllers: [ObController],
-  providers: [ObService]
+   controllers: [ObController],
+   providers: [ObService],
 })
 export class ObModule {}
