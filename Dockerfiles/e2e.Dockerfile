@@ -9,3 +9,7 @@ COPY package.json yarn.lock ./
 COPY . .
 
 EXPOSE 7000
+
+RUN yarn install
+
+CMD [ "yarn", "test:actions" ]

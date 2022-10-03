@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { PrismaService } from './prisma/prisma.service';
 
 async function bootstrap() {
    const app = await NestFactory.create(AppModule);
@@ -13,6 +14,10 @@ async function bootstrap() {
    const document = SwaggerModule.createDocument(app, config);
    SwaggerModule.setup('api', app, document);
 
-   await app.listen(6000);
+   const prismaService = app.get(PrismaService);
+   await prismaService.enableShutdownHooks(app);
+
+   //TODO:環境変数化する
+   await app.listen(7000);
 }
 bootstrap();

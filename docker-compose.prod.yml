@@ -1,6 +1,15 @@
-web:
-  build: 
-    context: .
-    dockerfile: ./Dockerfiles/prod.Dockerfile
-  volumes:
-    - ./app
+version: '3'
+services:
+  server:
+    build: 
+      context: .
+      dockerfile: ./Dockerfiles/prod.Dockerfile
+    volumes:
+      - ./app
+
+  db:
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+
+volumes:
+    postgres_volume:
