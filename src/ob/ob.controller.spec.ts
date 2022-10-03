@@ -23,9 +23,9 @@ describe('ObController', () => {
             {
                provide: ObService,
                useValue: {
-                  createOb: jest.fn().mockImplementation((data: Prisma.StudentCreateInput) => Promise.resolve(data)),
-                  checkObExist: jest.fn().mockImplementation((uuid: string) => Promise.resolve(singleRecord)),
-                  getAllOb: jest.fn().mockImplementation(() => obArray),
+                  create: jest.fn().mockImplementation((data: Prisma.StudentCreateInput) => Promise.resolve(data)),
+                  checkObExist: jest.fn().mockImplementation((uuid: Prisma.OBWhereUniqueInput) => Promise.resolve(singleRecord)),
+                  getAll: jest.fn().mockImplementation(() => obArray),
                },
             },
          ],
@@ -40,19 +40,19 @@ describe('ObController', () => {
    });
 
    it('get all records', async () => {
-      const data = await service.getall();
+      const data = await controller.getAllOb()
       expect(data).toStrictEqual(obArray);
    });
 
    it('create ob record', async () => {
       const record = { obId: 'uuid1', name: 'てすと1', age: 25, email: 'test1@example.com' };
-      const data = await service.create(record);
+      const data = await controller.createOb(record);
       expect(data).toStrictEqual(record);
    });
 
    it('check record exist', async () => {
       const record = { obId: 'uuid1', name: 'てすと1', age: 25, email: 'test1@example.com' };
-      const testRecord = await service.checkObExist({ obId: record.obId });
+      const testRecord = await controller.checkExistOb('uuid1');
       expect(testRecord).toStrictEqual(record);
    });
 });

@@ -4,6 +4,9 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class JhsService {
+   checkUuid(arg0: { jhsId: string; }) {
+      throw new Error('Method not implemented.');
+   }
    constructor(private readonly prisma: PrismaService) {}
 
    async getAllJhs(): Promise<JHStudent[]> {
@@ -14,7 +17,7 @@ export class JhsService {
       });
    }
 
-   async checkUuid(uuid: Prisma.JHStudentWhereUniqueInput): Promise<JHStudent> {
+   async checkJhsExist(uuid: Prisma.JHStudentWhereUniqueInput): Promise<JHStudent> {
       return this.prisma.jHStudent.findUnique({
          where: uuid,
       });

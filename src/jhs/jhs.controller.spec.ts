@@ -64,7 +64,7 @@ describe('JhsController', () => {
    });
 
    test('check student exist', async () => {
-      const data = await controller.checkJhsExist('uuid1');
+      const data = await controller.checkUuid('uuid1');
       await expect(data).toEqual(singleRecord);
    });
 

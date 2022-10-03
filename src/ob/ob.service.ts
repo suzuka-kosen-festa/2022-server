@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ObService {
    constructor(private readonly prisma: PrismaService) {}
 
-   async getall(): Promise<OB[]> {
+   async getAll(): Promise<OB[]> {
       return this.prisma.oB.findMany();
    }
 

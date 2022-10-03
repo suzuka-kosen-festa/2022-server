@@ -13,7 +13,7 @@ export class ObController {
    @ApiOperation({ summary: 'OBのデータ全件取得' })
    @ApiOkResponse({ type: ObEntity, isArray: true })
    async getAllOb(): Promise<OB[]> {
-      return this.service.getall();
+      return this.service.getAll();
    }
 
    @Get('check/:uuid')
