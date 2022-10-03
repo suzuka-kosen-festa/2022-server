@@ -29,5 +29,4 @@ export class ObController {
   async createOb(data : CreateObDto): Promise<OB>{
     return this.service.create(data)
   }
-
 }
