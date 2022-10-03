@@ -4,10 +4,10 @@ import { PrismaService } from '../prisma/prisma.service';
 import { ObService } from './ob.service';
 
 const obArray: Prisma.OBCreateInput[] = [
-   { obId: 'uuid1', name: 'てすと1', age: 25, email: 'test1@example.com' },
-   { obId: 'uuid2', name: 'てすと2', age: 26, email: 'test2@example.com' },
-   { obId: 'uuid3', name: 'てすと3', age: 27, email: 'test3@example.com' },
-   { obId: 'uuid4', name: 'てすと4', age: 28, email: 'test4@example.com' },
+   { obId: 'uuid1', name: 'てすと1', email: 'test1@example.com' },
+   { obId: 'uuid2', name: 'てすと2', email: 'test2@example.com' },
+   { obId: 'uuid3', name: 'てすと3', email: 'test3@example.com' },
+   { obId: 'uuid4', name: 'てすと4', email: 'test4@example.com' },
 ];
 
 const singleRecord = obArray[0];
@@ -40,7 +40,6 @@ describe('ObService', () => {
 
    it('create',async () => {
       const obData = {
-         age : 25,
          name : 'てすと１',
          email: 'test1@example.com'
       };

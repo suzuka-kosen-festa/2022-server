@@ -5,6 +5,4 @@ export class CreateObDto {
    email: string;
    @ApiProperty()
    name: string;
-   @ApiProperty()
-   age: string;
 }

@@ -54,7 +54,6 @@ model JHStudent {
 //あとGuestテーブルが単独で存在するの嫌だし
 model OB {
   obId    String    @unique @default(uuid())
-  age     String
   name    String
   email   String    @unique
   History History[]
