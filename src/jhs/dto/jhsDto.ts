@@ -6,7 +6,7 @@ export class createJhsStudentDto {
    @ApiProperty()
    name: string;
    @ApiProperty()
-   age: number;
+   age: string;
 }
 
 export class updateJhsStudentDto {

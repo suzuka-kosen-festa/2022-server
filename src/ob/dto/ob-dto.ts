@@ -6,5 +6,5 @@ export class CreateObDto {
    @ApiProperty()
    name: string;
    @ApiProperty()
-   age: number;
+   age: string;
 }
