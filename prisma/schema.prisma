@@ -43,7 +43,7 @@ model Sponsor {
 //中学生用テーブル。とりあえず年齢と送り返す用のメルアドだけ
 model JHStudent {
   jhsId   String    @unique @default(uuid())
-  age     Int
+  age     String
   name    String
   email   String    @unique
   parents Guest[]
@@ -54,7 +54,7 @@ model JHStudent {
 //あとGuestテーブルが単独で存在するの嫌だし
 model OB {
   obId    String    @unique @default(uuid())
-  age     Int
+  age     String
   name    String
   email   String    @unique
   History History[]
