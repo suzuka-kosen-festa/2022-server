@@ -4,8 +4,6 @@ import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { Prisma } from '@prisma/client';
 
-// どっかのタイミングでファイル分けしたいけど依存考えて分けるのだるい
-
 describe('AppController (e2e)', () => {
    let app: INestApplication;
 
@@ -19,48 +17,6 @@ describe('AppController (e2e)', () => {
    });
    afterAll(async () => {
       await app.close();
-   });
-
-   describe('check health', () => {
-      it('check httpHealth', async () => {
-         const result = {
-            status: 'ok',
-            info: {
-               httpHealth: {
-                  status: 'up',
-               },
-            },
-            error: {},
-            details: {
-               httpHealth: {
-                  status: 'up',
-               },
-            },
-         };
-
-         const testResult = await request(app.getHttpServer()).get('/health/http').expect(200);
-         expect(testResult.body).toEqual(result);
-      });
-
-      it('check dbHealth', async () => {
-         const result = {
-            status: 'ok',
-            info: {
-               db: {
-                  status: 'up',
-               },
-            },
-            error: {},
-            details: {
-               db: {
-                  status: 'up',
-               },
-            },
-         };
-
-         const testResult = await request(app.getHttpServer()).get('/health/db').expect(200);
-         expect(testResult.body).toEqual(result);
-      });
    });
 
    describe('test student module', () => {
