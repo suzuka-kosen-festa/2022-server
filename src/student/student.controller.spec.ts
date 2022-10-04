@@ -56,7 +56,7 @@ describe('StudentController', () => {
    });
 
    test('get all students', async () => {
-      const data = await controller.getAllStudent();
+      const data = await controller.getAll();
       await expect(data).toEqual(studentArray);
    });
 
@@ -66,7 +66,7 @@ describe('StudentController', () => {
    });
 
    test('update Student', async () => {
-      const data = await controller.updateStudent({
+      const data = await controller.update({
          email: 'example2.com',
          sex: '男',
          jobs: '祖父',
