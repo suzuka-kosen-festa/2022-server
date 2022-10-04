@@ -34,14 +34,13 @@ export class JhsService {
       return this.prisma.jHStudent.update({
          where: where,
          data: data,
-         include:{
-            parents:true
-         }
+         include: {
+            parents: true,
+         },
       });
    }
 
-   
-   async deleteJhs(where: Prisma.JHStudentWhereUniqueInput) : Promise<JHStudent> {
-      return this.prisma.jHStudent.delete({where:where})
+   async deleteJhs(where: Prisma.JHStudentWhereUniqueInput): Promise<JHStudent> {
+      return this.prisma.jHStudent.delete({ where: where });
    }
 }

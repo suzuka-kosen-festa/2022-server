@@ -54,9 +54,9 @@ export class JhsController {
    @Delete(':uuid')
    @ApiOperation({ summary: '学生のデータの削除' })
    @ApiResponse({ type: JhsEntity })
-   async delete(@Param('uuid') uuid : string) : Promise<JHStudent> {
+   async delete(@Param('uuid') uuid: string): Promise<JHStudent> {
       return this.service.deleteJhs({
-         jhsId: uuid
-      })
+         jhsId: uuid,
+      });
    }
 }

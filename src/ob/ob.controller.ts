@@ -33,7 +33,7 @@ export class ObController {
    @Delete(':uuid')
    @ApiOperation({ summary: 'OBレコードの削除' })
    @ApiResponse({ type: ObEntity })
-   async delete(@Param('uuid') uuid:string): Promise<OB> {
-      return this.service.deleteOb({obId: uuid}) 
+   async delete(@Param('uuid') uuid: string): Promise<OB> {
+      return this.service.deleteOb({ obId: uuid });
    }
 }

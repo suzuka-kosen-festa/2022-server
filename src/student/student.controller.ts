@@ -64,9 +64,9 @@ export class StudentController {
    @Delete(':uuid')
    @ApiOperation({ summary: '学生のデータの削除' })
    @ApiResponse({ type: StudentEntity })
-   async delete(@Param('uuid') uuid : string) : Promise<Student> {
+   async delete(@Param('uuid') uuid: string): Promise<Student> {
       return this.studentService.deleteStudent({
-         studentId: uuid
-      })
+         studentId: uuid,
+      });
    }
 }

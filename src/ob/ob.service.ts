@@ -20,7 +20,7 @@ export class ObService {
       });
    }
 
-   async deleteOb(where: Prisma.OBWhereUniqueInput) : Promise<OB> {
-      return this.prisma.oB.delete({where:where})
+   async deleteOb(where: Prisma.OBWhereUniqueInput): Promise<OB> {
+      return this.prisma.oB.delete({ where: where });
    }
 }

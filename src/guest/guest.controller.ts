@@ -25,9 +25,9 @@ export class GuestController {
    @Delete(':uuid')
    @ApiOperation({ summary: '招待客ののデータの削除' })
    @ApiResponse({ type: GuestEntity })
-   async delete(@Param('uuid') uuid : string) : Promise<Guest> {
+   async delete(@Param('uuid') uuid: string): Promise<Guest> {
       return this.guestService.deleteGuest({
-         guestId: uuid
-      })
+         guestId: uuid,
+      });
    }
 }

@@ -20,7 +20,7 @@ export class GuestService {
       });
    }
 
-   async deleteGuest(where: Prisma.GuestWhereUniqueInput) : Promise<Guest> {
-      return this.prisma.guest.delete({where:where})
+   async deleteGuest(where: Prisma.GuestWhereUniqueInput): Promise<Guest> {
+      return this.prisma.guest.delete({ where: where });
    }
 }

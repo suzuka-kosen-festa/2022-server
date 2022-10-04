@@ -22,7 +22,7 @@ describe('AppController (e2e)', () => {
 
    describe('Student and GuestModule(e2e)', () => {
       let result = new Array<StudentTestRecord>(null);
-      
+
       it('create student record and get it', async () => {
          const record: Prisma.StudentCreateInput = {
             email: 'test@example.com',
@@ -43,7 +43,7 @@ describe('AppController (e2e)', () => {
             },
          ];
 
-         const testResult = await request(app.getHttpServer()).get('/student')
+         const testResult = await request(app.getHttpServer()).get('/student');
 
          expect(testResult.body).toEqual(result);
       });
@@ -74,7 +74,11 @@ describe('AppController (e2e)', () => {
             },
          ];
 
-         expect(await request(app.getHttpServer()).get('/student').then(res => res.body)).toEqual(result)
+         expect(
+            await request(app.getHttpServer())
+               .get('/student')
+               .then((res) => res.body),
+         ).toEqual(result);
       });
 
       it('check uuid exist', async () => {
@@ -111,11 +115,15 @@ describe('AppController (e2e)', () => {
          expect(testRecord).toEqual(Guest[0]);
       });
 
-      it("delete",async () => {
-         await request(app.getHttpServer()).delete(`/student/${result[0].studentId}`)
+      it('delete', async () => {
+         await request(app.getHttpServer()).delete(`/student/${result[0].studentId}`);
 
-         expect(await request(app.getHttpServer()).get('/student').then(res => res.body)).toEqual([])
-      })
+         expect(
+            await request(app.getHttpServer())
+               .get('/student')
+               .then((res) => res.body),
+         ).toEqual([]);
+      });
    });
 
    describe('JHS Module and GuestModule(e2e)', () => {
@@ -141,49 +149,64 @@ describe('AppController (e2e)', () => {
             },
          ];
 
-         const expectedResult = await request(app.getHttpServer()).get('/jhs').then(res => res.body)
+         const expectedResult = await request(app.getHttpServer())
+            .get('/jhs')
+            .then((res) => res.body);
 
          expect(expectedResult).toEqual(result);
       });
 
-      it('update jhs and get it', async () =>{
-         const parentsRecord : Pick<Prisma.JHStudentUpdateInput, 'email'> & Prisma.GuestCreateInput = {
+      it('update jhs and get it', async () => {
+         const parentsRecord: Pick<Prisma.JHStudentUpdateInput, 'email'> & Prisma.GuestCreateInput = {
             email: 'test1@example.com',
             name: 'てすとぺあれんと',
             sex: '男',
             jobs: '保護者',
-         }  
+         };
 
-         const updatedRecord = await request(app.getHttpServer()).put('/jhs').send(parentsRecord).then(res => res.body)
+         const updatedRecord = await request(app.getHttpServer())
+            .put('/jhs')
+            .send(parentsRecord)
+            .then((res) => res.body);
 
-         const parentsData = updatedRecord.parents[0]
+         const parentsData = updatedRecord.parents[0];
 
-         result[0].parents =[{
-            guestId : parentsData.guestId,
-            hostJhsId: parentsData.hostJhsId,
-            name : parentsData.name,
-            sex: parentsData.sex,
-            jobs: parentsData.jobs,
-            hostId: null
-         }]
+         result[0].parents = [
+            {
+               guestId: parentsData.guestId,
+               hostJhsId: parentsData.hostJhsId,
+               name: parentsData.name,
+               sex: parentsData.sex,
+               jobs: parentsData.jobs,
+               hostId: null,
+            },
+         ];
 
-         expect(await request(app.getHttpServer()).get('/jhs').then(res => res.body)).toEqual(result)
-      })
+         expect(
+            await request(app.getHttpServer())
+               .get('/jhs')
+               .then((res) => res.body),
+         ).toEqual(result);
+      });
 
-      it('check uuid exist',async () => {
+      it('check uuid exist', async () => {
          const res = await request(app.getHttpServer())
-         .get(`/jhs/check/${result[0].jhsId}`)
-         .then((res) => res.body);
+            .get(`/jhs/check/${result[0].jhsId}`)
+            .then((res) => res.body);
 
          const { parents, ...testResult } = result[0];
 
          expect(res).toEqual(testResult);
-      })
+      });
 
-      it("delete", async () => {
-         await request(app.getHttpServer()).delete(`/jhs/${result[0].jhsId}`)
-         
-         expect(await request(app.getHttpServer()).get('/jhs').then(res => res.body)).toEqual([])
-      })
-   });   
+      it('delete', async () => {
+         await request(app.getHttpServer()).delete(`/jhs/${result[0].jhsId}`);
+
+         expect(
+            await request(app.getHttpServer())
+               .get('/jhs')
+               .then((res) => res.body),
+         ).toEqual([]);
+      });
+   });
 });

@@ -45,7 +45,7 @@ export class StudentService {
       });
    }
 
-   async deleteStudent(where: Prisma.StudentWhereUniqueInput) : Promise<Student> {
-      return this.prisma.student.delete({where:where})
+   async deleteStudent(where: Prisma.StudentWhereUniqueInput): Promise<Student> {
+      return this.prisma.student.delete({ where: where });
    }
 }
