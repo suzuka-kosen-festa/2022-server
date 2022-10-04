@@ -63,7 +63,7 @@ describe('jhsService', () => {
       const jhsData = {
          name: 'テスト1',
          email: 'example1.com',
-         age: 15,
+         age: "15",
       };
       const createdJhs = await service.createJhs(jhsData);
       expect(createdJhs).toEqual(singleRecord);
