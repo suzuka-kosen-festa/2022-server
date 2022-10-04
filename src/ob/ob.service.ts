@@ -6,11 +6,11 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ObService {
    constructor(private readonly prisma: PrismaService) {}
 
-   async getAll(): Promise<OB[]> {
+   async getAllOb(): Promise<OB[]> {
       return this.prisma.oB.findMany();
    }
 
-   async create(data: Prisma.OBCreateInput): Promise<OB> {
+   async createOb(data: Prisma.OBCreateInput): Promise<OB> {
       return this.prisma.oB.create({ data });
    }
 
@@ -20,7 +20,7 @@ export class ObService {
       });
    }
 
-   async deleteStudent(where: Prisma.StudentWhereUniqueInput) : Promise<OB> {
+   async deleteOb(where: Prisma.OBWhereUniqueInput) : Promise<OB> {
       return this.prisma.oB.delete({where:where})
    }
 }

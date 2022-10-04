@@ -13,7 +13,7 @@ export class ObController {
    @ApiOperation({ summary: 'OBのデータ全件取得' })
    @ApiOkResponse({ type: ObEntity, isArray: true })
    async getAll(): Promise<OB[]> {
-      return this.service.getAll();
+      return this.service.getAllOb();
    }
 
    @Get('check/:uuid')
@@ -27,13 +27,13 @@ export class ObController {
    @ApiOperation({ summary: 'OBレコードの作成' })
    @ApiCreatedResponse({ type: ObEntity })
    async create(data: CreateObDto): Promise<OB> {
-      return this.service.create(data);
+      return this.service.createOb(data);
    }
 
    @Delete(':uuid')
    @ApiOperation({ summary: 'OBレコードの削除' })
    @ApiResponse({ type: ObEntity })
    async delete(@Param('uuid') uuid:string): Promise<OB> {
-      return this.service.deleteStudent({studentId: uuid}) 
+      return this.service.deleteOb({obId: uuid}) 
    }
 }

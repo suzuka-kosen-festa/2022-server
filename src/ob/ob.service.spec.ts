@@ -40,12 +40,12 @@ describe('ObService', () => {
          name: 'てすと１',
          email: 'test1@example.com',
       };
-      const createdOb = await service.create(obData);
+      const createdOb = await service.createOb(obData);
       expect(createdOb).toEqual(singleRecord);
    });
 
    it('getAll', async () => {
-      const obData = await service.getAll();
+      const obData = await service.getAllOb();
       expect(obData).toStrictEqual(obArray);
    });
 
