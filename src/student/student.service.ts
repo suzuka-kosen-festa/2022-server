@@ -39,6 +39,9 @@ export class StudentService {
       return this.prisma.student.update({
          where,
          data,
+         include:{
+            Guest : true
+         }
       });
    }
 }
