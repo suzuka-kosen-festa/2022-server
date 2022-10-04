@@ -19,4 +19,8 @@ export class ObService {
          where: uuid,
       });
    }
+
+   async deleteStudent(where: Prisma.StudentWhereUniqueInput) : Promise<OB> {
+      return this.prisma.oB.delete({where:where})
+   }
 }

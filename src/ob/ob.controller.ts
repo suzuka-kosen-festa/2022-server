@@ -1,5 +1,5 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OB } from '@prisma/client';
 import { CreateObDto } from './dto/ob-dto';
 import { ObEntity } from './entity/ob';
@@ -12,21 +12,28 @@ export class ObController {
    @Get()
    @ApiOperation({ summary: 'OBのデータ全件取得' })
    @ApiOkResponse({ type: ObEntity, isArray: true })
-   async getAllOb(): Promise<OB[]> {
+   async getAll(): Promise<OB[]> {
       return this.service.getAll();
    }
 
    @Get('check/:uuid')
    @ApiOperation({ summary: 'OBのuuidの照合' })
    @ApiOkResponse({ type: ObEntity })
-   async checkExistOb(@Param('uuid') uuid: string): Promise<OB> {
+   async checkUuid(@Param('uuid') uuid: string): Promise<OB> {
       return this.service.checkObExist({ obId: uuid });
    }
 
    @Post()
    @ApiOperation({ summary: 'OBレコードの作成' })
    @ApiCreatedResponse({ type: ObEntity })
-   async createOb(data: CreateObDto): Promise<OB> {
+   async create(data: CreateObDto): Promise<OB> {
       return this.service.create(data);
+   }
+
+   @Delete(':uuid')
+   @ApiOperation({ summary: 'OBレコードの削除' })
+   @ApiResponse({ type: ObEntity })
+   async delete(@Param('uuid') uuid:string): Promise<OB> {
+      return this.service.deleteStudent({studentId: uuid}) 
    }
 }
