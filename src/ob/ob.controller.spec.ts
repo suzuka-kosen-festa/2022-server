@@ -7,7 +7,7 @@ const obArray: Prisma.OBCreateInput[] = [
    { obId: 'uuid1', name: 'てすと1', email: 'test1@example.com' },
    { obId: 'uuid2', name: 'てすと2', email: 'test2@example.com' },
    { obId: 'uuid3', name: 'てすと3', email: 'test3@example.com' },
-   { obId: 'uuid4', name: 'てすと4' , email: 'test4@example.com' },
+   { obId: 'uuid4', name: 'てすと4', email: 'test4@example.com' },
 ];
 
 const singleRecord = obArray[0];
@@ -24,7 +24,9 @@ describe('ObController', () => {
                provide: ObService,
                useValue: {
                   create: jest.fn().mockImplementation((data: Prisma.StudentCreateInput) => Promise.resolve(data)),
-                  checkObExist: jest.fn().mockImplementation((uuid: Prisma.OBWhereUniqueInput) => Promise.resolve(singleRecord)),
+                  checkObExist: jest
+                     .fn()
+                     .mockImplementation((uuid: Prisma.OBWhereUniqueInput) => Promise.resolve(singleRecord)),
                   getAll: jest.fn().mockImplementation(() => obArray),
                },
             },
@@ -40,7 +42,7 @@ describe('ObController', () => {
    });
 
    it('get all records', async () => {
-      const data = await controller.getAllOb()
+      const data = await controller.getAllOb();
       expect(data).toStrictEqual(obArray);
    });
 

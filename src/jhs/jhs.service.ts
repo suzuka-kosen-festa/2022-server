@@ -4,7 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class JhsService {
-   checkUuid(arg0: { jhsId: string; }) {
+   checkUuid(arg0: { jhsId: string }) {
       throw new Error('Method not implemented.');
    }
    constructor(private readonly prisma: PrismaService) {}
@@ -34,7 +34,7 @@ export class JhsService {
       data: Prisma.JHStudentUpdateInput;
    }): Promise<JHStudent> {
       const { where, data } = params;
-      const { email, name , age } = data
+      const { email, name, age } = data;
       return this.prisma.jHStudent.update({
          where: where,
          data: data,
