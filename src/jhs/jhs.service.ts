@@ -31,10 +31,12 @@ export class JhsService {
       data: Prisma.JHStudentUpdateInput;
    }): Promise<JHStudent> {
       const { where, data } = params;
-      const { email, name, age } = data;
       return this.prisma.jHStudent.update({
          where: where,
          data: data,
+         include:{
+            parents:true
+         }
       });
    }
 }
