@@ -1,4 +1,5 @@
-import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
+// eslint-disable-next-line no-redeclare
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OB } from '@prisma/client';
 import { CreateObDto } from './dto/ob-dto';
@@ -26,7 +27,7 @@ export class ObController {
    @Post()
    @ApiOperation({ summary: 'OBレコードの作成' })
    @ApiCreatedResponse({ type: ObEntity })
-   async create(data: CreateObDto): Promise<OB> {
+   async create(@Body() data: CreateObDto): Promise<OB> {
       return this.service.createOb(data);
    }
 

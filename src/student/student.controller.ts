@@ -30,12 +30,7 @@ export class StudentController {
    @ApiOperation({ summary: '学生の作成' })
    @ApiCreatedResponse({ type: StudentEntity })
    async create(@Body() data: createStudentDto): Promise<Student> {
-      console.log(data);
-      const { kana, email } = data;
-      return this.studentService.createStudent({
-         kana,
-         email,
-      });
+      return this.studentService.createStudent(data);
    }
 
    @Put()
