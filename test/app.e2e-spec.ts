@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import { Prisma } from '@prisma/client';
 import * as request from 'supertest';
-import { JhsTestRecord, StudentTestRecord } from './type';
+import { JhsTestRecord, StudentTestRecord, ObTestRecord } from './type';
 
 describe('AppController (e2e)', () => {
    let app: INestApplication;
@@ -63,15 +63,15 @@ describe('AppController (e2e)', () => {
 
          const resGuestData = res.Guest[0];
 
+         const {email, ...rest} = guestRecord
+
          result[0].Guest = [
             {
                guestId: resGuestData.guestId,
                hostId: resGuestData.hostId,
-               sex: guestRecord.sex,
-               name: guestRecord.name,
-               jobs: guestRecord.jobs,
                hostJhsId: null,
-            },
+               ...rest
+            }
          ];
 
          expect(
@@ -173,12 +173,7 @@ describe('AppController (e2e)', () => {
 
          result[0].parents = [
             {
-               guestId: parentsData.guestId,
-               hostJhsId: parentsData.hostJhsId,
-               name: parentsData.name,
-               sex: parentsData.sex,
-               jobs: parentsData.jobs,
-               hostId: null,
+               ...parentsData
             },
          ];
 
@@ -211,6 +206,28 @@ describe('AppController (e2e)', () => {
    });
 
    describe("OB Module (e2e)", () =>{
-      
+      let result : ObTestRecord[]
+
+      it("create record and get it", async() =>{
+         const obData : Prisma.OBCreateInput = {
+            name : "てすと",
+            email: 'test@example'
+         }
+
+         const res = await request(app.getHttpServer()).post('/ob').send(obData).then(res => res.body)
+
+         result = [{
+            obId: res.obId,
+            ...obData
+         }]
+
+         expect(await request(app.getHttpServer()).get('/ob').then(res=>res.body)).toEqual(result)
+      })
+
+      it("delete",async () => {
+         await request(app.getHttpServer()).delete(`/ob/${result[0].obId}`)
+
+         expect(await request(app.getHttpServer()).get('/ob').then(res=>res.body)).toEqual([])
+      })
    })
 });
