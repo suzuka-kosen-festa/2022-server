@@ -19,4 +19,8 @@ export class GuestService {
          where: data,
       });
    }
+
+   async deleteGuest(where: Prisma.GuestWhereUniqueInput) : Promise<Guest> {
+      return this.prisma.guest.delete({where:where})
+   }
 }
