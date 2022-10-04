@@ -39,4 +39,9 @@ export class JhsService {
          }
       });
    }
+
+   
+   async deleteJhs(where: Prisma.JHStudentWhereUniqueInput) : Promise<JHStudent> {
+      return this.prisma.jHStudent.delete({where:where})
+   }
 }

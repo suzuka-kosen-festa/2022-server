@@ -59,7 +59,7 @@ describe('JhsController', () => {
    });
 
    test('get all students', async () => {
-      const data = await controller.getAllJhs();
+      const data = await controller.getAll();
       await expect(data).toEqual(jhsArray);
    });
 
@@ -69,7 +69,7 @@ describe('JhsController', () => {
    });
 
    test('update Student', async () => {
-      const data = await controller.updateJhs({
+      const data = await controller.update({
          email: 'test2@example.com',
          name: 'てすと親',
          age: 40,

@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-redeclare
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { JHStudent } from '@prisma/client';
 import { createJhsStudentDto, updateJhsStudentDto } from './dto/jhsDto';
 import { JhsEntity, JhswithParentEntity } from './entity/jhs';
@@ -13,7 +13,7 @@ export class JhsController {
    @Get()
    @ApiOperation({ summary: '中学生のデータ全件取得' })
    @ApiOkResponse({ type: JhsEntity, isArray: true })
-   async getAllJhs(): Promise<JHStudent[]> {
+   async getAll(): Promise<JHStudent[]> {
       return this.service.getAllJhs();
    }
 
@@ -27,14 +27,14 @@ export class JhsController {
    @Post()
    @ApiOperation({ summary: '中学生のレコード作成' })
    @ApiCreatedResponse({ type: JhsEntity })
-   async createJhs(@Body() data: createJhsStudentDto): Promise<JHStudent> {
+   async create(@Body() data: createJhsStudentDto): Promise<JHStudent> {
       return this.service.createJhs(data);
    }
 
    @Put()
    @ApiOperation({ summary: '中学生と保護者のリレーション作成' })
    @ApiCreatedResponse({ type: JhswithParentEntity })
-   async updateJhs(@Body() data: updateJhsStudentDto): Promise<JHStudent> {
+   async update(@Body() data: updateJhsStudentDto): Promise<JHStudent> {
       const { email, sex, jobs, name } = data;
       //serviceの部分の引数の型を変えればdataをそのまま代入できるかもしれない
       return this.service.updateJhs({
@@ -49,5 +49,14 @@ export class JhsController {
             },
          },
       });
+   }
+
+   @Delete(':uuid')
+   @ApiOperation({ summary: '学生のデータの削除' })
+   @ApiResponse({ type: JhsEntity })
+   async delete(@Param('uuid') uuid : string) : Promise<JHStudent> {
+      return this.service.deleteJhs({
+         jhsId: uuid
+      })
    }
 }
