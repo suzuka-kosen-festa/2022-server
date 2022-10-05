@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Sponsor } from '@prisma/client';
 import { createSponsorDto } from './dto/sponsorDto';
 import { SponsorEntity } from './entity/sponsor';
 import { SponsorService } from './sponsor.service';
 
+@ApiTags('sponsor')
 @Controller('sponsor')
 export class SponsorController {
   constructor(private readonly service : SponsorService){}

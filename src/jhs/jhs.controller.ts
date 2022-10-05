@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JHStudent } from '@prisma/client';
 import { createJhsStudentDto, updateJhsStudentDto } from './dto/jhsDto';
 import { JhsEntity, JhswithParentEntity } from './entity/jhs';
 import { JhsService } from './jhs.service';
 
+@ApiTags('jhs')
 @Controller('jhs')
 export class JhsController {
    constructor(private readonly service: JhsService) {}

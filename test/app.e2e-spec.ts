@@ -36,16 +36,12 @@ describe('AppController (e2e)', () => {
 
          result = [
             {
-               studentId: res.studentId,
-               kana: res.kana,
-               email: res.email,
                Guest: [],
+               ...res
             },
          ];
 
-         const testResult = await request(app.getHttpServer()).get('/student');
-
-         expect(testResult.body).toEqual(result);
+         expect(await request(app.getHttpServer()).get('/student').then(res => res.body)).toEqual(result);
       });
 
       it('update student record and get it', async () => {
@@ -74,11 +70,7 @@ describe('AppController (e2e)', () => {
             }
          ];
 
-         expect(
-            await request(app.getHttpServer())
-               .get('/student')
-               .then((res) => res.body),
-         ).toEqual(result);
+         expect(await request(app.getHttpServer()).get('/student').then((res) => res.body)).toEqual(result);
       });
 
       it('check uuid exist', async () => {
@@ -86,8 +78,12 @@ describe('AppController (e2e)', () => {
             .get(`/student/check/${result[0].studentId}`)
             .then((res) => res.body);
 
+         console.log(res)
+
          const { Guest, ...testResult } = result[0];
 
+         console.log(testResult)
+         
          expect(res).toEqual(testResult);
       });
 

@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { OB } from '@prisma/client';
 import { createObDto } from './dto/ob-dto';
 import { ObEntity } from './entity/ob';
 import { ObService } from './ob.service';
 
+@ApiTags('ob')
 @Controller('ob')
 export class ObController {
    constructor(private readonly service: ObService) {}

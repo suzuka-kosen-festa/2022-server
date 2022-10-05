@@ -1,9 +1,10 @@
 import { Controller, Delete, Get, Param } from '@nestjs/common';
-import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Guest } from '@prisma/client';
 import { GuestEntity } from './entity/guest';
 import { GuestService } from './guest.service';
 
+@ApiTags('guest')
 @Controller('guest')
 export class GuestController {
    constructor(private readonly guestService: GuestService) {}
