@@ -51,7 +51,7 @@ describe('SponsorService', () => {
   it('getAllSponsor',async () => {
     const result = await service.getAllSponsor()
 
-    expect(result).toEqual(singleRecord)
+    expect(result).toEqual(sponsorArray)
   })
 
   it("deleteSponsor",async () => {
