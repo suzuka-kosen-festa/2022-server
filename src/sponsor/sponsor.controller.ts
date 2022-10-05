@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { Sponsor } from '@prisma/client';
@@ -29,5 +30,4 @@ export class SponsorController {
   async delete(@Param("uuid") uuid : string): Promise<Sponsor>{
     return this.service.deleteSponsor({sponsorId: uuid})
   }
-
 }

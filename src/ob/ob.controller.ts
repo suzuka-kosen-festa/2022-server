@@ -2,7 +2,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OB } from '@prisma/client';
-import { CreateObDto } from './dto/ob-dto';
+import { createObDto } from './dto/ob-dto';
 import { ObEntity } from './entity/ob';
 import { ObService } from './ob.service';
 
@@ -27,7 +27,7 @@ export class ObController {
    @Post()
    @ApiOperation({ summary: 'OBレコードの作成' })
    @ApiCreatedResponse({ type: ObEntity })
-   async create(@Body() data: CreateObDto): Promise<OB> {
+   async create(@Body() data: createObDto): Promise<OB> {
       return this.service.createOb(data);
    }
 
