@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class SponsorEntiry {
+export class SponsorEntity {
   @ApiProperty()
   sponsorId : string
   @ApiProperty()
