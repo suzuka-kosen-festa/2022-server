@@ -3,12 +3,12 @@ import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import { Prisma } from '@prisma/client';
 import * as request from 'supertest';
-import { JhsTestRecord, StudentTestRecord, ObTestRecord } from './type';
+import { JhsTestRecord, StudentTestRecord, ObTestRecord, SponsorTestRecord } from './type';
 
 describe('AppController (e2e)', () => {
    let app: INestApplication;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const moduleFixture: TestingModule = await Test.createTestingModule({
          imports: [AppModule],
       }).compile();
@@ -228,6 +228,32 @@ describe('AppController (e2e)', () => {
          await request(app.getHttpServer()).delete(`/ob/${result[0].obId}`)
 
          expect(await request(app.getHttpServer()).get('/ob').then(res=>res.body)).toEqual([])
+      })
+   })
+
+   describe("Sponsor Module(e2e)",() => {
+      let result : SponsorTestRecord[]
+
+      it("create record and get it",async () => {
+         const sponsorData : Prisma.SponsorCreateInput = {
+            email: "test@example.com",
+            name: "てすとすぽんさー",
+         }
+
+         const res = await request(app.getHttpServer()).post("/sponsor").send(sponsorData).then(res => res.body)
+
+         result = [{
+            sponsorId: res.sponsorId,
+            ...sponsorData
+         }]
+
+         expect(await request(app.getHttpServer()).get('/sponsor').then(res=>res.body)).toEqual(result)
+      })
+
+      it("delete",async () => {
+         await request(app.getHttpServer()).delete(`/sponsor/${result[0].sponsorId}`)
+
+         expect(await request(app.getHttpServer()).get('/sponsor').then(res=>res.body)).toEqual([])
       })
    })
 });

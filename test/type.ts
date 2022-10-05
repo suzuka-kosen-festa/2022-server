@@ -1,4 +1,4 @@
-import { OB, Prisma } from '@prisma/client';
+import { OB, Prisma, Sponsor } from '@prisma/client';
 
 export type StudentTestRecord = Omit<Prisma.StudentCreateInput, 'Guest'> & {
    Guest?: Prisma.GuestCreateManyInput[];
@@ -9,3 +9,5 @@ export type JhsTestRecord = Omit<Prisma.JHStudentCreateInput, 'parents'> & {
 };
 
 export type ObTestRecord = OB
+
+export type SponsorTestRecord = Sponsor
