@@ -35,7 +35,7 @@ describe('ObService', () => {
       expect(service).toBeDefined();
    });
 
-   it('create', async () => {
+   it('createOb', async () => {
       const obData = {
          name: 'てすと１',
          email: 'test1@example.com',
@@ -44,12 +44,12 @@ describe('ObService', () => {
       expect(createdOb).toEqual(singleRecord);
    });
 
-   it('getAll', async () => {
+   it('getAllOb', async () => {
       const obData = await service.getAllOb();
       expect(obData).toStrictEqual(obArray);
    });
 
-   it('checkExistOb', async () => {
+   it('checkObExist', async () => {
       const obRecord = await service.checkObExist({ obId: 'uuid1' });
       expect(obRecord).toStrictEqual(singleRecord);
    });

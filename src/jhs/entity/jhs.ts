@@ -8,7 +8,7 @@ export class JhsEntity {
    @ApiProperty()
    name: string;
    @ApiProperty()
-   age: number;
+   age: string;
    @ApiProperty()
    email: string;
 }

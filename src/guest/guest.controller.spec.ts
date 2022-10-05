@@ -22,6 +22,7 @@ describe('GuestController', () => {
                useValue: {
                   getAllGuests: jest.fn().mockImplementation(() => guestArray),
                   checkGuestExist: jest.fn().mockImplementation((uuid: string) => Promise.resolve(singleRecord)),
+                  deleteGuest: jest.fn().mockResolvedValue(singleRecord)
                },
             },
          ],
@@ -34,11 +35,16 @@ describe('GuestController', () => {
       expect(controller).toBeDefined();
    });
 
-   test('get all guests data', async () => {
+   test('get all guests', async () => {
       expect(await controller.getAllGeusts()).toEqual(guestArray);
    });
 
    test('check guest exist', async () => {
       expect(await controller.checkuuid('uuid1')).toEqual(singleRecord);
    });
+
+   test('delete guest',async () =>{
+      const res = await controller.delete('uuid1')
+      expect(res).toEqual(singleRecord)
+   })
 });

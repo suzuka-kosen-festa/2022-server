@@ -44,7 +44,8 @@ describe('JhsController', () => {
                   updateJhs: jest
                      .fn()
                      .mockImplementation((data: Prisma.StudentUpdateInput) => Promise.resolve(singleRecordwithParents)),
-                  getAllJhs: jest.fn().mockImplementation(() => jhsArray),
+                  getAllJhs: jest.fn().mockResolvedValue(jhsArray),
+                  deleteJhs: jest.fn().mockResolvedValue(singleRecord)
                },
             },
          ],
@@ -68,7 +69,7 @@ describe('JhsController', () => {
       await expect(data).toEqual(singleRecord);
    });
 
-   test('update Student', async () => {
+   test('update student', async () => {
       const data = await controller.update({
          email: 'test2@example.com',
          name: 'てすと親',
@@ -79,4 +80,9 @@ describe('JhsController', () => {
       });
       await expect(data).toEqual(singleRecordwithParents);
    });
+
+   test("delete student",async () => {
+      const res = await controller.delete("uuid1")
+      expect(res).toEqual(singleRecord)
+   })
 });

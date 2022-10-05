@@ -27,8 +27,8 @@ describe('SponsorController', () => {
               checkSponsorExist: jest
                  .fn()
                  .mockImplementation((uuid: Prisma.OBWhereUniqueInput) => Promise.resolve(singleRecord)),
-              getAllSponsor: jest.fn().mockImplementation(() => sponsorArray),
-              deleteSponsor: jest.fn().mockImplementation(() => singleRecord)
+              getAllSponsor: jest.fn().mockResolvedValue(sponsorArray),
+              deleteSponsor: jest.fn().mockResolvedValue(singleRecord)
            },
         },
      ],
