@@ -23,11 +23,11 @@ describe('ObController', () => {
             {
                provide: ObService,
                useValue: {
-                  create: jest.fn().mockImplementation((data: Prisma.StudentCreateInput) => Promise.resolve(data)),
+                  createOb: jest.fn().mockImplementation((data: Prisma.StudentCreateInput) => Promise.resolve(data)),
                   checkObExist: jest
                      .fn()
                      .mockImplementation((uuid: Prisma.OBWhereUniqueInput) => Promise.resolve(singleRecord)),
-                  getAll: jest.fn().mockImplementation(() => obArray),
+                  getAllOb: jest.fn().mockImplementation(() => obArray),
                },
             },
          ],
