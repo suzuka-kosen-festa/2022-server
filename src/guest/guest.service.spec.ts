@@ -24,7 +24,7 @@ describe('GuestService', () => {
                   guest: {
                      findMany: jest.fn().mockResolvedValue(guestArray),
                      findUnique: jest.fn().mockResolvedValue(singleRecord),
-                     delete: jest.fn().mockResolvedValue(singleRecord)
+                     delete: jest.fn().mockResolvedValue(singleRecord),
                   },
                },
             },
@@ -46,14 +46,14 @@ describe('GuestService', () => {
 
    test('checkGuestExist', async () => {
       const singleGuest = await service.checkGuestExist({
-         guestId: 'uuid1'
+         guestId: 'uuid1',
       });
       expect(singleGuest).toEqual(singleRecord);
    });
 
    test('deleteGuest', async () => {
-      const result = await service.deleteGuest({guestId :'uuid1'})
+      const result = await service.deleteGuest({ guestId: 'uuid1' });
 
-      expect(result).toEqual(singleRecord)
-   })
+      expect(result).toEqual(singleRecord);
+   });
 });

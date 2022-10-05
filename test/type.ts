@@ -8,6 +8,6 @@ export type JhsTestRecord = Omit<Prisma.JHStudentCreateInput, 'parents'> & {
    parents?: Prisma.GuestCreateManyInput[];
 };
 
-export type ObTestRecord = OB
+export type ObTestRecord = OB;
 
-export type SponsorTestRecord = Sponsor
+export type SponsorTestRecord = Sponsor;

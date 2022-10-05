@@ -37,11 +37,15 @@ describe('AppController (e2e)', () => {
          result = [
             {
                Guest: [],
-               ...res
+               ...res,
             },
          ];
 
-         expect(await request(app.getHttpServer()).get('/student').then(res => res.body)).toEqual(result);
+         expect(
+            await request(app.getHttpServer())
+               .get('/student')
+               .then((res) => res.body),
+         ).toEqual(result);
       });
 
       it('update student record and get it', async () => {
@@ -59,18 +63,22 @@ describe('AppController (e2e)', () => {
 
          const resGuestData = res.Guest[0];
 
-         const {email, ...rest} = guestRecord
+         const { email, ...rest } = guestRecord;
 
          result[0].Guest = [
             {
                guestId: resGuestData.guestId,
                hostId: resGuestData.hostId,
                hostJhsId: null,
-               ...rest
-            }
+               ...rest,
+            },
          ];
 
-         expect(await request(app.getHttpServer()).get('/student').then((res) => res.body)).toEqual(result);
+         expect(
+            await request(app.getHttpServer())
+               .get('/student')
+               .then((res) => res.body),
+         ).toEqual(result);
       });
 
       it('check uuid exist', async () => {
@@ -78,12 +86,12 @@ describe('AppController (e2e)', () => {
             .get(`/student/check/${result[0].studentId}`)
             .then((res) => res.body);
 
-         console.log(res)
+         console.log(res);
 
          const { Guest, ...testResult } = result[0];
 
-         console.log(testResult)
-         
+         console.log(testResult);
+
          expect(res).toEqual(testResult);
       });
 
@@ -169,7 +177,7 @@ describe('AppController (e2e)', () => {
 
          result[0].parents = [
             {
-               ...parentsData
+               ...parentsData,
             },
          ];
 
@@ -201,55 +209,81 @@ describe('AppController (e2e)', () => {
       });
    });
 
-   describe("OB Module (e2e)", () =>{
-      let result : ObTestRecord[]
+   describe('OB Module (e2e)', () => {
+      let result: ObTestRecord[];
 
-      it("create record and get it", async() =>{
-         const obData : Prisma.OBCreateInput = {
-            name : "てすと",
-            email: 'test@example'
-         }
+      it('create record and get it', async () => {
+         const obData: Prisma.OBCreateInput = {
+            name: 'てすと',
+            email: 'test@example',
+         };
 
-         const res = await request(app.getHttpServer()).post('/ob').send(obData).then(res => res.body)
+         const res = await request(app.getHttpServer())
+            .post('/ob')
+            .send(obData)
+            .then((res) => res.body);
 
-         result = [{
-            obId: res.obId,
-            ...obData
-         }]
+         result = [
+            {
+               obId: res.obId,
+               ...obData,
+            },
+         ];
 
-         expect(await request(app.getHttpServer()).get('/ob').then(res=>res.body)).toEqual(result)
-      })
+         expect(
+            await request(app.getHttpServer())
+               .get('/ob')
+               .then((res) => res.body),
+         ).toEqual(result);
+      });
 
-      it("delete",async () => {
-         await request(app.getHttpServer()).delete(`/ob/${result[0].obId}`)
+      it('delete', async () => {
+         await request(app.getHttpServer()).delete(`/ob/${result[0].obId}`);
 
-         expect(await request(app.getHttpServer()).get('/ob').then(res=>res.body)).toEqual([])
-      })
-   })
+         expect(
+            await request(app.getHttpServer())
+               .get('/ob')
+               .then((res) => res.body),
+         ).toEqual([]);
+      });
+   });
 
-   describe("Sponsor Module(e2e)",() => {
-      let result : SponsorTestRecord[]
+   describe('Sponsor Module(e2e)', () => {
+      let result: SponsorTestRecord[];
 
-      it("create record and get it",async () => {
-         const sponsorData : Prisma.SponsorCreateInput = {
-            email: "test@example.com",
-            name: "てすとすぽんさー",
-         }
+      it('create record and get it', async () => {
+         const sponsorData: Prisma.SponsorCreateInput = {
+            email: 'test@example.com',
+            name: 'てすとすぽんさー',
+         };
 
-         const res = await request(app.getHttpServer()).post("/sponsor").send(sponsorData).then(res => res.body)
+         const res = await request(app.getHttpServer())
+            .post('/sponsor')
+            .send(sponsorData)
+            .then((res) => res.body);
 
-         result = [{
-            sponsorId: res.sponsorId,
-            ...sponsorData
-         }]
+         result = [
+            {
+               sponsorId: res.sponsorId,
+               ...sponsorData,
+            },
+         ];
 
-         expect(await request(app.getHttpServer()).get('/sponsor').then(res=>res.body)).toEqual(result)
-      })
+         expect(
+            await request(app.getHttpServer())
+               .get('/sponsor')
+               .then((res) => res.body),
+         ).toEqual(result);
+      });
 
-      it("delete",async () => {
-         await request(app.getHttpServer()).delete(`/sponsor/${result[0].sponsorId}`)
+      it('delete', async () => {
+         await request(app.getHttpServer()).delete(`/sponsor/${result[0].sponsorId}`);
 
-         expect(await request(app.getHttpServer()).get('/sponsor').then(res=>res.body)).toEqual([])
-      })
-   })
+         expect(
+            await request(app.getHttpServer())
+               .get('/sponsor')
+               .then((res) => res.body),
+         ).toEqual([]);
+      });
+   });
 });
