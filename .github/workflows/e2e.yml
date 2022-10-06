@@ -12,7 +12,6 @@ jobs:
       steps:
          - name: Checkout branch
            uses: actions/checkout@v3
-           with:
 
          - name: run test on docker-compose
            run: docker compose -f docker-compose.yml -f docker-compose.e2e.yml up --abort-on-container-exit
