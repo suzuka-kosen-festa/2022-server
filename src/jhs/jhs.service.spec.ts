@@ -33,7 +33,7 @@ const db = {
       findUnique: jest.fn().mockResolvedValue(singleRecord),
       create: jest.fn().mockResolvedValue(singleRecord),
       update: jest.fn().mockResolvedValue(singleRecordwithParents),
-      delete: jest.fn().mockResolvedValue(singleRecord)
+      delete: jest.fn().mockResolvedValue(singleRecord),
    },
 };
 
@@ -100,9 +100,9 @@ describe('jhsService', () => {
       expect(singleJhswithParents).toEqual(singleRecordwithParents);
    });
 
-   test("deleteJhs",async () => {
-      const res = await service.deleteJhs({jhsId: "uuid1"})
+   test('deleteJhs', async () => {
+      const res = await service.deleteJhs({ jhsId: 'uuid1' });
 
-      expect(res).toEqual(singleRecord)
-   })
+      expect(res).toEqual(singleRecord);
+   });
 });

@@ -28,7 +28,7 @@ describe('ObController', () => {
                      .fn()
                      .mockImplementation((uuid: Prisma.OBWhereUniqueInput) => Promise.resolve(singleRecord)),
                   getAllOb: jest.fn().mockResolvedValue(obArray),
-                  deleteOb: jest.fn().mockResolvedValue(singleRecord)
+                  deleteOb: jest.fn().mockResolvedValue(singleRecord),
                },
             },
          ],
@@ -59,9 +59,9 @@ describe('ObController', () => {
       expect(testRecord).toStrictEqual(record);
    });
 
-   it("delete student",async () => {
-      const res = await controller.delete("uuid1")
+   it('delete student', async () => {
+      const res = await controller.delete('uuid1');
 
-      expect(res).toEqual(singleRecord)
-   })
+      expect(res).toEqual(singleRecord);
+   });
 });
