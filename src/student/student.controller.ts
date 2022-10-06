@@ -22,7 +22,7 @@ export class StudentController {
    @Get('check/:uuid')
    @ApiOperation({ summary: 'uuidの照合' })
    @ApiOkResponse({ type: StudentEntity })
-   async checkUuid(@Param('uuid') id: string): Promise<Student> {
+   async checkUuid(@Param('uuid') id: string): Promise<Student | null> {
       return this.studentService.checkStudentExist({ studentId: id });
    }
 

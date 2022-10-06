@@ -21,7 +21,7 @@ export class JhsController {
    @Get('check/:id')
    @ApiOperation({ summary: '中学生のuuid照合' })
    @ApiOkResponse({ type: JhsEntity })
-   async checkUuid(@Param('id') uuid: string): Promise<JHStudent> {
+   async checkUuid(@Param('id') uuid: string): Promise<JHStudent | null> {
       return this.service.checkJhsExist({ jhsId: uuid });
    }
 

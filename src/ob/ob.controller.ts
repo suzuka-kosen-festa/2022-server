@@ -21,7 +21,7 @@ export class ObController {
    @Get('check/:uuid')
    @ApiOperation({ summary: 'OBのuuidの照合' })
    @ApiOkResponse({ type: ObEntity })
-   async checkUuid(@Param('uuid') uuid: string): Promise<OB> {
+   async checkUuid(@Param('uuid') uuid: string): Promise<OB | null> {
       return this.service.checkObExist({ obId: uuid });
    }
 

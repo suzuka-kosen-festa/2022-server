@@ -14,7 +14,7 @@ export class JhsService {
       });
    }
 
-   async checkJhsExist(uuid: Prisma.JHStudentWhereUniqueInput): Promise<JHStudent> {
+   async checkJhsExist(uuid: Prisma.JHStudentWhereUniqueInput): Promise<JHStudent | null> {
       return this.prisma.jHStudent.findUnique({
          where: uuid,
       });

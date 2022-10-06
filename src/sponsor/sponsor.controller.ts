@@ -21,7 +21,7 @@ export class SponsorController {
    @Post()
    @ApiOperation({ summary: 'Sponsorレコードの生成' })
    @ApiCreatedResponse({ type: SponsorEntity })
-   async create(@Body() data: createSponsorDto): Promise<Sponsor> {
+   async create(@Body() data: createSponsorDto): Promise<Sponsor | null> {
       return this.service.createSponsor(data);
    }
 
