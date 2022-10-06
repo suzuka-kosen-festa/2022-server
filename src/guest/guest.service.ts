@@ -14,7 +14,7 @@ export class GuestService {
    }
 
    //uuidの照合
-   async checkGuestExist(data: Prisma.GuestWhereUniqueInput): Promise<Guest> {
+   async checkGuestExist(data: Prisma.GuestWhereUniqueInput): Promise<Guest | null> {
       return this.prisma.guest.findUnique({
          where: data,
       });
