@@ -24,7 +24,7 @@ const db = {
 describe('SponsorService', () => {
    let service: SponsorService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          providers: [
             SponsorService,
