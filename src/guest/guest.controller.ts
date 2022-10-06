@@ -19,7 +19,7 @@ export class GuestController {
    @Get('check/:uuid')
    @ApiOperation({ summary: 'uuidの照合' })
    @ApiOkResponse({ type: GuestEntity })
-   async checkuuid(@Param('uuid') id: string): Promise<Guest> {
+   async checkuuid(@Param('uuid') id: string): Promise<Guest | null> {
       return this.guestService.checkGuestExist({ guestId: id });
    }
 
