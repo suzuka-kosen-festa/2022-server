@@ -41,7 +41,7 @@ describe('jhsService', () => {
    let service: JhsService;
    let prisma: PrismaService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          providers: [
             JhsService,

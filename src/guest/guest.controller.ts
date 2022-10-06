@@ -1,7 +1,7 @@
 import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Guest } from '@prisma/client';
-import { GuestEntity } from './entity/guest';
+import { GuestEntity } from './entity/guest.entity';
 import { GuestService } from './guest.service';
 
 @ApiTags('guest')

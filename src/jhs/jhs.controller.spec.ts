@@ -32,7 +32,7 @@ describe('JhsController', () => {
    let controller: JhsController;
    let service: JhsService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          controllers: [JhsController],
          providers: [

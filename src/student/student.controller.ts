@@ -3,8 +3,8 @@
 import { Post, Controller, Body, Get, Put, Param, Delete } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Student } from '@prisma/client';
-import { createStudentDto, updateStudentDto } from './dto/studentDto';
-import { StudentEntity, StudentwithGuestEntity } from './entities/student';
+import { createStudentDto, updateStudentDto } from './dto/student.dto';
+import { StudentEntity, StudentwithGuestEntity } from './entities/student.entity';
 import { StudentService } from './student.service';
 
 @ApiTags('student')

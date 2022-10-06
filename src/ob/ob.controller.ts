@@ -2,8 +2,8 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { OB } from '@prisma/client';
-import { createObDto } from './dto/ob-dto';
-import { ObEntity } from './entity/ob';
+import { createObDto } from './dto/ob.dto';
+import { ObEntity } from './entity/ob.dto';
 import { ObService } from './ob.service';
 
 @ApiTags('ob')

@@ -2,8 +2,8 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Sponsor } from '@prisma/client';
-import { createSponsorDto } from './dto/sponsorDto';
-import { SponsorEntity } from './entity/sponsor';
+import { createSponsorDto } from './dto/sponsor.dto';
+import { SponsorEntity } from './entity/sponsor.entity';
 import { SponsorService } from './sponsor.service';
 
 @ApiTags('sponsor')

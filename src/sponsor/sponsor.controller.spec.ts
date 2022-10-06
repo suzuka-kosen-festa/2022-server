@@ -15,7 +15,7 @@ const singleRecord = sponsorArray[0];
 describe('SponsorController', () => {
    let controller: SponsorController;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          controllers: [SponsorController],
          providers: [

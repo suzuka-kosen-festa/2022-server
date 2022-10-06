@@ -23,7 +23,7 @@ const db = {
 describe('ObService', () => {
    let service: ObService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          providers: [ObService, { provide: PrismaService, useValue: db }],
       }).compile();

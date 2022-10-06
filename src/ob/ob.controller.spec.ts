@@ -16,7 +16,7 @@ describe('ObController', () => {
    let controller: ObController;
    let service: ObService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          controllers: [ObController],
          providers: [

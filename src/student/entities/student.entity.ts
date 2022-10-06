@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { GuestEntity } from '../../guest/entity/guest';
+import { GuestEntity } from '../../guest/entity/guest.entity';
 
 export class StudentEntity {
    @ApiProperty()

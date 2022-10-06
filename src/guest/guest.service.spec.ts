@@ -14,7 +14,7 @@ describe('GuestService', () => {
    let service: GuestService;
    let prisma: PrismaService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          providers: [
             GuestService,
@@ -39,19 +39,19 @@ describe('GuestService', () => {
       expect(service).toBeDefined();
    });
 
-   test('getAllGuests', async () => {
+   it('getAllGuests', async () => {
       const students = await service.getAllGuests();
       expect(students).toEqual(guestArray);
    });
 
-   test('checkGuestExist', async () => {
+   it('checkGuestExist', async () => {
       const singleGuest = await service.checkGuestExist({
          guestId: 'uuid1',
       });
       expect(singleGuest).toEqual(singleRecord);
    });
 
-   test('deleteGuest', async () => {
+   it('deleteGuest', async () => {
       const result = await service.deleteGuest({ guestId: 'uuid1' });
 
       expect(result).toEqual(singleRecord);

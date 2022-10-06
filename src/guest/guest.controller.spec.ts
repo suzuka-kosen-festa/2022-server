@@ -13,7 +13,7 @@ const singleRecord = guestArray[0];
 describe('GuestController', () => {
    let controller: GuestController;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          controllers: [GuestController],
          providers: [
@@ -31,19 +31,19 @@ describe('GuestController', () => {
       controller = module.get<GuestController>(GuestController);
    });
 
-   test('should be defined', () => {
+   it('should be defined', () => {
       expect(controller).toBeDefined();
    });
 
-   test('get all guests', async () => {
+   it('get all guests', async () => {
       expect(await controller.getAllGeusts()).toEqual(guestArray);
    });
 
-   test('check guest exist', async () => {
+   it('check guest exist', async () => {
       expect(await controller.checkuuid('uuid1')).toEqual(singleRecord);
    });
 
-   test('delete guest', async () => {
+   it('delete guest', async () => {
       const res = await controller.delete('uuid1');
       expect(res).toEqual(singleRecord);
    });

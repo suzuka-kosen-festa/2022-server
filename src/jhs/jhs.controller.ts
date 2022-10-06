@@ -2,8 +2,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JHStudent } from '@prisma/client';
-import { createJhsStudentDto, updateJhsStudentDto } from './dto/jhsDto';
-import { JhsEntity, JhswithParentEntity } from './entity/jhs';
+import { createJhsStudentDto, updateJhsStudentDto } from './dto/jhs.dto';
+import { JhsEntity, JhswithParentEntity } from './entity/jhs.entiry';
 import { JhsService } from './jhs.service';
 
 @ApiTags('jhs')

@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import { Prisma } from '@prisma/client';
 import * as request from 'supertest';
-import { JhsTestRecord, StudentTestRecord, ObTestRecord, SponsorTestRecord } from './type';
+import { JhsTestRecord, StudentTestRecord, ObTestRecord, SponsorTestRecord } from './types';
 
 describe('AppController (e2e)', () => {
    let app: INestApplication;
@@ -19,6 +19,48 @@ describe('AppController (e2e)', () => {
    afterAll(async () => {
       await app.close();
    });
+
+   describe('HealthCheck Module(e2e)', async () =>{
+      it('check httpHealth', async () => {
+         const result = {
+            status: 'ok',
+            info: {
+               httpHealth: {
+                  status: 'up',
+               },
+            },
+            error: {},
+            details: {
+               httpHealth: {
+                  status: 'up',
+               },
+            },
+         };
+   
+         const testResult = await request(app.getHttpServer()).get('/health/http').expect(200);
+         expect(testResult.body).toEqual(result);
+      });
+   
+      it('check dbHealth', async () => {
+         const result = {
+            status: 'ok',
+            info: {
+               db: {
+                  status: 'up',
+               },
+            },
+            error: {},
+            details: {
+               db: {
+                  status: 'up',
+               },
+            },
+         };
+   
+         const testResult = await request(app.getHttpServer()).get('/health/db').expect(200);
+         expect(testResult.body).toEqual(result);
+      })
+   })
 
    describe('Student and GuestModule(e2e)', () => {
       let result = new Array<StudentTestRecord>(null);
