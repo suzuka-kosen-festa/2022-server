@@ -20,9 +20,9 @@ describe('AppController (e2e)', () => {
       await app.close();
    });
 
-   describe('HealthCheck Module(e2e)', async () => {
+   describe('HealthCheck Module(e2e)', () => {
       it('check httpHealth', async () => {
-         const result = {
+         const expectedResult = {
             status: 'ok',
             info: {
                httpHealth: {
@@ -37,12 +37,12 @@ describe('AppController (e2e)', () => {
             },
          };
 
-         const testResult = await request(app.getHttpServer()).get('/health/http').expect(200);
-         expect(testResult.body).toEqual(result);
+         const testResult = await request(app.getHttpServer()).get('/health/http').then(res => res.body);
+         expect(testResult).toEqual(expectedResult);
       });
 
       it('check dbHealth', async () => {
-         const result = {
+         const expectedResult = {
             status: 'ok',
             info: {
                db: {
@@ -57,8 +57,8 @@ describe('AppController (e2e)', () => {
             },
          };
 
-         const testResult = await request(app.getHttpServer()).get('/health/db').expect(200);
-         expect(testResult.body).toEqual(result);
+         const testResult = await request(app.getHttpServer()).get('/health/http').then(res => res.body);
+         expect(testResult).toEqual(expectedResult);
       });
    });
 
