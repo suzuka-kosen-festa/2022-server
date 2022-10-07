@@ -20,7 +20,7 @@ export class JhsController {
 
    @Get('check/:id')
    @ApiOperation({ summary: '中学生のuuid照合' })
-   @ApiOkResponse({ type: JhsEntity , description:"存在しない場合はnullを返す"})
+   @ApiOkResponse({ type: JhsEntity, description: '存在しない場合はnullを返す' })
    async checkUuid(@Param('id') uuid: string): Promise<JHStudent | null> {
       return this.service.checkJhsExist({ jhsId: uuid });
    }

@@ -20,7 +20,7 @@ describe('AppController (e2e)', () => {
       await app.close();
    });
 
-   describe('HealthCheck Module(e2e)', async () =>{
+   describe('HealthCheck Module(e2e)', async () => {
       it('check httpHealth', async () => {
          const result = {
             status: 'ok',
@@ -36,11 +36,11 @@ describe('AppController (e2e)', () => {
                },
             },
          };
-   
+
          const testResult = await request(app.getHttpServer()).get('/health/http').expect(200);
          expect(testResult.body).toEqual(result);
       });
-   
+
       it('check dbHealth', async () => {
          const result = {
             status: 'ok',
@@ -56,11 +56,11 @@ describe('AppController (e2e)', () => {
                },
             },
          };
-   
+
          const testResult = await request(app.getHttpServer()).get('/health/db').expect(200);
          expect(testResult.body).toEqual(result);
-      })
-   })
+      });
+   });
 
    describe('Student and GuestModule(e2e)', () => {
       let result = new Array<StudentTestRecord>(null);
@@ -318,10 +318,10 @@ describe('AppController (e2e)', () => {
          ).toEqual(result);
       });
 
-      it('check record exist',async () => {
-         const data = await request(app.getHttpServer()).get(`/sponsor/check/${result[0].sponsorId}`)
-         expect(data).toEqual(request[0])
-      })
+      it('check record exist', async () => {
+         const data = await request(app.getHttpServer()).get(`/sponsor/check/${result[0].sponsorId}`);
+         expect(data).toEqual(request[0]);
+      });
 
       it('delete', async () => {
          await request(app.getHttpServer()).delete(`/sponsor/${result[0].sponsorId}`);
