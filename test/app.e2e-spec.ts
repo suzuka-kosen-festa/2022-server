@@ -318,6 +318,11 @@ describe('AppController (e2e)', () => {
          ).toEqual(result);
       });
 
+      it('check record exist',async () => {
+         const data = await request(app.getHttpServer()).get(`/sponsor/check/${result[0].sponsorId}`)
+         expect(data).toEqual(request[0])
+      })
+
       it('delete', async () => {
          await request(app.getHttpServer()).delete(`/sponsor/${result[0].sponsorId}`);
 
