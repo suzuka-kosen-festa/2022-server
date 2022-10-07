@@ -60,7 +60,7 @@ describe('AppController (e2e)', () => {
          };
 
          const testResult = await request(app.getHttpServer())
-            .get('/health/http')
+            .get('/health/db')
             .then((res) => res.body);
          expect(testResult).toEqual(expectedResult);
       });
@@ -283,6 +283,14 @@ describe('AppController (e2e)', () => {
          ).toEqual(result);
       });
 
+      it('check uuid exist', async () => {
+         const res = await request(app.getHttpServer())
+            .get(`/ob/check/${result[0].obId}`)
+            .then((res) => res.body);
+
+         expect(res).toEqual(result[0]);
+      });
+
       it('delete', async () => {
          await request(app.getHttpServer()).delete(`/ob/${result[0].obId}`);
 
@@ -323,8 +331,8 @@ describe('AppController (e2e)', () => {
       });
 
       it('check record exist', async () => {
-         const data = await request(app.getHttpServer()).get(`/sponsor/check/${result[0].sponsorId}`);
-         expect(data).toEqual(request[0]);
+         const data = await request(app.getHttpServer()).get(`/sponsor/check/${result[0].sponsorId}`).then((res) => res.body);;
+         expect(data).toEqual(result[0]);
       });
 
       it('delete', async () => {
