@@ -50,11 +50,11 @@ describe('StudentService', () => {
       prisma = module.get<PrismaService>(PrismaService);
    });
 
-   test('service should be Defined', () => {
+   it('service should be Defined', () => {
       expect(service).toBeDefined();
    });
 
-   test('createStudent', async () => {
+   it('createStudent', async () => {
       const studentData = {
          kana: 'テスト1',
          email: 'example1.com',
@@ -63,19 +63,19 @@ describe('StudentService', () => {
       expect(createdStudent).toEqual(singleRecord);
    });
 
-   test('getStudents', async () => {
+   it('getStudents', async () => {
       const students = await service.getAllStudents();
       expect(students).toEqual(studentArray);
    });
 
-   test('checkStudentExist', async () => {
+   it('checkStudentExist', async () => {
       const singleStudent = await service.checkStudentExist({
          studentId: 'uuid1',
       });
       expect(singleStudent).toEqual(singleRecord);
    });
 
-   test('updateStudent', async () => {
+   it('updateStudent', async () => {
       const guestData = {
          sex: '男',
          jobs: '祖父',

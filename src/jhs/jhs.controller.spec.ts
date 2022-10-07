@@ -59,17 +59,17 @@ describe('JhsController', () => {
       expect(controller).toBeDefined();
    });
 
-   test('get all students', async () => {
+   it('get all students', async () => {
       const data = await controller.getAll();
       await expect(data).toEqual(jhsArray);
    });
 
-   test('check student exist', async () => {
+   it('check student exist', async () => {
       const data = await controller.checkUuid('uuid1');
       await expect(data).toEqual(singleRecord);
    });
 
-   test('update student', async () => {
+   it('update student', async () => {
       const data = await controller.update({
          email: 'test2@example.com',
          name: 'てすと親',
@@ -81,7 +81,7 @@ describe('JhsController', () => {
       await expect(data).toEqual(singleRecordwithParents);
    });
 
-   test('delete student', async () => {
+   it('delete student', async () => {
       const res = await controller.delete('uuid1');
       expect(res).toEqual(singleRecord);
    });

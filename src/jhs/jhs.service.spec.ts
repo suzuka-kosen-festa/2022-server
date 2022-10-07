@@ -56,11 +56,11 @@ describe('jhsService', () => {
       prisma = module.get<PrismaService>(PrismaService);
    });
 
-   test('service should be Defined', () => {
+   it('service should be Defined', () => {
       expect(service).toBeDefined();
    });
 
-   test('createJhs', async () => {
+   it('createJhs', async () => {
       const jhsData = {
          name: 'テスト1',
          email: 'example1.com',
@@ -70,19 +70,19 @@ describe('jhsService', () => {
       expect(createdJhs).toEqual(singleRecord);
    });
 
-   test('getJhs', async () => {
+   it('getJhs', async () => {
       const students = await service.getAllJhs();
       expect(students).toEqual(jhsArray);
    });
 
-   test('checkJhstExist', async () => {
+   it('checkJhstExist', async () => {
       const singleStudent = await service.checkJhsExist({
          jhsId: 'uuid1',
       });
       expect(singleStudent).toEqual(singleRecord);
    });
 
-   test('updateJhs', async () => {
+   it('updateJhs', async () => {
       const guestData = {
          name: 'てすと親',
          age: 40,
@@ -100,7 +100,7 @@ describe('jhsService', () => {
       expect(singleJhswithParents).toEqual(singleRecordwithParents);
    });
 
-   test('deleteJhs', async () => {
+   it('deleteJhs', async () => {
       const res = await service.deleteJhs({ jhsId: 'uuid1' });
 
       expect(res).toEqual(singleRecord);
