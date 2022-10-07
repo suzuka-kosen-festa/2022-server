@@ -21,7 +21,7 @@ export class StudentController {
 
    @Get('check/:uuid')
    @ApiOperation({ summary: 'uuidの照合' })
-   @ApiOkResponse({ type: StudentEntity })
+   @ApiOkResponse({ type: StudentEntity ,description:"存在しない場合はnullを返す"})
    async checkUuid(@Param('uuid') id: string): Promise<Student | null> {
       return this.studentService.checkStudentExist({ studentId: id });
    }
