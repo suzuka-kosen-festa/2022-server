@@ -48,15 +48,13 @@ describe('ObController', () => {
    });
 
    it('create ob record', async () => {
-      const record = { obId: 'uuid1', name: 'てすと1', email: 'test1@example.com' };
-      const data = await controller.create(record);
-      expect(data).toStrictEqual(record);
+      const data = await controller.create(singleRecord);
+      expect(data).toStrictEqual(singleRecord);
    });
 
    it('check record exist', async () => {
-      const record = { obId: 'uuid1', name: 'てすと1', email: 'test1@example.com' };
       const testRecord = await controller.checkUuid('uuid1');
-      expect(testRecord).toStrictEqual(record);
+      expect(testRecord).toStrictEqual(singleRecord);
    });
 
    it('delete student', async () => {

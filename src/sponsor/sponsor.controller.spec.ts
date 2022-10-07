@@ -54,6 +54,11 @@ describe('SponsorController', () => {
       expect(result).toEqual(sponsorArray);
    });
 
+   it('check record exist', async () => {
+      const testRecord = await controller.checkUuid('uuid1');
+      expect(testRecord).toStrictEqual(singleRecord);
+   });
+
    it('delete', async () => {
       const result = await controller.delete('uuid1');
       expect(result).toEqual(singleRecord);

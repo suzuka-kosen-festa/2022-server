@@ -14,6 +14,10 @@ export class SponsorService {
       return this.prisma.sponsor.create({ data });
    }
 
+   async checkSponsorExist(where : Prisma.SponsorWhereUniqueInput): Promise<Sponsor | null>{
+      return this.prisma.sponsor.findUnique({where : where})
+   }
+
    async deleteSponsor(wehere: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {
       return this.prisma.sponsor.delete({ where: wehere });
    }

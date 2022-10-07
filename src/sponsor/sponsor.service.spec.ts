@@ -55,6 +55,11 @@ describe('SponsorService', () => {
       expect(result).toEqual(sponsorArray);
    });
 
+   it('checkObExist', async () => {
+      const obRecord = await service.checkSponsorExist({ sponsorId: 'uuid1' });
+      expect(obRecord).toStrictEqual(singleRecord);
+   });
+
    it('deleteSponsor', async () => {
       const result = await service.deleteSponsor({ sponsorId: 'uuid1' });
 

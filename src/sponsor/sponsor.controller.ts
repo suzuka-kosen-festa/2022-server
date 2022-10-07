@@ -18,6 +18,13 @@ export class SponsorController {
       return this.service.getAllSponsor();
    }
 
+   @Get("check/:uuid")
+   @ApiOperation({summary:"uuidの照合"})
+   @ApiOkResponse({type: SponsorEntity})
+   async checkUuid(@Param('uuid') uuid:string) : Promise<Sponsor | null>{
+      return this.service.checkSponsorExist({sponsorId: uuid})
+   }
+
    @Post()
    @ApiOperation({ summary: 'Sponsorレコードの生成' })
    @ApiCreatedResponse({ type: SponsorEntity })
