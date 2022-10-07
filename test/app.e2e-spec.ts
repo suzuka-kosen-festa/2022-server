@@ -331,7 +331,9 @@ describe('AppController (e2e)', () => {
       });
 
       it('check record exist', async () => {
-         const data = await request(app.getHttpServer()).get(`/sponsor/check/${result[0].sponsorId}`).then((res) => res.body);;
+         const data = await request(app.getHttpServer())
+            .get(`/sponsor/check/${result[0].sponsorId}`)
+            .then((res) => res.body);
          expect(data).toEqual(result[0]);
       });
 
