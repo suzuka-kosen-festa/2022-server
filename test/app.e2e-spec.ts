@@ -37,7 +37,9 @@ describe('AppController (e2e)', () => {
             },
          };
 
-         const testResult = await request(app.getHttpServer()).get('/health/http').then(res => res.body);
+         const testResult = await request(app.getHttpServer())
+            .get('/health/http')
+            .then((res) => res.body);
          expect(testResult).toEqual(expectedResult);
       });
 
@@ -57,7 +59,9 @@ describe('AppController (e2e)', () => {
             },
          };
 
-         const testResult = await request(app.getHttpServer()).get('/health/http').then(res => res.body);
+         const testResult = await request(app.getHttpServer())
+            .get('/health/http')
+            .then((res) => res.body);
          expect(testResult).toEqual(expectedResult);
       });
    });
