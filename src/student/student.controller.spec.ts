@@ -27,7 +27,7 @@ describe('StudentController', () => {
    let controller: StudentController;
    let service: StudentService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          controllers: [StudentController],
          providers: [
@@ -51,26 +51,22 @@ describe('StudentController', () => {
       service = module.get<StudentService>(StudentService);
    });
 
-   test('controller should be Defined', () => {
+   it('controller should be Defined', () => {
       expect(controller).toBeDefined();
    });
 
-   test('service should be Defined', () => {
-      expect(service).toBeDefined();
-   });
-
-   test('get all students', async () => {
-      const data = await controller.getAllStudent();
+   it('get all students', async () => {
+      const data = await controller.getAll();
       await expect(data).toEqual(studentArray);
    });
 
-   test('check student exist', async () => {
+   it('check student exist', async () => {
       const data = await controller.checkUuid('uuid1');
       await expect(data).toEqual(singleRecord);
    });
 
-   test('update Student', async () => {
-      const data = await controller.updateStudent({
+   it('update Student', async () => {
+      const data = await controller.update({
          email: 'example2.com',
          sex: '男',
          jobs: '祖父',
