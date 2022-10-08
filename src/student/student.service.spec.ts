@@ -35,7 +35,7 @@ describe('StudentService', () => {
    let service: StudentService;
    let prisma: PrismaService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          providers: [
             StudentService,
@@ -50,7 +50,11 @@ describe('StudentService', () => {
       prisma = module.get<PrismaService>(PrismaService);
    });
 
-   test('createStudent', async () => {
+   it('service should be Defined', () => {
+      expect(service).toBeDefined();
+   });
+
+   it('createStudent', async () => {
       const studentData = {
          kana: 'テスト1',
          email: 'example1.com',
@@ -59,19 +63,19 @@ describe('StudentService', () => {
       expect(createdStudent).toEqual(singleRecord);
    });
 
-   test('getStudents', async () => {
+   it('getStudents', async () => {
       const students = await service.getAllStudents();
       expect(students).toEqual(studentArray);
    });
 
-   test('checkStudentExist', async () => {
+   it('checkStudentExist', async () => {
       const singleStudent = await service.checkStudentExist({
          studentId: 'uuid1',
       });
       expect(singleStudent).toEqual(singleRecord);
    });
 
-   test('updateStudent', async () => {
+   it('updateStudent', async () => {
       const guestData = {
          sex: '男',
          jobs: '祖父',
@@ -81,11 +85,7 @@ describe('StudentService', () => {
          where: { studentId: 'uuid2' },
          data: {
             Guest: {
-               create: {
-                  sex: guestData.sex,
-                  jobs: guestData.jobs,
-                  name: guestData.name,
-               },
+               create: guestData,
             },
          },
       });

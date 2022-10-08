@@ -20,14 +20,13 @@ model Student {
 }
 
 //招待客テーブル。情報を残すために色々項目が多い
-//OBの場合に合わせてjobsをoptionalにしてある
 model Guest {
   guestId   String     @unique @default(uuid())
   sex       String
-  jobs      String?
+  jobs      String
   name      String
   host      Student?   @relation(fields: [hostId], references: [studentId])
-  hostId    String?    @unique
+  hostId    String?
   History   History[]
   hostJhs   JHStudent? @relation(fields: [hostJhsId], references: [jhsId])
   hostJhsId String?
@@ -44,9 +43,19 @@ model Sponsor {
 //中学生用テーブル。とりあえず年齢と送り返す用のメルアドだけ
 model JHStudent {
   jhsId   String    @unique @default(uuid())
-  age     Int
+  age     String
+  name    String
   email   String    @unique
   parents Guest[]
+  History History[]
+}
+
+//OBテーブル。難しい事考えたくないので招待客とテーブル分けた
+//あとGuestテーブルが単独で存在するの嫌だし
+model OB {
+  obId    String    @unique @default(uuid())
+  name    String
+  email   String    @unique
   History History[]
 }
 
@@ -59,4 +68,6 @@ model History {
   sponsorId    String?
   JHStudent    JHStudent? @relation(fields: [JHStudentId], references: [jhsId])
   JHStudentId  String?
+  OB           OB?        @relation(fields: [oBObId], references: [obId])
+  oBObId       String?
 }
