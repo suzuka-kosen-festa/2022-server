@@ -19,7 +19,7 @@ ENV NODE_ENV=production
 COPY package.json yarn.lock ./
 RUN yarn install --immutable
 
-FROM gcr.io/distroless/nodejs:16
+FROM gcr.io/distroless/nodejs:18
 
 WORKDIR /app
 
