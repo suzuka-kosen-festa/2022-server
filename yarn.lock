@@ -683,7 +683,7 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@nestjs/axios@^0.1.0":
+"@nestjs/axios@0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@nestjs/axios/-/axios-0.1.0.tgz#6cf93df11ef93b598b3c7411adb980eedd13b3e3"
   integrity sha512-b2TT2X6BFbnNoeteiaxCIiHaFcSbVW+S5yygYqiIq5i6H77yIU3IVuLdpQkHq8/EqOWFwMopLN8jdkUT71Am9w==
@@ -718,7 +718,7 @@
     webpack "5.74.0"
     webpack-node-externals "3.0.0"
 
-"@nestjs/common@^9.1.1":
+"@nestjs/common@9.1.1":
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-9.1.1.tgz#31d33486db59fa3b952c9a206be9220d1a291c41"
   integrity sha512-qrrCnc7FwYzJDjGJTRdL68nULFV0dkEa1DTJgtR7nHXzwcJU8EC+9wfMkahQdyB7ZPAQNJSuyarwmbgVFFNoLg==
@@ -727,7 +727,7 @@
     tslib "2.4.0"
     uuid "9.0.0"
 
-"@nestjs/core@^9.1.1":
+"@nestjs/core@9.1.1":
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-9.1.1.tgz#80bf48932cbd31ce5dbc1c89e7cffe28355f3dcf"
   integrity sha512-IFL9DAGFAFgVvIQDoXh248KH8Hqwj6x3Nz1ud4V1Gzv6FnsjANe4nhUAO9IJbUydtFAiNuclXC5gs2vbhBtqqg==
@@ -745,7 +745,7 @@
   resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-1.1.0.tgz#54a9fa61079635dd6c3c75fd9593f20b2302a55b"
   integrity sha512-+2kSly4P1QI+9eGt+/uGyPdEG1hVz7nbpqPHWZVYgoqz8eOHljpXPag+UCVRw9zo2XCu4sgNUIGe8Uk0+OvUQg==
 
-"@nestjs/platform-express@^9.1.1":
+"@nestjs/platform-express@9.1.1":
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-9.1.1.tgz#2cdd65fd04214a85e4e48649fece88803b4a5672"
   integrity sha512-2+W4TIVExANTS1Zna8Z+G0I4Fo6S8htzFZNea/oO5ptPtb9IWKSqaNlJU4L8cCQyJBYM82stDDjZ0JzsMMSJug==
@@ -767,7 +767,7 @@
     jsonc-parser "3.2.0"
     pluralize "8.0.0"
 
-"@nestjs/swagger@^6.0.4":
+"@nestjs/swagger@6.1.2":
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-6.1.2.tgz#5eb9c134fc976f16c139ecaf80a7f02a5d33da46"
   integrity sha512-RU1DeTDyuN/lRXKFWaf7I9LYF34/ale3IIGeY3romAcXL/N9W0+50Ek3ou+Ajd5FqpLqzt7saYhnaQegVuU4UQ==
@@ -778,7 +778,7 @@
     path-to-regexp "3.2.0"
     swagger-ui-dist "4.14.0"
 
-"@nestjs/terminus@^9.1.2":
+"@nestjs/terminus@9.1.2":
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/@nestjs/terminus/-/terminus-9.1.2.tgz#2732971e9d1d9e4c42e6823aca2a311dbce3bf9f"
   integrity sha512-6itH7tVucUyN/NTImnIiVmdiIVbvUCUXVzDjlNiHzl9DLx3dRyN4fyfFFS1ICcg7O0OhXNOCuDd/onV8ceH1Hg==
@@ -823,7 +823,7 @@
     consola "^2.15.0"
     node-fetch "^2.6.1"
 
-"@prisma/client@^4.3.1":
+"@prisma/client@4.3.1":
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/@prisma/client/-/client-4.3.1.tgz#b9aad9bd9bd43e7f715ec1d763c8bd9273688800"
   integrity sha512-FA0/d1VMJNWqzU7WVWTNWJ+lGOLR9JUBnF73GdIPAEVo/6dWk4gHx0EmgeU+SMv4MZoxgOeTBJF2azhg7x0hMw==
@@ -4308,7 +4308,7 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-reflect-metadata@^0.1.13:
+reflect-metadata@0.1.13:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
   integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
@@ -4407,7 +4407,7 @@ rxjs@6.6.7, rxjs@^6.6.0:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^7.2.0, rxjs@^7.5.5:
+rxjs@7.5.6, rxjs@^7.5.5:
   version "7.5.6"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.6.tgz#0446577557862afd6903517ce7cae79ecb9662bc"
   integrity sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==
