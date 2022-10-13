@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, Student } from '@prisma/client';
+import { Guest, Prisma, Student } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class StudentService {
       });
    }
    // Studentテーブルの全レコードを返す
-   async getAllStudents(): Promise<Student[]> {
+   async getAllStudents(): Promise<(Student & {Guest?: Guest[];})[]> {
       return this.prisma.student.findMany({
          include: {
             Guest: true,

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import { AppModule } from '../src/app/app.module';
+import { AppModule } from '../src/app.module';
 import { Prisma } from '@prisma/client';
 import * as request from 'supertest';
 import { JhsTestRecord, StudentTestRecord, ObTestRecord, SponsorTestRecord } from './types';
@@ -20,51 +20,51 @@ describe('AppController (e2e)', () => {
       await app.close();
    });
 
-   describe('HealthCheck Module(e2e)', () => {
-      it('check httpHealth', async () => {
-         const expectedResult = {
-            status: 'ok',
-            info: {
-               httpHealth: {
-                  status: 'up',
-               },
-            },
-            error: {},
-            details: {
-               httpHealth: {
-                  status: 'up',
-               },
-            },
-         };
+   // describe('HealthCheck Module(e2e)', () => {
+   //    it('check httpHealth', async () => {
+   //       const expectedResult = {
+   //          status: 'ok',
+   //          info: {
+   //             httpHealth: {
+   //                status: 'up',
+   //             },
+   //          },
+   //          error: {},
+   //          details: {
+   //             httpHealth: {
+   //                status: 'up',
+   //             },
+   //          },
+   //       };
 
-         const testResult = await request(app.getHttpServer())
-            .get('/health/http')
-            .then((res) => res.body);
-         expect(testResult).toEqual(expectedResult);
-      });
+   //       const testResult = await request(app.getHttpServer())
+   //          .get('/health/http')
+   //          .then((res) => res.body);
+   //       expect(testResult).toEqual(expectedResult);
+   //    });
 
-      it('check dbHealth', async () => {
-         const expectedResult = {
-            status: 'ok',
-            info: {
-               db: {
-                  status: 'up',
-               },
-            },
-            error: {},
-            details: {
-               db: {
-                  status: 'up',
-               },
-            },
-         };
+   //    it('check dbHealth', async () => {
+   //       const expectedResult = {
+   //          status: 'ok',
+   //          info: {
+   //             db: {
+   //                status: 'up',
+   //             },
+   //          },
+   //          error: {},
+   //          details: {
+   //             db: {
+   //                status: 'up',
+   //             },
+   //          },
+   //       };
 
-         const testResult = await request(app.getHttpServer())
-            .get('/health/db')
-            .then((res) => res.body);
-         expect(testResult).toEqual(expectedResult);
-      });
-   });
+   //       const testResult = await request(app.getHttpServer())
+   //          .get('/health/db')
+   //          .then((res) => res.body);
+   //       expect(testResult).toEqual(expectedResult);
+   //    });
+   // });
 
    describe('Student and GuestModule(e2e)', () => {
       let result = new Array<StudentTestRecord>(null);
@@ -347,4 +347,29 @@ describe('AppController (e2e)', () => {
          ).toEqual([]);
       });
    });
+
+   describe("app Module(e2e)", () =>{
+
+      it("export GuestI by Student",async () => {
+         const studentData : Prisma.StudentCreateInput = {
+            kana: "てすと",
+            email: "test@example.com"
+         }
+
+         request(app.getHttpServer()).post("/student").send(studentData)
+
+         const guestData = {
+            email : studentData.email,
+            name : "てすと",
+            sex: "男",
+            jobs:"祖父"
+         }
+         
+         request(app.getHttpServer()).put("/student").send(guestData)
+
+         const res = await request(app.getHttpServer()).get("/app/studentguest").then(res => res.body)
+
+         console.log(res)
+      })
+   })
 });

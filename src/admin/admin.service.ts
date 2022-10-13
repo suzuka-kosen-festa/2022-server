@@ -7,7 +7,7 @@ import { SponsorService } from '../sponsor/sponsor.service';
 import { StudentService } from '../student/student.service';
 
 @Injectable()
-export class AppService {
+export class AdminService {
     constructor(
         private readonly studentService: StudentService,
         private readonly guestServce : GuestService,
@@ -16,7 +16,22 @@ export class AppService {
         private readonly sponsorService : SponsorService
     ){}
 
-    parseUuid(reqUuid : string) : Promise<Student | OB | Guest | JHStudent | Sponsor>{
+    async exportStudentGuestUuid(){
+        const studentData = await this.studentService.getAllStudents()
+        const guestIdList = studentData.map((data)=>{
+            return {
+                email : data.email,
+                guest : data.Guest.map((guestData) =>(
+                    guestData.guestId
+                ))
+            }
+        })
+
+        return guestIdList
+    }
+    
+    
+    async parseUuid(reqUuid : string) : Promise<Student | OB | Guest | JHStudent | Sponsor>{
         const [type, ...id]  = reqUuid
         const uuid = id.join()
 

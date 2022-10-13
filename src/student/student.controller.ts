@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-redeclare
 import { Post, Controller, Body, Get, Put, Param, Delete } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Student } from '@prisma/client';
+import { Guest, Student } from '@prisma/client';
 import { createStudentDto, updateStudentDto } from './dto/student.dto';
 import { StudentEntity, StudentwithGuestEntity } from './entities/student.entity';
 import { StudentService } from './student.service';
@@ -15,7 +15,7 @@ export class StudentController {
    @Get()
    @ApiOperation({ summary: '学生の全件データを返す' })
    @ApiOkResponse({ type: StudentEntity, isArray: true })
-   async getAll(): Promise<Student[]> {
+   async getAll(): Promise<(Student & {Guest?: Guest[];})[]> {
       return this.studentService.getAllStudents();
    }
 

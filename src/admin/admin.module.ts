@@ -8,6 +8,6 @@ import { SponsorModule } from '../sponsor/sponsor.module';
 import { StudentModule } from '../student/student.module';
 
 @Module({
-    imports:[StudentModule, PrismaModule,HealthModule, GuestModule, JhsModule , ObModule, SponsorModule]
+    imports:[StudentModule, PrismaModule,HealthModule, GuestModule, JhsModule , ObModule, SponsorModule, AdminModule]
 })
-export class AppModule {}
+export class AdminModule {}
