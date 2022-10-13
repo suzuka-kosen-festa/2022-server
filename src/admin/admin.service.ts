@@ -53,7 +53,7 @@ export class AdminService {
       });
    }
 
-   async exportSponsorId() {
+   async exportSponsorUuid() {
       const sponsorList = await this.sponsorService.getAllSponsor();
       return sponsorList.map((data) => {
          return {

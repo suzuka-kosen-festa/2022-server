@@ -12,8 +12,23 @@ export class AdminController {
    }
 
    @Get('/studentguest')
-   async exportStudentGuest(): Promise<any> {
+   async exportStudentGuestId(): Promise<unknown> {
       return this.service.exportStudentGuestUuid();
+   }
+
+   @Get('/jhsguest')
+   async exportJhsGuestId() : Promise<unknown> {
+    return this.service.exportJhsGuestUuid();
+   }
+
+   @Get('/ob')
+   async exportObId(): Promise<unknown> {
+    return this.service.exportObUuid()
+   }
+
+   @Get('/sponsor')
+   async exportSponsorId() : Promise<unknown> {
+    return this.service.exportSponsorUuid()
    }
 
    @Get('check/:uuid')

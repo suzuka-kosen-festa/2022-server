@@ -30,7 +30,7 @@ describe('AdminService', () => {
                   exportStudentGuestUuid: jest.fn().mockResolvedValue(studentGuestIdData),
                   exportJhsGuestUuid: jest.fn().mockResolvedValue(jhsGuestIdData),
                   exportObUuid: jest.fn().mockResolvedValue(obIdData),
-                  exportSponsorId: jest.fn().mockResolvedValue(sponsorIdData),
+                  exportSponsorUuid: jest.fn().mockResolvedValue(sponsorIdData),
                   parseUuid: jest.fn().mockResolvedValue(guestData),
                },
             },
@@ -69,7 +69,7 @@ describe('AdminService', () => {
    });
 
    it('exportSponsorId', async () => {
-      const data = await service.exportSponsorId();
+      const data = await service.exportSponsorUuid();
 
       expect(data).toEqual(sponsorIdData);
    });
