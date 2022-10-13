@@ -17,18 +17,18 @@ export class AdminController {
    }
 
    @Get('/jhsguest')
-   async exportJhsGuestId() : Promise<unknown> {
-    return this.service.exportJhsGuestUuid();
+   async exportJhsGuestId(): Promise<unknown> {
+      return this.service.exportJhsGuestUuid();
    }
 
    @Get('/ob')
    async exportObId(): Promise<unknown> {
-    return this.service.exportObUuid()
+      return this.service.exportObUuid();
    }
 
    @Get('/sponsor')
-   async exportSponsorId() : Promise<unknown> {
-    return this.service.exportSponsorUuid()
+   async exportSponsorId(): Promise<unknown> {
+      return this.service.exportSponsorUuid();
    }
 
    @Get('check/:uuid')

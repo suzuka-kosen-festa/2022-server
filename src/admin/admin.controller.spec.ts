@@ -26,16 +26,16 @@ describe('AdminController', () => {
                   exportStudentGuestUuid: jest.fn().mockResolvedValue(studentGuestIdData),
                   exportJhsGuestUuid: jest.fn().mockResolvedValue(jhsGuestIdData),
                   exportObUuid: jest.fn().mockResolvedValue(obIdData),
-                  exportSponsorUuid: jest.fn().mockResolvedValue(sponsorIdData) 
-               }
+                  exportSponsorUuid: jest.fn().mockResolvedValue(sponsorIdData),
+               },
             },
-            StudentService, 
-            GuestService, 
-            JhsService, 
-            ObService, 
-            SponsorService, 
-            PrismaService
-         ]
+            StudentService,
+            GuestService,
+            JhsService,
+            ObService,
+            SponsorService,
+            PrismaService,
+         ],
       }).compile();
 
       controller = module.get<AdminController>(AdminController);
@@ -46,22 +46,22 @@ describe('AdminController', () => {
    });
 
    it('exportStudentGuest controller', async () => {
-      const data = await controller.exportStudentGuestId()
-      expect(data).toEqual(studentGuestIdData)
-   })
+      const data = await controller.exportStudentGuestId();
+      expect(data).toEqual(studentGuestIdData);
+   });
 
-   it("exportJhsGuest controller",async () => {
-      const data = await controller.exportJhsGuestId()
-      expect(data).toEqual(jhsGuestIdData)
-   })
+   it('exportJhsGuest controller', async () => {
+      const data = await controller.exportJhsGuestId();
+      expect(data).toEqual(jhsGuestIdData);
+   });
 
-   it("exportOb controller", async () => {
-      const data = await controller.exportObId()
-      expect(data).toEqual(obIdData)
-   })
+   it('exportOb controller', async () => {
+      const data = await controller.exportObId();
+      expect(data).toEqual(obIdData);
+   });
 
-   it("exportSponsorId controller",async () => {
-      const data = await controller.exportSponsorId()
-      expect(data).toEqual(sponsorIdData)
-   })
+   it('exportSponsorId controller', async () => {
+      const data = await controller.exportSponsorId();
+      expect(data).toEqual(sponsorIdData);
+   });
 });
