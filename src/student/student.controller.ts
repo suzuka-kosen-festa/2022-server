@@ -15,7 +15,7 @@ export class StudentController {
    @Get()
    @ApiOperation({ summary: '学生の全件データを返す' })
    @ApiOkResponse({ type: StudentEntity, isArray: true })
-   async getAll(): Promise<(Student & {Guest?: Guest[];})[]> {
+   async getAll(): Promise<(Student & { Guest?: Guest[] })[]> {
       return this.studentService.getAllStudents();
    }
 

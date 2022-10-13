@@ -6,9 +6,11 @@ import { PrismaService } from '../prisma/prisma.service';
 export class JhsService {
    constructor(private readonly prisma: PrismaService) {}
 
-   async getAllJhs(): Promise<(JHStudent & {
-      parents: Guest[];
-  })[]> {
+   async getAllJhs(): Promise<
+      (JHStudent & {
+         parents: Guest[];
+      })[]
+   > {
       return this.prisma.jHStudent.findMany({
          include: {
             parents: true,

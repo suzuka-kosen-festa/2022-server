@@ -21,7 +21,7 @@ export class StudentService {
       });
    }
    // Studentテーブルの全レコードを返す
-   async getAllStudents(): Promise<(Student & {Guest?: Guest[];})[]> {
+   async getAllStudents(): Promise<(Student & { Guest?: Guest[] })[]> {
       return this.prisma.student.findMany({
          include: {
             Guest: true,

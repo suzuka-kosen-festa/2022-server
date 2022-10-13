@@ -8,7 +8,7 @@ import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 
 @Module({
-    providers:[AdminService, StudentService,GuestService,JhsService,ObService,SponsorService],
-    controllers: [AdminController]
+   providers: [AdminService, StudentService, GuestService, JhsService, ObService, SponsorService],
+   controllers: [AdminController],
 })
 export class AdminModule {}

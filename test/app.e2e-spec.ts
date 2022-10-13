@@ -348,28 +348,29 @@ describe('AppController (e2e)', () => {
       });
    });
 
-   describe("app Module(e2e)", () =>{
+   describe('app Module(e2e)', () => {
+      it('export GuestI by Student', async () => {
+         const studentData: Prisma.StudentCreateInput = {
+            kana: 'てすと',
+            email: 'test@example.com',
+         };
 
-      it("export GuestI by Student",async () => {
-         const studentData : Prisma.StudentCreateInput = {
-            kana: "てすと",
-            email: "test@example.com"
-         }
-
-         request(app.getHttpServer()).post("/student").send(studentData)
+         request(app.getHttpServer()).post('/student').send(studentData);
 
          const guestData = {
-            email : studentData.email,
-            name : "てすと",
-            sex: "男",
-            jobs:"祖父"
-         }
-         
-         request(app.getHttpServer()).put("/student").send(guestData)
+            email: studentData.email,
+            name: 'てすと',
+            sex: '男',
+            jobs: '祖父',
+         };
 
-         const res = await request(app.getHttpServer()).get("/admin/studentguest").then(res => res.body)
+         request(app.getHttpServer()).put('/student').send(guestData);
 
-         console.log(res)
-      })
-   })
+         const res = await request(app.getHttpServer())
+            .get('/admin/studentguest')
+            .then((res) => res.body);
+
+         console.log(res);
+      });
+   });
 });

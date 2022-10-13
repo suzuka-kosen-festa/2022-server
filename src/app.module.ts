@@ -9,6 +9,6 @@ import { StudentModule } from './student/student.module';
 import { AdminModule } from './admin/admin.module';
 
 @Module({
-    imports:[StudentModule, PrismaModule,HealthModule, GuestModule, JhsModule , ObModule, SponsorModule, AdminModule],
+   imports: [StudentModule, PrismaModule, HealthModule, GuestModule, JhsModule, ObModule, SponsorModule, AdminModule],
 })
 export class AppModule {}
