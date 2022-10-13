@@ -22,7 +22,7 @@ export class AdminService {
             return {
                 email : data.email,
                 guest : data.Guest.map((guestData) =>(
-                    guestData.guestId
+                    "G" + guestData.guestId
                 ))
             }
         })
@@ -33,8 +33,8 @@ export class AdminService {
     
     async parseUuid(reqUuid : string) : Promise<Student | OB | Guest | JHStudent | Sponsor>{
         const [type, ...id]  = reqUuid
-        const uuid = id.join()
-
+        const uuid = reqUuid.slice(1)
+        
         switch(type){
             case "G":
                 return this.guestServce.checkGuestExist({guestId: uuid})

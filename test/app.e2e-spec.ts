@@ -367,7 +367,7 @@ describe('AppController (e2e)', () => {
          
          request(app.getHttpServer()).put("/student").send(guestData)
 
-         const res = await request(app.getHttpServer()).get("/app/studentguest").then(res => res.body)
+         const res = await request(app.getHttpServer()).get("/admin/studentguest").then(res => res.body)
 
          console.log(res)
       })

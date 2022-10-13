@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
-import { GuestModule } from '../guest/guest.module';
-import { HealthModule } from '../health/health.module';
-import { JhsModule } from '../jhs/jhs.module';
-import { ObModule } from '../ob/ob.module';
-import { PrismaModule } from '../prisma/prisma.module';
-import { SponsorModule } from '../sponsor/sponsor.module';
-import { StudentModule } from '../student/student.module';
+import { GuestService } from '../guest/guest.service';
+import { JhsService } from '../jhs/jhs.service';
+import { ObService } from '../ob/ob.service';
+import { SponsorService } from '../sponsor/sponsor.service';
+import { StudentService } from '../student/student.service';
+import { AdminController } from './admin.controller';
+import { AdminService } from './admin.service';
 
 @Module({
-    imports:[StudentModule, PrismaModule,HealthModule, GuestModule, JhsModule , ObModule, SponsorModule, AdminModule]
+    providers:[AdminService, StudentService,GuestService,JhsService,ObService,SponsorService],
+    controllers: [AdminController]
 })
 export class AdminModule {}
