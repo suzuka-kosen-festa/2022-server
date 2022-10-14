@@ -35,7 +35,7 @@ export class AdminService {
          return {
             email: data.email,
             jhsId: 'J' + data.jhsId,
-            guest: data.parents.map((guestData) => ({
+            parents: data.parents.map((guestData) => ({
                name: guestData.name,
                guestId: 'G' + guestData.guestId,
             })),

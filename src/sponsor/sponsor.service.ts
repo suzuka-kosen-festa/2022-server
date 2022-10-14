@@ -18,7 +18,7 @@ export class SponsorService {
       return this.prisma.sponsor.findUnique({ where: where });
    }
 
-   async deleteSponsor(wehere: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {
-      return this.prisma.sponsor.delete({ where: wehere });
+   async deleteSponsor(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {
+      return this.prisma.sponsor.delete({ where: where });
    }
 }
