@@ -17,6 +17,11 @@ export class ObController {
    async getAll(): Promise<OB[]> {
       return this.service.getAllOb();
    }
+   @Get('/history')
+   @ApiOperation({ summary: 'OBの入場履歴を返す'})
+   async getAllSponsorHistory() : Promise<OB[]>{
+      return this.service.getAllHistory()
+   }
 
    @Get('check/:uuid')
    @ApiOperation({ summary: 'OBのuuidの照合' })

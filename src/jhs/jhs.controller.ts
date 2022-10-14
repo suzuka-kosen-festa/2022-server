@@ -18,6 +18,12 @@ export class JhsController {
       return this.service.getAllJhs();
    }
 
+   @Get('/history')
+   @ApiOperation({ summary: '中学生の入場履歴を返す'})
+   async getAllSponsorHistory() : Promise<JHStudent[]>{
+      return this.service.getAllHistory()
+   }
+
    @Get('check/:id')
    @ApiOperation({ summary: '中学生のuuid照合' })
    @ApiOkResponse({ type: JhsEntity, description: '存在しない場合はnullを返す' })
