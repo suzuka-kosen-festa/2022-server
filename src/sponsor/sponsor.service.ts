@@ -15,7 +15,34 @@ export class SponsorService {
    }
 
    async checkSponsorExist(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor | null> {
+      await this.updateTimeStamp(where)
       return this.prisma.sponsor.findUnique({ where: where });
+   }
+
+   async getAllHistory(): Promise<Sponsor[]> {
+      return this.prisma.sponsor.findMany({
+         include : {
+            History : {
+               select: {
+                  timeStamp : true
+               }
+            }
+         }
+      })
+   }
+
+   async updateTimeStamp(where: Prisma.SponsorWhereUniqueInput) : Promise<Sponsor> {
+      return  this.prisma.sponsor.update({
+         data: {
+            History: {
+               create: {}
+            }
+         },
+         where: where,
+         include:{
+            History: true
+         }
+      })
    }
 
    async deleteSponsor(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {

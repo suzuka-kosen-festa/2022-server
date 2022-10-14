@@ -18,6 +18,12 @@ export class SponsorController {
       return this.service.getAllSponsor();
    }
 
+   @Get('/history')
+   @ApiOperation({ summary: 'Sponsorの入場履歴を返す'})
+   async getAllSponsorHistory() : Promise<Sponsor[]>{
+      return this.service.getAllHistory()
+   }
+
    @Get('check/:uuid')
    @ApiOperation({ summary: 'uuidの照合' })
    @ApiOkResponse({ type: SponsorEntity, description: '存在しない場合はnullを返す' })

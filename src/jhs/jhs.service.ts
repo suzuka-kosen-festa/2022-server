@@ -19,9 +19,36 @@ export class JhsService {
    }
 
    async checkJhsExist(uuid: Prisma.JHStudentWhereUniqueInput): Promise<JHStudent | null> {
+      await this.updateTimeStamp(uuid)
       return this.prisma.jHStudent.findUnique({
          where: uuid,
       });
+   }
+
+   async getAllHistory(): Promise<JHStudent[]> {
+      return this.prisma.jHStudent.findMany({
+         include : {
+            History : {
+               select: {
+                  timeStamp : true
+               }
+            }
+         }
+      })
+   }
+
+   async updateTimeStamp(where: Prisma.JHStudentWhereUniqueInput) : Promise<JHStudent> {
+      return  this.prisma.jHStudent.update({
+         data: {
+            History: {
+               create: {}
+            }
+         },
+         where: where,
+         include:{
+            History: true
+         }
+      })
    }
 
    async createJhs(data: Prisma.JHStudentCreateInput): Promise<JHStudent> {

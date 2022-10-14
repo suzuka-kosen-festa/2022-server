@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 // eslint-disable-next-line no-redeclare
 import { History } from '@prisma/client';
 import { HistoryService } from './history.service';
@@ -7,7 +7,8 @@ import { HistoryService } from './history.service';
 export class HistoryController {
   constructor(private readonly service : HistoryService){}
 
- async getAllHistory() : Promise<History[]>{
-  return this.service.getAll()
- }
+  @Get()
+  async getAllHistory() : Promise<History[]>{
+    return this.service.getAll()
+  }
 }

@@ -13,10 +13,37 @@ export class GuestService {
       return this.prisma.guest.findMany();
    }
 
+   async getAllHistory(): Promise<Guest[]> {
+      return this.prisma.guest.findMany({
+         include : {
+            History : {
+               select: {
+                  timeStamp : true
+               }
+            }
+         }
+      })
+   }
+
+   async updateTimeStamp(where: Prisma.GuestWhereUniqueInput) : Promise<Guest> {
+      return  this.prisma.guest.update({
+         data: {
+            History: {
+               create: {}
+            }
+         },
+         where: where,
+         include:{
+            History: true
+         }
+      })
+   }
+
    //uuidの照合
-   async checkGuestExist(data: Prisma.GuestWhereUniqueInput): Promise<Guest | null> {
+   async checkGuestExist(uuid: Prisma.GuestWhereUniqueInput): Promise<Guest | null> {
+      await this.updateTimeStamp(uuid)
       return this.prisma.guest.findUnique({
-         where: data,
+         where: uuid,
       });
    }
 
