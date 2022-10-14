@@ -7,8 +7,9 @@ import { PrismaModule } from './prisma/prisma.module';
 import { SponsorModule } from './sponsor/sponsor.module';
 import { StudentModule } from './student/student.module';
 import { AdminModule } from './admin/admin.module';
+import { HistoryModule } from './history/history.module';
 
 @Module({
-   imports: [StudentModule, PrismaModule, HealthModule, GuestModule, JhsModule, ObModule, SponsorModule, AdminModule],
+   imports: [StudentModule, PrismaModule, HealthModule, GuestModule, JhsModule, ObModule, SponsorModule, AdminModule, HistoryModule],
 })
 export class AppModule {}
