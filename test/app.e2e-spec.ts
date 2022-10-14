@@ -20,51 +20,51 @@ describe('AppController (e2e)', () => {
       await app.close();
    });
 
-   // describe('HealthCheck Module(e2e)', () => {
-   //    it('check httpHealth', async () => {
-   //       const expectedResult = {
-   //          status: 'ok',
-   //          info: {
-   //             httpHealth: {
-   //                status: 'up',
-   //             },
-   //          },
-   //          error: {},
-   //          details: {
-   //             httpHealth: {
-   //                status: 'up',
-   //             },
-   //          },
-   //       };
+   describe('HealthCheck Module(e2e)', () => {
+      it('check httpHealth', async () => {
+         const expectedResult = {
+            status: 'ok',
+            info: {
+               httpHealth: {
+                  status: 'up',
+               },
+            },
+            error: {},
+            details: {
+               httpHealth: {
+                  status: 'up',
+               },
+            },
+         };
 
-   //       const testResult = await request(app.getHttpServer())
-   //          .get('/health/http')
-   //          .then((res) => res.body);
-   //       expect(testResult).toEqual(expectedResult);
-   //    });
+         const testResult = await request(app.getHttpServer())
+            .get('/health/http')
+            .then((res) => res.body);
+         expect(testResult).toEqual(expectedResult);
+      });
 
-   //    it('check dbHealth', async () => {
-   //       const expectedResult = {
-   //          status: 'ok',
-   //          info: {
-   //             db: {
-   //                status: 'up',
-   //             },
-   //          },
-   //          error: {},
-   //          details: {
-   //             db: {
-   //                status: 'up',
-   //             },
-   //          },
-   //       };
+      it('check dbHealth', async () => {
+         const expectedResult = {
+            status: 'ok',
+            info: {
+               db: {
+                  status: 'up',
+               },
+            },
+            error: {},
+            details: {
+               db: {
+                  status: 'up',
+               },
+            },
+         };
 
-   //       const testResult = await request(app.getHttpServer())
-   //          .get('/health/db')
-   //          .then((res) => res.body);
-   //       expect(testResult).toEqual(expectedResult);
-   //    });
-   // });
+         const testResult = await request(app.getHttpServer())
+            .get('/health/db')
+            .then((res) => res.body);
+         expect(testResult).toEqual(expectedResult);
+      });
+   });
 
    describe('Student and GuestModule(e2e)', () => {
       let result = new Array<StudentTestRecord>(null);
@@ -132,11 +132,7 @@ describe('AppController (e2e)', () => {
             .get(`/student/check/${result[0].studentId}`)
             .then((res) => res.body);
 
-         console.log(res);
-
          const { Guest, ...testResult } = result[0];
-
-         console.log(testResult);
 
          expect(res).toEqual(testResult);
       });
@@ -349,13 +345,13 @@ describe('AppController (e2e)', () => {
    });
 
    describe('app Module(e2e)', () => {
-      it('export GuestI by Student', async () => {
+      it('export GuestId by Student', async () => {
          const studentData: Prisma.StudentCreateInput = {
             kana: 'てすと',
             email: 'test@example.com',
          };
 
-         request(app.getHttpServer()).post('/student').send(studentData);
+         await request(app.getHttpServer()).post('/student').send(studentData);
 
          const guestData = {
             email: studentData.email,
@@ -364,13 +360,107 @@ describe('AppController (e2e)', () => {
             jobs: '祖父',
          };
 
-         request(app.getHttpServer()).put('/student').send(guestData);
+         const guestResData = await request(app.getHttpServer()).put('/student').send(guestData);
+
+         const expectData = [{
+            email: 'test@example.com',
+            guest:[{
+               guestId: "G" + guestResData.body.Guest[0].guestId,
+               name : guestResData.body.Guest[0].name
+            }]
+         }]
 
          const res = await request(app.getHttpServer())
             .get('/admin/studentguest')
             .then((res) => res.body);
 
-         console.log(res);
+         expect(res).toEqual(expectData)
+
+         const studentId = await request(app.getHttpServer()).get('/student').then(res => res.body[0].studentId)
+
+         await request(app.getHttpServer()).delete(`/student/${studentId}`)
       });
+
+      it("export GuestId by Jhs",async () => {
+         const jhsData : Prisma.JHStudentCreateInput = {
+            email: 'test@example.com',
+            name: 'てすと',
+            age: "15"
+         }
+
+         const jhsResData = await request(app.getHttpServer()).post('/jhs').send(jhsData);
+
+         const guestData = {
+            email: jhsData.email,
+            name: 'てすと',
+            sex: '男',
+            jobs: '祖父',
+         };
+
+         const guestResData = await request(app.getHttpServer()).put('/jhs').send(guestData);
+
+         const expectData = [{
+            email: 'test@example.com',
+            jhsId: "J" + jhsResData.body.jhsId,
+            parents:[{
+               guestId: "G" + guestResData.body.parents[0].guestId,
+               name : guestResData.body.parents[0].name
+            }]
+         }]
+
+         const res = await request(app.getHttpServer())
+         .get('/admin/jhsguest')
+         .then((res) => res.body);
+
+         expect(res).toEqual(expectData)
+
+         const jhsId = await request(app.getHttpServer()).get('/jhs').then(res => res.body[0].jhsId)
+
+         await request(app.getHttpServer()).delete(`/jhs/${jhsId}`)
+      })
+
+      it("export obId",async () => {
+         const obData: Prisma.OBCreateInput = {
+            name: 'てすと',
+            email: 'test@example.com',
+         };
+
+         const obResData = await request(app.getHttpServer()).post("/ob").send(obData)
+
+         const expectData = [{
+            email : obData.email,
+            obId : "O" + obResData.body.obId
+         }]
+         
+         const res = await request(app.getHttpServer())
+         .get('/admin/ob')
+         .then((res) => res.body);
+
+         expect(res).toEqual(expectData)
+
+         await request(app.getHttpServer()).delete(`/ob/${obResData.body.obId}`)
+      })
+
+      it("export SponsorId",async () => {
+         const sponsorData : Prisma.SponsorCreateInput ={
+            email : 'test@example.com',
+            name: 'テスト'
+         }
+
+         const sponsorResData = await request(app.getHttpServer()).post('/sponsor').send(sponsorData)
+
+         const expectData = [{
+            email : sponsorData.email,
+            sponsorId : "S" + sponsorResData.body.sponsorId
+         }]
+
+         const res = await request(app.getHttpServer())
+         .get('/admin/sponsor')
+         .then((res) => res.body);
+
+         expect(res).toEqual(expectData)
+
+         await request(app.getHttpServer()).delete(`/sponsor/${sponsorResData.body.sponsorId}`)
+      })
    });
 });
