@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Sponsor } from '@prisma/client';
 import { createSponsorDto } from './dto/sponsor.dto';
-import { SponsorEntity } from './entity/sponsor.entity';
+import { SponsorEntity, SponsorWithHistoryEntity } from './entity/sponsor.entity';
 import { SponsorService } from './sponsor.service';
 
 @ApiTags('sponsor')
@@ -20,6 +20,7 @@ export class SponsorController {
 
    @Get('/history')
    @ApiOperation({ summary: 'Sponsorの入場履歴を返す'})
+   @ApiOkResponse({ type : SponsorWithHistoryEntity})
    async getAllSponsorHistory() : Promise<Sponsor[]>{
       return this.service.getAllHistory()
    }

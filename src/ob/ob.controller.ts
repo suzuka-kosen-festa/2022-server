@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { OB } from '@prisma/client';
 import { createObDto } from './dto/ob.dto';
-import { ObEntity } from './entity/ob.dto';
+import { ObEntity, ObWithHistoryEntity } from './entity/ob.dto';
 import { ObService } from './ob.service';
 
 @ApiTags('ob')
@@ -19,6 +19,7 @@ export class ObController {
    }
    @Get('/history')
    @ApiOperation({ summary: 'OBの入場履歴を返す'})
+   @ApiOkResponse({type : ObWithHistoryEntity})
    async getAllSponsorHistory() : Promise<OB[]>{
       return this.service.getAllHistory()
    }

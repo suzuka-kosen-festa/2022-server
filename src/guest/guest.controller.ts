@@ -1,7 +1,7 @@
 import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Guest } from '@prisma/client';
-import { GuestEntity } from './entity/guest.entity';
+import { GuestEntity, GuestWithHistoryEntity } from './entity/guest.entity';
 import { GuestService } from './guest.service';
 
 @ApiTags('guest')
@@ -18,6 +18,7 @@ export class GuestController {
 
    @Get('/history')
    @ApiOperation({ summary: 'Guestの入場履歴を返す'})
+   @ApiOkResponse({ type : GuestWithHistoryEntity})
    async getAllSponsorHistory() : Promise<Guest[]>{
       return this.service.getAllHistory()
    }

@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JHStudent } from '@prisma/client';
 import { createJhsStudentDto, updateJhsStudentDto } from './dto/jhs.dto';
-import { JhsEntity, JhswithParentEntity } from './entity/jhs.entiry';
+import { JhsEntity, JhsWithHistoryEntity, JhswithParentEntity } from './entity/jhs.entiry';
 import { JhsService } from './jhs.service';
 
 @ApiTags('jhs')
@@ -20,6 +20,7 @@ export class JhsController {
 
    @Get('/history')
    @ApiOperation({ summary: '中学生の入場履歴を返す'})
+   @ApiOkResponse({ type : JhsWithHistoryEntity })
    async getAllSponsorHistory() : Promise<JHStudent[]>{
       return this.service.getAllHistory()
    }
