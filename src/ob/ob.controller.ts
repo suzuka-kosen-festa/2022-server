@@ -19,14 +19,14 @@ export class ObController {
    }
    @Get('/history')
    @ApiOperation({ summary: 'OBの入場履歴を返す'})
-   @ApiOkResponse({type : ObWithHistoryEntity})
+   @ApiOkResponse({type : ObWithHistoryEntity, isArray: true})
    async getAllSponsorHistory() : Promise<OB[]>{
       return this.service.getAllHistory()
    }
 
    @Get('check/:uuid')
    @ApiOperation({ summary: 'OBのuuidの照合' })
-   @ApiOkResponse({ type: ObEntity, description: '存在しない場合はnullを返す' })
+   @ApiOkResponse({ type: ObWithHistoryEntity, description: '存在しない場合はnullを返す' })
    async checkUuid(@Param('uuid') uuid: string): Promise<OB | null> {
       return this.service.checkObExist({ obId: uuid });
    }

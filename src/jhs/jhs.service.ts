@@ -22,6 +22,11 @@ export class JhsService {
       await this.updateTimeStamp(uuid)
       return this.prisma.jHStudent.findUnique({
          where: uuid,
+         include:{ History : {
+            select: {
+               timeStamp : true
+            }
+         }}
       });
    }
 

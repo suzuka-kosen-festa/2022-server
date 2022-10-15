@@ -44,6 +44,11 @@ export class ObService {
       await this.updateTimeStamp(uuid)
       return this.prisma.oB.findUnique({
          where: uuid,
+         include:{ History : {
+            select: {
+               timeStamp : true
+            }
+         }} 
       });
    }
 

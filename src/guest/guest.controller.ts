@@ -18,14 +18,14 @@ export class GuestController {
 
    @Get('/history')
    @ApiOperation({ summary: 'Guestの入場履歴を返す'})
-   @ApiOkResponse({ type : GuestWithHistoryEntity})
+   @ApiOkResponse({ type : GuestWithHistoryEntity , isArray: true})
    async getAllSponsorHistory() : Promise<Guest[]>{
       return this.service.getAllHistory()
    }
 
    @Get('check/:uuid')
    @ApiOperation({ summary: 'uuidの照合' })
-   @ApiOkResponse({ type: GuestEntity, description: '存在しない場合はnullを返す' })
+   @ApiOkResponse({ type: GuestWithHistoryEntity, description: '存在しない場合はnullを返す' })
    async checkuuid(@Param('uuid') id: string): Promise<Guest | null> {
       return this.service.checkGuestExist({ guestId: id });
    }

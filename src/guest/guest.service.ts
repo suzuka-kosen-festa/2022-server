@@ -44,6 +44,11 @@ export class GuestService {
       await this.updateTimeStamp(uuid)
       return this.prisma.guest.findUnique({
          where: uuid,
+         include:{ History : {
+            select: {
+               timeStamp : true
+            }
+         }}
       });
    }
 
