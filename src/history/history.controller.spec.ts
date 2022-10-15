@@ -9,7 +9,7 @@ describe('HistoryController', () => {
    beforeEach(async () => {
       const module: TestingModule = await Test.createTestingModule({
          controllers: [HistoryController],
-         providers: [PrismaService, HistoryService]
+         providers: [PrismaService, HistoryService],
       }).compile();
 
       controller = module.get<HistoryController>(HistoryController);
