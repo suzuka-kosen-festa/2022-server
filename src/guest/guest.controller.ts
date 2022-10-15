@@ -17,10 +17,10 @@ export class GuestController {
    }
 
    @Get('/history')
-   @ApiOperation({ summary: 'Guestの入場履歴を返す'})
-   @ApiOkResponse({ type : GuestWithHistoryEntity , isArray: true})
-   async getAllSponsorHistory() : Promise<Guest[]>{
-      return this.service.getAllHistory()
+   @ApiOperation({ summary: 'Guestの入場履歴を返す' })
+   @ApiOkResponse({ type: GuestWithHistoryEntity, isArray: true })
+   async getAllSponsorHistory(): Promise<Guest[]> {
+      return this.service.getAllHistory();
    }
 
    @Get('check/:uuid')

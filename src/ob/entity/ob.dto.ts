@@ -14,13 +14,13 @@ export class ObEntity {
 
 export class ObWithHistoryEntity {
    @ApiProperty()
-   obId : string
+   obId: string;
    @ApiProperty()
-   email : string
+   email: string;
    @ApiProperty()
-   name : string
+   name: string;
    @ApiProperty()
-   age : string
+   age: string;
    @ApiProperty()
-   History : HistoryEntity
+   History: HistoryEntity;
 }

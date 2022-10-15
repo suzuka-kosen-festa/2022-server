@@ -19,10 +19,10 @@ export class JhsController {
    }
 
    @Get('/history')
-   @ApiOperation({ summary: '中学生の入場履歴を返す'})
-   @ApiOkResponse({ type : JhsWithHistoryEntity, isArray: true })
-   async getAllSponsorHistory() : Promise<JHStudent[]>{
-      return this.service.getAllHistory()
+   @ApiOperation({ summary: '中学生の入場履歴を返す' })
+   @ApiOkResponse({ type: JhsWithHistoryEntity, isArray: true })
+   async getAllSponsorHistory(): Promise<JHStudent[]> {
+      return this.service.getAllHistory();
    }
 
    @Get('check/:id')

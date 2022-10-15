@@ -5,9 +5,9 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class HistoryService {
-  constructor(private readonly prisma : PrismaService){}
+   constructor(private readonly prisma: PrismaService) {}
 
-  async getAll() : Promise<History[]>{
-    return this.prisma.history.findMany()
-  }
+   async getAll(): Promise<History[]> {
+      return this.prisma.history.findMany();
+   }
 }

@@ -27,5 +27,5 @@ export class JhsWithHistoryEntity {
    @ApiProperty()
    email: string;
    @ApiProperty()
-   History : HistoryEntity
+   History: HistoryEntity;
 }

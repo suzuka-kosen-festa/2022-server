@@ -18,5 +18,5 @@ export class SponsorWithHistoryEntity {
    @ApiProperty()
    email: string;
    @ApiProperty()
-   History: HistoryEntity
+   History: HistoryEntity;
 }

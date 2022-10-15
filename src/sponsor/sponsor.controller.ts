@@ -19,10 +19,10 @@ export class SponsorController {
    }
 
    @Get('history')
-   @ApiOperation({ summary: 'Sponsorの入場履歴を返す'})
-   @ApiOkResponse({ type : SponsorWithHistoryEntity , isArray: true })
-   async getAllSponsorHistory() : Promise<Sponsor[]>{
-      return this.service.getAllHistory()
+   @ApiOperation({ summary: 'Sponsorの入場履歴を返す' })
+   @ApiOkResponse({ type: SponsorWithHistoryEntity, isArray: true })
+   async getAllSponsorHistory(): Promise<Sponsor[]> {
+      return this.service.getAllHistory();
    }
 
    @Get('check/:uuid')
@@ -31,7 +31,6 @@ export class SponsorController {
    async checkUuid(@Param('uuid') uuid: string): Promise<Sponsor | null> {
       return this.service.checkSponsorExist({ sponsorId: uuid });
    }
-
 
    @Post()
    @ApiOperation({ summary: 'Sponsorレコードの生成' })

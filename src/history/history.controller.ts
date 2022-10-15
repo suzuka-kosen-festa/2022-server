@@ -5,10 +5,10 @@ import { HistoryService } from './history.service';
 
 @Controller('history')
 export class HistoryController {
-  constructor(private readonly service : HistoryService){}
+   constructor(private readonly service: HistoryService) {}
 
-  @Get()
-  async getAllHistory() : Promise<History[]>{
-    return this.service.getAll()
-  }
+   @Get()
+   async getAllHistory(): Promise<History[]> {
+      return this.service.getAll();
+   }
 }

@@ -15,40 +15,42 @@ export class GuestService {
 
    async getAllHistory(): Promise<Guest[]> {
       return this.prisma.guest.findMany({
-         include : {
-            History : {
+         include: {
+            History: {
                select: {
-                  timeStamp : true
-               }
-            }
-         }
-      })
+                  timeStamp: true,
+               },
+            },
+         },
+      });
    }
 
-   async updateTimeStamp(where: Prisma.GuestWhereUniqueInput) : Promise<Guest> {
-      return  this.prisma.guest.update({
+   async updateTimeStamp(where: Prisma.GuestWhereUniqueInput): Promise<Guest> {
+      return this.prisma.guest.update({
          data: {
             History: {
-               create: {}
-            }
+               create: {},
+            },
          },
          where: where,
-         include:{
-            History: true
-         }
-      })
+         include: {
+            History: true,
+         },
+      });
    }
 
    //uuidの照合
    async checkGuestExist(uuid: Prisma.GuestWhereUniqueInput): Promise<Guest | null> {
-      await this.updateTimeStamp(uuid)
+      await this.updateTimeStamp(uuid);
       return this.prisma.guest.findUnique({
          where: uuid,
-         include:{ History : {
-            select: {
-               timeStamp : true
-            }
-         }}
+         include: {
+            History: {
+               select: {
+                  timeStamp: true,
+               },
+            },
+         },
       });
    }
 

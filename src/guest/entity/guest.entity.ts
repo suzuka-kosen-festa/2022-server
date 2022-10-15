@@ -26,5 +26,5 @@ export class GuestWithHistoryEntity {
    @ApiProperty()
    hostId: string;
    @ApiProperty()
-   History : HistoryEntity
+   History: HistoryEntity;
 }

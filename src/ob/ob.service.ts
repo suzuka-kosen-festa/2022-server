@@ -12,28 +12,28 @@ export class ObService {
 
    async getAllHistory(): Promise<OB[]> {
       return this.prisma.oB.findMany({
-         include : {
-            History : {
+         include: {
+            History: {
                select: {
-                  timeStamp : true
-               }
-            }
-         }
-      })
+                  timeStamp: true,
+               },
+            },
+         },
+      });
    }
 
-   async updateTimeStamp(where: Prisma.OBWhereUniqueInput) : Promise<OB> {
-      return  this.prisma.oB.update({
+   async updateTimeStamp(where: Prisma.OBWhereUniqueInput): Promise<OB> {
+      return this.prisma.oB.update({
          data: {
             History: {
-               create: {}
-            }
+               create: {},
+            },
          },
          where: where,
-         include:{
-            History: true
-         }
-      })
+         include: {
+            History: true,
+         },
+      });
    }
 
    async createOb(data: Prisma.OBCreateInput): Promise<OB> {
@@ -41,14 +41,16 @@ export class ObService {
    }
 
    async checkObExist(uuid: Prisma.OBWhereUniqueInput): Promise<OB | null> {
-      await this.updateTimeStamp(uuid)
+      await this.updateTimeStamp(uuid);
       return this.prisma.oB.findUnique({
          where: uuid,
-         include:{ History : {
-            select: {
-               timeStamp : true
-            }
-         }} 
+         include: {
+            History: {
+               select: {
+                  timeStamp: true,
+               },
+            },
+         },
       });
    }
 

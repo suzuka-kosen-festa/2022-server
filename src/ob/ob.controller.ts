@@ -18,10 +18,10 @@ export class ObController {
       return this.service.getAllOb();
    }
    @Get('/history')
-   @ApiOperation({ summary: 'OBの入場履歴を返す'})
-   @ApiOkResponse({type : ObWithHistoryEntity, isArray: true})
-   async getAllSponsorHistory() : Promise<OB[]>{
-      return this.service.getAllHistory()
+   @ApiOperation({ summary: 'OBの入場履歴を返す' })
+   @ApiOkResponse({ type: ObWithHistoryEntity, isArray: true })
+   async getAllSponsorHistory(): Promise<OB[]> {
+      return this.service.getAllHistory();
    }
 
    @Get('check/:uuid')
