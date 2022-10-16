@@ -5,5 +5,6 @@ import { SponsorController } from './sponsor.controller';
 @Module({
    providers: [SponsorService],
    controllers: [SponsorController],
+   exports: [SponsorService]
 })
 export class SponsorModule {}
