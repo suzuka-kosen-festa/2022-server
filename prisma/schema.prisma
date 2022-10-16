@@ -60,14 +60,14 @@ model OB {
 }
 
 model History {
-  id           Int        @id @default(autoincrement())
-  timeStamp    DateTime   @default(now())
-  Guest        Guest?     @relation(fields: [guestGuestId], references: [guestId])
-  guestGuestId String?
-  Sponsor      Sponsor?   @relation(fields: [sponsorId], references: [sponsorId])
-  sponsorId    String?
-  JHStudent    JHStudent? @relation(fields: [JHStudentId], references: [jhsId])
-  JHStudentId  String?
-  OB           OB?        @relation(fields: [oBObId], references: [obId])
-  oBObId       String?
+  id        Int        @id @default(autoincrement())
+  timeStamp DateTime   @default(now())
+  Guest     Guest?     @relation(fields: [guestId], references: [guestId])
+  guestId   String?
+  Sponsor   Sponsor?   @relation(fields: [sponsorId], references: [sponsorId])
+  sponsorId String?
+  JHStudent JHStudent? @relation(fields: [jhsId], references: [jhsId])
+  jhsId     String?
+  OB        OB?        @relation(fields: [obId], references: [obId])
+  obId      String?
 }
