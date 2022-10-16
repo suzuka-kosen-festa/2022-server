@@ -25,7 +25,7 @@ describe('GuestService', () => {
                      findMany: jest.fn().mockResolvedValue(guestArray),
                      findUnique: jest.fn().mockResolvedValue(singleRecord),
                      delete: jest.fn().mockResolvedValue(singleRecord),
-                     update: jest.fn().mockResolvedValue(singleRecord)
+                     update: jest.fn().mockResolvedValue(singleRecord),
                   },
                },
             },

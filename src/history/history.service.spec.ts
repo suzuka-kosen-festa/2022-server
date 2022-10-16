@@ -5,7 +5,7 @@ import { HistoryService } from './history.service';
 describe('HistoryService', () => {
    let service: HistoryService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          providers: [HistoryService, PrismaService],
       }).compile();

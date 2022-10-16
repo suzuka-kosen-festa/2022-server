@@ -17,7 +17,7 @@ const db = {
       findMany: jest.fn().mockResolvedValue(obArray),
       findUnique: jest.fn().mockResolvedValue(singleRecord),
       create: jest.fn().mockResolvedValue(singleRecord),
-      update: jest.fn().mockResolvedValue(singleRecord)
+      update: jest.fn().mockResolvedValue(singleRecord),
    },
 };
 
