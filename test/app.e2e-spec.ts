@@ -162,6 +162,13 @@ describe('App (e2e)', () => {
 
          expect(res).toEqual(expectedResult);
       });
+       
+      it('search by kana', async () =>{
+         const kana = encodeURI(result[0].kana)
+         const res = await request(app.getHttpServer()).get(`/student/${kana}`)
+
+         expect(res.body).toEqual(result)
+      })
 
       it('delete', async () => {
          await request(app.getHttpServer()).delete(`/student/${result[0].studentId}`);
@@ -244,6 +251,13 @@ describe('App (e2e)', () => {
          expect(res).toEqual(expectedResult);
       });
 
+      it("search by name", async() =>{
+         const name = encodeURI(result[0].name)
+         const res = await request(app.getHttpServer()).get(`/jhs/${name}`)
+
+         expect(res.body).toEqual(result)
+      })
+
       it('delete', async () => {
          await request(app.getHttpServer()).delete(`/jhs/${result[0].jhsId}`);
 
@@ -292,6 +306,13 @@ describe('App (e2e)', () => {
          expect(res).toEqual(expectedResult);
       });
 
+      it("search by name", async () =>{
+         const name = encodeURI(result[0].name)
+         const res = await request(app.getHttpServer()).get(`/ob/${name}`)
+
+         expect(res.body).toEqual(result)
+      })
+
       it('delete', async () => {
          await request(app.getHttpServer()).delete(`/ob/${result[0].obId}`);
 
@@ -339,6 +360,13 @@ describe('App (e2e)', () => {
          const expectedResult = { History: [{ timeStamp: res.History[0].timeStamp }], ...result[0] };
          expect(res).toEqual(expectedResult);
       });
+
+      it("search by name", async () =>{
+         const name = encodeURI(result[0].name)
+         const res = await request(app.getHttpServer()).get(`/sponsor/${name}`)
+
+         expect(res.body).toEqual(result)
+      })
 
       it('delete', async () => {
          await request(app.getHttpServer()).delete(`/sponsor/${result[0].sponsorId}`);
