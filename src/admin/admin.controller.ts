@@ -6,11 +6,6 @@ import { AdminService } from './admin.service';
 export class AdminController {
    constructor(private readonly service: AdminService) {}
 
-   @Get('test')
-   async test(): Promise<string> {
-      return 'hello';
-   }
-
    @Get('/studentguest')
    async exportStudentGuestId(): Promise<unknown> {
       return this.service.exportStudentGuestUuid();
