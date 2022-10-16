@@ -32,6 +32,13 @@ export class JhsController {
       return this.service.checkJhsExist({ jhsId: uuid });
    }
 
+   @Get(':name')
+   @ApiOperation({ summary : "中学生を名前で検索" })
+   @ApiOkResponse({ type : JhsEntity , isArray: true})
+   async searchJhsByName(@Param("name") name : string) : Promise<JHStudent[] | null> {
+      return this.service.searchByName({name : name})
+   }
+
    @Post()
    @ApiOperation({ summary: '中学生のレコード作成' })
    @ApiCreatedResponse({ type: JhsEntity })

@@ -81,6 +81,11 @@ describe('JhsController', () => {
       await expect(data).toEqual(singleRecordwithParents);
    });
 
+   it("searchJhsByName", async () =>{
+      const data = await controller.searchJhsByName("てすと１")
+      expect(data).toEqual(jhsArray)
+   })
+
    it('delete student', async () => {
       const res = await controller.delete('uuid1');
       expect(res).toEqual(singleRecord);
