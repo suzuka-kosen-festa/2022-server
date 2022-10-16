@@ -57,6 +57,11 @@ describe('ObController', () => {
       expect(testRecord).toStrictEqual(singleRecord);
    });
 
+   it("searchObByName", async () =>{
+      const data = await controller.searchObByName("てすと1")
+      expect(data).toEqual(obArray)
+   })
+
    it('delete student', async () => {
       const res = await controller.delete('uuid1');
 

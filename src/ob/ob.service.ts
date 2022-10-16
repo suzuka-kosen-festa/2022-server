@@ -22,6 +22,12 @@ export class ObService {
       });
    }
 
+   async searchByName(name : Prisma.OBWhereInput) : Promise<OB[] | null>{
+      return this.prisma.oB.findMany({
+         where: name
+      })
+   }
+
    async updateTimeStamp(where: Prisma.OBWhereUniqueInput): Promise<OB> {
       return this.prisma.oB.update({
          data: {
