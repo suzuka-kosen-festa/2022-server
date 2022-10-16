@@ -23,7 +23,7 @@ export class StudentController {
    @ApiOperation({ summary: "かな検索"})
    @ApiOkResponse({ type: StudentwithGuestEntity , isArray: true , description: '存在しない場合はnullを返す' })
    async searchStudentByKana(@Param("kana") kana: string) : Promise<Student[] | null>{
-      return this.studentService.seatchByKana({kana})
+      return this.studentService.searchByKana({kana})
    }
 
    @Get('check/:uuid')

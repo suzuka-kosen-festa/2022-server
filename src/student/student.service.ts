@@ -21,7 +21,7 @@ export class StudentService {
       });
    }
 
-   async seatchByKana(kana : Prisma.StudentWhereInput) : Promise<Student[] | null> {
+   async searchByKana(kana : Prisma.StudentWhereInput) : Promise<Student[] | null> {
       return this.prisma.student.findMany({
          where : kana,
          include: {

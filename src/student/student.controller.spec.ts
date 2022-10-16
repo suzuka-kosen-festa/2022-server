@@ -43,6 +43,7 @@ describe('StudentController', () => {
                      .fn()
                      .mockImplementation((data: Prisma.StudentUpdateInput) => Promise.resolve(singleRecordwithGuest)),
                   getAllStudents: jest.fn().mockImplementation(() => studentArray),
+                  searchByKana: jest.fn().mockResolvedValue(studentArray)
                },
             },
          ],
@@ -68,7 +69,7 @@ describe('StudentController', () => {
 
    it('search by kana',async () => {
       const data = await controller.searchStudentByKana("テスト2")
-      await expect(data).toEqual(singleRecord)
+      await expect(data).toEqual(studentArray)
    })
 
    it('update Student', async () => {

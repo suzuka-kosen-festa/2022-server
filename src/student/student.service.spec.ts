@@ -76,7 +76,7 @@ describe('StudentService', () => {
    });
 
    it("searchByKana" ,async () => {
-      const data = await service.seatchByKana({
+      const data = await service.searchByKana({
          kana : 'テスト1'
       })
 

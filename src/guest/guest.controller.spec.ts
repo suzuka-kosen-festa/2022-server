@@ -23,6 +23,7 @@ describe('GuestController', () => {
                   getAllGuests: jest.fn().mockImplementation(() => guestArray),
                   checkGuestExist: jest.fn().mockImplementation((uuid: string) => Promise.resolve(singleRecord)),
                   deleteGuest: jest.fn().mockResolvedValue(singleRecord),
+                  searchByName: jest.fn().mockResolvedValue(guestArray)
                },
             },
          ],

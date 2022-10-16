@@ -46,6 +46,7 @@ describe('JhsController', () => {
                      .mockImplementation((data: Prisma.StudentUpdateInput) => Promise.resolve(singleRecordwithParents)),
                   getAllJhs: jest.fn().mockResolvedValue(jhsArray),
                   deleteJhs: jest.fn().mockResolvedValue(singleRecord),
+                  searchByName: jest.fn().mockResolvedValue(jhsArray)
                },
             },
          ],

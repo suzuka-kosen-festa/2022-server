@@ -29,6 +29,7 @@ describe('ObController', () => {
                      .mockImplementation((uuid: Prisma.OBWhereUniqueInput) => Promise.resolve(singleRecord)),
                   getAllOb: jest.fn().mockResolvedValue(obArray),
                   deleteOb: jest.fn().mockResolvedValue(singleRecord),
+                  searchByName: jest.fn().mockResolvedValue(obArray)
                },
             },
          ],
