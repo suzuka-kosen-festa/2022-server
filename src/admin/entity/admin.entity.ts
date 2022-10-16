@@ -11,7 +11,7 @@ export class ExportStudentGuestEntity {
   @ApiProperty()
   email : string
   @ApiProperty()
-  guest : Array<ExportGuestEntity>
+  guest : Array<ExportGuestEntity> | []
 }
 
 export class ExportJhsGuestEntity {
@@ -20,7 +20,7 @@ export class ExportJhsGuestEntity {
   @ApiProperty()
   jhsId : string
   @ApiProperty()
-  parents : Array<ExportGuestEntity>
+  parents : Array<ExportGuestEntity> | []
 }
 
 export class ExportObEntity {
@@ -34,6 +34,6 @@ export class ExportSponsorEntity {
   @ApiProperty()
   email : string
   @ApiProperty()
-  sponosrid : string
+  sponsorid : string
 }
 

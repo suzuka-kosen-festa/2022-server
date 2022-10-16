@@ -416,6 +416,7 @@ describe('App (e2e)', () => {
             {
                email: 'test@example.com',
                jhsId: 'J' + jhsResData.body.jhsId,
+               name: jhsResData.body.name,
                parents: [
                   {
                      guestId: 'G' + guestResData.body.parents[0].guestId,

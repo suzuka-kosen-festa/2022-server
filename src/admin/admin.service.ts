@@ -5,6 +5,7 @@ import { JhsService } from '../jhs/jhs.service';
 import { ObService } from '../ob/ob.service';
 import { SponsorService } from '../sponsor/sponsor.service';
 import { StudentService } from '../student/student.service';
+import { ExportJhsGuest, ExportOb, ExportSponsor, ExportStudentGuest } from './types/types';
 
 @Injectable()
 export class AdminService {
@@ -16,7 +17,7 @@ export class AdminService {
       private readonly sponsorService: SponsorService,
    ) {}
 
-   async exportStudentGuestUuid() {
+   async exportStudentGuestUuid() : Promise<ExportStudentGuest[]>{
       const studentData = await this.studentService.getAllStudents();
       return studentData.map((data) => {
          return {
@@ -29,12 +30,13 @@ export class AdminService {
       });
    }
 
-   async exportJhsGuestUuid() {
+   async exportJhsGuestUuid() : Promise<ExportJhsGuest[]> {
       const jhsData = await this.jhsService.getAllJhs();
       return jhsData.map((data) => {
          return {
             email: data.email,
             jhsId: 'J' + data.jhsId,
+            name : data.name,
             parents: data.parents.map((guestData) => ({
                name: guestData.name,
                guestId: 'G' + guestData.guestId,
@@ -43,7 +45,7 @@ export class AdminService {
       });
    }
 
-   async exportObUuid() {
+   async exportObUuid() : Promise<ExportOb[]>{
       const obList = await this.obService.getAllOb();
       return obList.map((data) => {
          return {
@@ -53,7 +55,7 @@ export class AdminService {
       });
    }
 
-   async exportSponsorUuid() {
+   async exportSponsorUuid() : Promise<ExportSponsor[]>{
       const sponsorList = await this.sponsorService.getAllSponsor();
       return sponsorList.map((data) => {
          return {
