@@ -28,6 +28,12 @@ export class SponsorService {
       });
    }
 
+   async searchByName(name : Prisma.SponsorWhereInput) : Promise<Sponsor[] | null> {
+      return this.prisma.sponsor.findMany({
+         where : name
+      })
+   }
+
    async getAllHistory(): Promise<Sponsor[]> {
       return this.prisma.sponsor.findMany({
          include: {

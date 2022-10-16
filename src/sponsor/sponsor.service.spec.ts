@@ -61,6 +61,11 @@ describe('SponsorService', () => {
       expect(obRecord).toStrictEqual(singleRecord);
    });
 
+   it('searchByName', async () =>{
+      const data = await service.searchByName({name:"てすと1"})
+      expect(data).toEqual(sponsorArray)
+   })
+
    it('deleteSponsor', async () => {
       const result = await service.deleteSponsor({ sponsorId: 'uuid1' });
 
