@@ -38,6 +38,7 @@ describe('StudentController', () => {
                      .fn()
                      .mockImplementation((data: Prisma.StudentCreateInput) => Promise.resolve(data)),
                   checkStudentExist: jest.fn().mockImplementation((uuid: string) => Promise.resolve(singleRecord)),
+                  seatchStudentByKana : jest.fn().mockResolvedValue(singleRecord),
                   updateStudent: jest
                      .fn()
                      .mockImplementation((data: Prisma.StudentUpdateInput) => Promise.resolve(singleRecordwithGuest)),
@@ -64,6 +65,11 @@ describe('StudentController', () => {
       const data = await controller.checkUuid('uuid1');
       await expect(data).toEqual(singleRecord);
    });
+
+   it('search by kana',async () => {
+      const data = await controller.searchStudentByKana("テスト2")
+      await expect(data).toEqual(singleRecord)
+   })
 
    it('update Student', async () => {
       const data = await controller.update({

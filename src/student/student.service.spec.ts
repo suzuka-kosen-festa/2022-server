@@ -75,6 +75,14 @@ describe('StudentService', () => {
       expect(singleStudent).toEqual(singleRecord);
    });
 
+   it("searchByKana" ,async () => {
+      const data = await service.seatchByKana({
+         kana : 'テスト1'
+      })
+
+      expect(data).toEqual(studentArray)
+   })
+
    it('updateStudent', async () => {
       const guestData = {
          sex: '男',
