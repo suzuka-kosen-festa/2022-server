@@ -19,11 +19,11 @@ export class StudentController {
       return this.studentService.getAllStudents();
    }
 
-   @Get(":kana")
-   @ApiOperation({ summary: "かな検索"})
-   @ApiOkResponse({ type: StudentwithGuestEntity , isArray: true , description: '存在しない場合はnullを返す' })
-   async searchStudentByKana(@Param("kana") kana: string) : Promise<Student[] | null>{
-      return this.studentService.searchByKana({kana})
+   @Get(':kana')
+   @ApiOperation({ summary: 'かな検索' })
+   @ApiOkResponse({ type: StudentwithGuestEntity, isArray: true, description: '存在しない場合はnullを返す' })
+   async searchStudentByKana(@Param('kana') kana: string): Promise<Student[] | null> {
+      return this.studentService.searchByKana({ kana });
    }
 
    @Get('check/:uuid')
