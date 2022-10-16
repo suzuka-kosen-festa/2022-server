@@ -60,10 +60,10 @@ describe('SponsorController', () => {
       expect(testRecord).toStrictEqual(singleRecord);
    });
 
-   it("searchSpoonsorByName", async () =>{
-      const data = await controller.searchSpoonsorByName("てすと1")
-      expect(data).toEqual(sponsorArray)
-   })
+   it('searchSpoonsorByName', async () => {
+      const data = await controller.searchSpoonsorByName('てすと1');
+      expect(data).toEqual(sponsorArray);
+   });
 
    it('delete', async () => {
       const result = await controller.delete('uuid1');

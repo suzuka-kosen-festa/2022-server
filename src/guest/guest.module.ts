@@ -5,6 +5,6 @@ import { GuestService } from './guest.service';
 @Module({
    controllers: [GuestController],
    providers: [GuestService],
-   exports : [ GuestService ]
+   exports: [GuestService],
 })
 export class GuestModule {}

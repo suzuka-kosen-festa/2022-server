@@ -9,11 +9,11 @@ export class AllHistoryEntity {
    @ApiProperty()
    timeStamp: string;
    @ApiProperty()
-   guestId : string
+   guestId: string;
    @ApiProperty()
-   sponsorId: string
+   sponsorId: string;
    @ApiProperty()
-   jhsId : string
+   jhsId: string;
    @ApiProperty()
-   obId : string
+   obId: string;
 }

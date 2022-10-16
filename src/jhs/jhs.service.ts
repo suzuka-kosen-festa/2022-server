@@ -32,13 +32,13 @@ export class JhsService {
       });
    }
 
-   async searchByName (name : Prisma.JHStudentWhereInput) : Promise<JHStudent[] | null>{
+   async searchByName(name: Prisma.JHStudentWhereInput): Promise<JHStudent[] | null> {
       return this.prisma.jHStudent.findMany({
-         where : name,
-         include:{
-            parents : true
-         }
-      })
+         where: name,
+         include: {
+            parents: true,
+         },
+      });
    }
 
    async getAllHistory(): Promise<JHStudent[]> {

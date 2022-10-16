@@ -80,8 +80,8 @@ describe('StudentService', () => {
          kana : 'テスト1'
       })
 
-      expect(data).toEqual(studentArray)
-   })
+      expect(data).toEqual(studentArray);
+   });
 
    it('updateStudent', async () => {
       const guestData = {

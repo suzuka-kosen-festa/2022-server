@@ -1,39 +1,38 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
-class ExportGuestEntity{
-  @ApiProperty()
-  name: string
-  @ApiProperty()
-  guestId : string
+class ExportGuestEntity {
+   @ApiProperty()
+   name: string;
+   @ApiProperty()
+   guestId: string;
 }
 
 export class ExportStudentGuestEntity {
-  @ApiProperty()
-  email : string
-  @ApiProperty()
-  guest : Array<ExportGuestEntity> | []
+   @ApiProperty()
+   email: string;
+   @ApiProperty()
+   guest: Array<ExportGuestEntity> | [];
 }
 
 export class ExportJhsGuestEntity {
-  @ApiProperty()
-  email : string
-  @ApiProperty()
-  jhsId : string
-  @ApiProperty()
-  parents : Array<ExportGuestEntity> | []
+   @ApiProperty()
+   email: string;
+   @ApiProperty()
+   jhsId: string;
+   @ApiProperty()
+   parents: Array<ExportGuestEntity> | [];
 }
 
 export class ExportObEntity {
-  @ApiProperty()
-  email : string
-  @ApiProperty()
-  obId : string
+   @ApiProperty()
+   email: string;
+   @ApiProperty()
+   obId: string;
 }
 
 export class ExportSponsorEntity {
-  @ApiProperty()
-  email : string
-  @ApiProperty()
-  sponsorid : string
+   @ApiProperty()
+   email: string;
+   @ApiProperty()
+   sponsorid: string;
 }
-

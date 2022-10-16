@@ -32,13 +32,12 @@ export class SponsorController {
       return this.service.checkSponsorExist({ sponsorId: uuid });
    }
 
-   @Get(":name")
-   @ApiOperation({ summary : "スポンサーを名前で検索"})
-   @ApiOkResponse({type : SponsorEntity, isArray : true})
-   async searchSpoonsorByName(@Param("name") name : string) : Promise<Sponsor[] | null>{
-      return this.service.searchByName({name: name})
+   @Get(':name')
+   @ApiOperation({ summary: 'スポンサーを名前で検索' })
+   @ApiOkResponse({ type: SponsorEntity, isArray: true })
+   async searchSpoonsorByName(@Param('name') name: string): Promise<Sponsor[] | null> {
+      return this.service.searchByName({ name: name });
    }
-
 
    @Post()
    @ApiOperation({ summary: 'Sponsorレコードの生成' })

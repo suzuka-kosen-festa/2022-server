@@ -50,10 +50,10 @@ describe('ObService', () => {
       expect(obData).toStrictEqual(obArray);
    });
 
-   it("searchByName", async () => {
-      const data = await service.searchByName({name : "てすと"})
-      expect(data).toEqual(obArray)
-   })
+   it('searchByName', async () => {
+      const data = await service.searchByName({ name: 'てすと' });
+      expect(data).toEqual(obArray);
+   });
 
    it('checkObExist', async () => {
       const obRecord = await service.checkObExist({ obId: 'uuid1' });
