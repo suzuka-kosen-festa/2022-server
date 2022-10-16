@@ -21,13 +21,13 @@ export class StudentService {
       });
    }
 
-   async seatchByKana(kana : Prisma.StudentWhereInput) : Promise<Student[] | null> {
+   async seatchByKana(kana: Prisma.StudentWhereInput): Promise<Student[] | null> {
       return this.prisma.student.findMany({
-         where : kana,
+         where: kana,
          include: {
-            Guest : true
-         }
-      })
+            Guest: true,
+         },
+      });
    }
 
    // Studentテーブルの全レコードを返す

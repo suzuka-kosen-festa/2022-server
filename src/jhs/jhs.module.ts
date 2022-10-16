@@ -5,6 +5,6 @@ import { JhsService } from './jhs.service';
 @Module({
    providers: [JhsService],
    controllers: [JhsController],
-   exports: [JhsService]
+   exports: [JhsService],
 })
 export class JhsModule {}

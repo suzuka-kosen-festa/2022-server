@@ -75,13 +75,13 @@ describe('StudentService', () => {
       expect(singleStudent).toEqual(singleRecord);
    });
 
-   it("searchByKana" ,async () => {
+   it('searchByKana', async () => {
       const data = await service.seatchByKana({
-         kana : 'テスト1'
-      })
+         kana: 'テスト1',
+      });
 
-      expect(data).toEqual(studentArray)
-   })
+      expect(data).toEqual(studentArray);
+   });
 
    it('updateStudent', async () => {
       const guestData = {

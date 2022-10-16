@@ -31,11 +31,11 @@ export class ObController {
       return this.service.checkObExist({ obId: uuid });
    }
 
-   @Get(":name")
-   @ApiOperation({ summary : "OBを名前で検索"})
-   @ApiOkResponse({ type : ObEntity, description: '存在しない場合はnullを返す'})
-   async searchObByName(@Param("name") name : string) : Promise<OB[]| null>{
-      return this.service.searchByName({name})
+   @Get(':name')
+   @ApiOperation({ summary: 'OBを名前で検索' })
+   @ApiOkResponse({ type: ObEntity, description: '存在しない場合はnullを返す' })
+   async searchObByName(@Param('name') name: string): Promise<OB[] | null> {
+      return this.service.searchByName({ name });
    }
 
    @Post()

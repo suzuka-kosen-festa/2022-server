@@ -10,7 +10,7 @@ export class HistoryController {
    constructor(private readonly service: HistoryService) {}
 
    @Get()
-   @ApiOperation({ summary : "全テーブルのHistoryを返す"})
+   @ApiOperation({ summary: '全テーブルのHistoryを返す' })
    @ApiOkResponse({ type: AllHistoryEntity })
    async getAllHistory(): Promise<History[]> {
       return this.service.getAll();
