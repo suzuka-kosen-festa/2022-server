@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { GuestEntity } from '../../guest/entity/guest.entity';
+import { HistoryEntity } from '../../history/entity/history.entity';
 
-//TODO:Parents型の追加
 export class JhsEntity {
    @ApiProperty()
    jhsId: string;
@@ -14,5 +14,18 @@ export class JhsEntity {
 }
 export class JhswithParentEntity extends JhsEntity {
    @ApiProperty()
-   guest: GuestEntity;
+   parents: ReadonlyArray<GuestEntity>;
+}
+
+export class JhsWithHistoryEntity {
+   @ApiProperty()
+   jhsId: string;
+   @ApiProperty()
+   name: string;
+   @ApiProperty()
+   age: string;
+   @ApiProperty()
+   email: string;
+   @ApiProperty()
+   History: ReadonlyArray<HistoryEntity>;
 }

@@ -46,6 +46,7 @@ describe('JhsController', () => {
                      .mockImplementation((data: Prisma.StudentUpdateInput) => Promise.resolve(singleRecordwithParents)),
                   getAllJhs: jest.fn().mockResolvedValue(jhsArray),
                   deleteJhs: jest.fn().mockResolvedValue(singleRecord),
+                  searchByName: jest.fn().mockResolvedValue(jhsArray),
                },
             },
          ],
@@ -79,6 +80,11 @@ describe('JhsController', () => {
          jobs: '保護者',
       });
       await expect(data).toEqual(singleRecordwithParents);
+   });
+
+   it('searchJhsByName', async () => {
+      const data = await controller.searchJhsByName('てすと１');
+      expect(data).toEqual(jhsArray);
    });
 
    it('delete student', async () => {

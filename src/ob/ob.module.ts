@@ -5,5 +5,6 @@ import { ObService } from './ob.service';
 @Module({
    controllers: [ObController],
    providers: [ObService],
+   exports: [ObService],
 })
 export class ObModule {}

@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Sponsor } from '@prisma/client';
 import { createSponsorDto } from './dto/sponsor.dto';
-import { SponsorEntity } from './entity/sponsor.entity';
+import { SponsorEntity, SponsorWithHistoryEntity } from './entity/sponsor.entity';
 import { SponsorService } from './sponsor.service';
 
 @ApiTags('sponsor')
@@ -18,11 +18,25 @@ export class SponsorController {
       return this.service.getAllSponsor();
    }
 
+   @Get('history')
+   @ApiOperation({ summary: 'Sponsorの入場履歴を返す' })
+   @ApiOkResponse({ type: SponsorWithHistoryEntity, isArray: true })
+   async getAllSponsorHistory(): Promise<Sponsor[]> {
+      return this.service.getAllHistory();
+   }
+
    @Get('check/:uuid')
    @ApiOperation({ summary: 'uuidの照合' })
-   @ApiOkResponse({ type: SponsorEntity, description: '存在しない場合はnullを返す' })
+   @ApiOkResponse({ type: SponsorWithHistoryEntity, description: '存在しない場合はnullを返す' })
    async checkUuid(@Param('uuid') uuid: string): Promise<Sponsor | null> {
       return this.service.checkSponsorExist({ sponsorId: uuid });
+   }
+
+   @Get(':name')
+   @ApiOperation({ summary: 'スポンサーを名前で検索' })
+   @ApiOkResponse({ type: SponsorEntity, isArray: true })
+   async searchSpoonsorByName(@Param('name') name: string): Promise<Sponsor[] | null> {
+      return this.service.searchByName({ name: name });
    }
 
    @Post()

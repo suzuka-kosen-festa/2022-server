@@ -17,6 +17,7 @@ const db = {
       findMany: jest.fn().mockResolvedValue(obArray),
       findUnique: jest.fn().mockResolvedValue(singleRecord),
       create: jest.fn().mockResolvedValue(singleRecord),
+      update: jest.fn().mockResolvedValue(singleRecord),
    },
 };
 
@@ -47,6 +48,11 @@ describe('ObService', () => {
    it('getAllOb', async () => {
       const obData = await service.getAllOb();
       expect(obData).toStrictEqual(obArray);
+   });
+
+   it('searchByName', async () => {
+      const data = await service.searchByName({ name: 'てすと' });
+      expect(data).toEqual(obArray);
    });
 
    it('checkObExist', async () => {

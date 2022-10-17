@@ -82,6 +82,12 @@ describe('jhsService', () => {
       expect(singleStudent).toEqual(singleRecord);
    });
 
+   it('searchByName', async () => {
+      const data = await service.searchByName({ name: 'てすと１' });
+
+      expect(data).toEqual(jhsArray);
+   });
+
    it('updateJhs', async () => {
       const guestData = {
          name: 'てすと親',

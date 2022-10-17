@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { HistoryEntity } from '../../history/entity/history.entity';
 
 export class ObEntity {
    @ApiProperty()
@@ -8,5 +9,18 @@ export class ObEntity {
    @ApiProperty()
    name: string;
    @ApiProperty()
-   age: number;
+   age: string;
+}
+
+export class ObWithHistoryEntity {
+   @ApiProperty()
+   obId: string;
+   @ApiProperty()
+   email: string;
+   @ApiProperty()
+   name: string;
+   @ApiProperty()
+   age: string;
+   @ApiProperty()
+   History: ReadonlyArray<HistoryEntity>;
 }

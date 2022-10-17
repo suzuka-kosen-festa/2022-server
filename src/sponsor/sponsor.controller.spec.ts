@@ -30,6 +30,7 @@ describe('SponsorController', () => {
                      .mockImplementation((uuid: Prisma.OBWhereUniqueInput) => Promise.resolve(singleRecord)),
                   getAllSponsor: jest.fn().mockResolvedValue(sponsorArray),
                   deleteSponsor: jest.fn().mockResolvedValue(singleRecord),
+                  searchByName: jest.fn().mockResolvedValue(sponsorArray),
                },
             },
          ],
@@ -57,6 +58,11 @@ describe('SponsorController', () => {
    it('check record exist', async () => {
       const testRecord = await controller.checkUuid('uuid1');
       expect(testRecord).toStrictEqual(singleRecord);
+   });
+
+   it('searchSpoonsorByName', async () => {
+      const data = await controller.searchSpoonsorByName('てすと1');
+      expect(data).toEqual(sponsorArray);
    });
 
    it('delete', async () => {

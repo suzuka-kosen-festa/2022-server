@@ -10,13 +10,53 @@ export class ObService {
       return this.prisma.oB.findMany();
    }
 
+   async getAllHistory(): Promise<OB[]> {
+      return this.prisma.oB.findMany({
+         include: {
+            History: {
+               select: {
+                  timeStamp: true,
+               },
+            },
+         },
+      });
+   }
+
+   async searchByName(name: Prisma.OBWhereInput): Promise<OB[] | null> {
+      return this.prisma.oB.findMany({
+         where: name,
+      });
+   }
+
+   async updateTimeStamp(where: Prisma.OBWhereUniqueInput): Promise<OB> {
+      return this.prisma.oB.update({
+         data: {
+            History: {
+               create: {},
+            },
+         },
+         where: where,
+         include: {
+            History: true,
+         },
+      });
+   }
+
    async createOb(data: Prisma.OBCreateInput): Promise<OB> {
       return this.prisma.oB.create({ data });
    }
 
    async checkObExist(uuid: Prisma.OBWhereUniqueInput): Promise<OB | null> {
+      await this.updateTimeStamp(uuid);
       return this.prisma.oB.findUnique({
          where: uuid,
+         include: {
+            History: {
+               select: {
+                  timeStamp: true,
+               },
+            },
+         },
       });
    }
 

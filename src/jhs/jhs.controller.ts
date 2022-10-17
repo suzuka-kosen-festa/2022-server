@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JHStudent } from '@prisma/client';
 import { createJhsStudentDto, updateJhsStudentDto } from './dto/jhs.dto';
-import { JhsEntity, JhswithParentEntity } from './entity/jhs.entiry';
+import { JhsEntity, JhsWithHistoryEntity, JhswithParentEntity } from './entity/jhs.entiry';
 import { JhsService } from './jhs.service';
 
 @ApiTags('jhs')
@@ -18,11 +18,25 @@ export class JhsController {
       return this.service.getAllJhs();
    }
 
+   @Get('/history')
+   @ApiOperation({ summary: '中学生の入場履歴を返す' })
+   @ApiOkResponse({ type: JhsWithHistoryEntity, isArray: true })
+   async getAllSponsorHistory(): Promise<JHStudent[]> {
+      return this.service.getAllHistory();
+   }
+
    @Get('check/:id')
    @ApiOperation({ summary: '中学生のuuid照合' })
-   @ApiOkResponse({ type: JhsEntity, description: '存在しない場合はnullを返す' })
+   @ApiOkResponse({ type: JhsWithHistoryEntity, description: '存在しない場合はnullを返す' })
    async checkUuid(@Param('id') uuid: string): Promise<JHStudent | null> {
       return this.service.checkJhsExist({ jhsId: uuid });
+   }
+
+   @Get(':name')
+   @ApiOperation({ summary: '中学生を名前で検索' })
+   @ApiOkResponse({ type: JhsEntity, isArray: true })
+   async searchJhsByName(@Param('name') name: string): Promise<JHStudent[] | null> {
+      return this.service.searchByName({ name: name });
    }
 
    @Post()

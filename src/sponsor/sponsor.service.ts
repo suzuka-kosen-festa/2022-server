@@ -15,10 +15,52 @@ export class SponsorService {
    }
 
    async checkSponsorExist(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor | null> {
-      return this.prisma.sponsor.findUnique({ where: where });
+      await this.updateTimeStamp(where);
+      return this.prisma.sponsor.findUnique({
+         where: where,
+         include: {
+            History: {
+               select: {
+                  timeStamp: true,
+               },
+            },
+         },
+      });
    }
 
-   async deleteSponsor(wehere: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {
-      return this.prisma.sponsor.delete({ where: wehere });
+   async searchByName(name: Prisma.SponsorWhereInput): Promise<Sponsor[] | null> {
+      return this.prisma.sponsor.findMany({
+         where: name,
+      });
+   }
+
+   async getAllHistory(): Promise<Sponsor[]> {
+      return this.prisma.sponsor.findMany({
+         include: {
+            History: {
+               select: {
+                  timeStamp: true,
+               },
+            },
+         },
+      });
+   }
+
+   async updateTimeStamp(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {
+      return this.prisma.sponsor.update({
+         data: {
+            History: {
+               create: {},
+            },
+         },
+         where: where,
+         include: {
+            History: true,
+         },
+      });
+   }
+
+   async deleteSponsor(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {
+      return this.prisma.sponsor.delete({ where: where });
    }
 }

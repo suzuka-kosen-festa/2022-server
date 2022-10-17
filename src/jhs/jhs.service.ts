@@ -1,12 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { JHStudent, Prisma } from '@prisma/client';
+import { Guest, JHStudent, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class JhsService {
    constructor(private readonly prisma: PrismaService) {}
 
-   async getAllJhs(): Promise<JHStudent[]> {
+   async getAllJhs(): Promise<
+      (JHStudent & {
+         parents: Guest[];
+      })[]
+   > {
       return this.prisma.jHStudent.findMany({
          include: {
             parents: true,
@@ -15,8 +19,51 @@ export class JhsService {
    }
 
    async checkJhsExist(uuid: Prisma.JHStudentWhereUniqueInput): Promise<JHStudent | null> {
+      await this.updateTimeStamp(uuid);
       return this.prisma.jHStudent.findUnique({
          where: uuid,
+         include: {
+            History: {
+               select: {
+                  timeStamp: true,
+               },
+            },
+         },
+      });
+   }
+
+   async searchByName(name: Prisma.JHStudentWhereInput): Promise<JHStudent[] | null> {
+      return this.prisma.jHStudent.findMany({
+         where: name,
+         include: {
+            parents: true,
+         },
+      });
+   }
+
+   async getAllHistory(): Promise<JHStudent[]> {
+      return this.prisma.jHStudent.findMany({
+         include: {
+            History: {
+               select: {
+                  timeStamp: true,
+               },
+            },
+         },
+      });
+   }
+
+   async updateTimeStamp(where: Prisma.JHStudentWhereUniqueInput): Promise<JHStudent> {
+      return this.prisma.jHStudent.update({
+         data: {
+            History: {
+               create: {},
+            },
+         },
+         where: where,
+         include: {
+            History: true,
+         },
       });
    }
 

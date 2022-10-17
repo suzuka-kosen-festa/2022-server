@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, Student } from '@prisma/client';
+import { Guest, Prisma, Student } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -20,8 +20,18 @@ export class StudentService {
          where: uuid,
       });
    }
+
+   async searchByKana(kana: Prisma.StudentWhereInput): Promise<Student[] | null> {
+      return this.prisma.student.findMany({
+         where: kana,
+         include: {
+            Guest: true,
+         },
+      });
+   }
+
    // Studentテーブルの全レコードを返す
-   async getAllStudents(): Promise<Student[]> {
+   async getAllStudents(): Promise<(Student & { Guest?: Guest[] })[]> {
       return this.prisma.student.findMany({
          include: {
             Guest: true,
