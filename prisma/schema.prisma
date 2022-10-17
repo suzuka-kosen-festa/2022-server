@@ -61,7 +61,7 @@ model OB {
 
 model History {
   id        Int        @id @default(autoincrement())
-  timeStamp DateTime   @default(now())
+  timeStamp DateTime   @default(now()) @db.Timestamptz(3)
   Guest     Guest?     @relation(fields: [guestId], references: [guestId])
   guestId   String?
   Sponsor   Sponsor?   @relation(fields: [sponsorId], references: [sponsorId])
@@ -79,4 +79,21 @@ model History {
 model SponsorCompany {
   id   Int    @id @default(autoincrement())
   name String
+}
+
+enum LivaStage {
+  main
+  sub
+  live
+  game
+}
+
+model LiveEvent {
+  id           Int       @id @default(autoincrement())
+  descriptions String
+  date         String
+  venue        String
+  start_time   String
+  end_time     String
+  stage        LivaStage
 }
