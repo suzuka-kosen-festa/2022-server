@@ -11,7 +11,7 @@ export class ExportStudentGuestEntity {
    @ApiProperty()
    email: string;
    @ApiProperty()
-   guest: Array<ExportGuestEntity> | [];
+   guest: ReadonlyArray<ExportGuestEntity> | [];
 }
 
 export class ExportJhsGuestEntity {
@@ -20,7 +20,7 @@ export class ExportJhsGuestEntity {
    @ApiProperty()
    jhsId: string;
    @ApiProperty()
-   parents: Array<ExportGuestEntity> | [];
+   parents: ReadonlyArray<ExportGuestEntity> | [];
 }
 
 export class ExportObEntity {

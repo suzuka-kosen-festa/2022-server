@@ -14,7 +14,7 @@ export class JhsEntity {
 }
 export class JhswithParentEntity extends JhsEntity {
    @ApiProperty()
-   parents: GuestEntity;
+   parents: ReadonlyArray<GuestEntity>;
 }
 
 export class JhsWithHistoryEntity {
@@ -27,5 +27,5 @@ export class JhsWithHistoryEntity {
    @ApiProperty()
    email: string;
    @ApiProperty()
-   History: HistoryEntity;
+   History: ReadonlyArray<HistoryEntity>;
 }
