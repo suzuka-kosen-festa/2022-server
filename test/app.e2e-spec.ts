@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
-import { Prisma } from '@prisma/client';
+import { Prisma, SponsorCompany } from '@prisma/client';
 import * as request from 'supertest';
 import { JhsTestRecord, StudentTestRecord, ObTestRecord, SponsorTestRecord } from './types';
 
@@ -513,6 +513,65 @@ describe('App (e2e)', () => {
          expect(res).toEqual(expectData);
 
          await request(app.getHttpServer()).delete(`/sponsor/${sponsorResData.body.sponsorId}`);
+      });
+   });
+
+   /**
+    *
+    *
+    *  HP用APIE2Eテスト
+    *
+    *
+    */
+
+   describe('SponsorCompany Module (e2e)', () => {
+      let result: SponsorCompany[];
+
+      it('create record and get it', async () => {
+         const data: Prisma.SponsorCompanyCreateInput = {
+            name: '会社名1',
+         };
+
+         const res = await request(app.getHttpServer()).post('/sponsorcompany').send(data);
+
+         result = [
+            {
+               id: res.body.id,
+               name: data.name,
+            },
+         ];
+
+         const allRecord = await request(app.getHttpServer()).get('/sponsorcompany');
+         expect(allRecord.body).toEqual(result);
+      });
+
+      it('getById', async () => {
+         const res = await request(app.getHttpServer()).get(`/sponsorcompany/${result[0].id}`);
+
+         expect(res.body).toEqual(result[0]);
+      });
+
+      it('update', async () => {
+         const data: Prisma.SponsorCompanyUpdateInput = {
+            name: '会社名2',
+         };
+
+         const res = await request(app.getHttpServer()).put(`/sponsorcompany/${result[0].id}`).send(data);
+
+         const expectedResult = {
+            id: result[0].id,
+            name: data.name,
+         };
+
+         expect(res.body).toEqual(expectedResult);
+      });
+
+      it('delete', async () => {
+         await request(app.getHttpServer()).delete(`/sponsorcompany/${result[0].id}`);
+
+         const res = await request(app.getHttpServer()).get('/sponsorcompany');
+
+         expect(res.body).toEqual([]);
       });
    });
 });

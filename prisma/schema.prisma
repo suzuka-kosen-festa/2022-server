@@ -71,3 +71,12 @@ model History {
   OB        OB?        @relation(fields: [obId], references: [obId])
   obId      String?
 }
+
+//
+// HP用DBテーブル郡
+//
+
+model SponsorCompany {
+  id   Int    @id @default(autoincrement())
+  name String
+}
