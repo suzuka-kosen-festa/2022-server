@@ -9,7 +9,7 @@ import { StudentModule } from './student/student.module';
 import { AdminModule } from './admin/admin.module';
 import { HistoryModule } from './history/history.module';
 import { SponsorcompanyModule } from './sponsorcompany/sponsorcompany.module';
-import { EventModule } from './event/event.module';
+import { LiveeventModule } from './liveevent/liveevent.module';
 
 @Module({
    imports: [
@@ -23,7 +23,7 @@ import { EventModule } from './event/event.module';
       AdminModule,
       HistoryModule,
       SponsorcompanyModule,
-      EventModule,
-   ],
+      LiveeventModule,
+   ]
 })
 export class AppModule {}
