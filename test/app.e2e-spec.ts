@@ -517,60 +517,61 @@ describe('App (e2e)', () => {
    });
 
    /**
-    * 
-    * 
+    *
+    *
     *  HP用APIE2Eテスト
-    * 
-    * 
+    *
+    *
     */
 
-   describe("SponsorCompany Module (e2e)", () =>{
-      let result : SponsorCompany[]
+   describe('SponsorCompany Module (e2e)', () => {
+      let result: SponsorCompany[];
 
-      it("create record and get it", async () =>{
-         const data : Prisma.SponsorCompanyCreateInput = {
-            name : '会社名1'
-         }
+      it('create record and get it', async () => {
+         const data: Prisma.SponsorCompanyCreateInput = {
+            name: '会社名1',
+         };
 
-         const res = await request(app.getHttpServer()).post("/sponsorcompany").send(data)
-         
-         result=[{ 
-            id : res.body.id,
-            name: data.name
-         }]
+         const res = await request(app.getHttpServer()).post('/sponsorcompany').send(data);
 
-         const allRecord = await request(app.getHttpServer()).get("/sponsorcompany")
-         expect(allRecord.body).toEqual(result)
-      })
+         result = [
+            {
+               id: res.body.id,
+               name: data.name,
+            },
+         ];
 
-      it("getById", async () =>{
-         const res = await request(app.getHttpServer()).get(`/sponsorcompany/${result[0].id}`)
+         const allRecord = await request(app.getHttpServer()).get('/sponsorcompany');
+         expect(allRecord.body).toEqual(result);
+      });
 
-         expect(res.body).toEqual(result[0])
-      })
+      it('getById', async () => {
+         const res = await request(app.getHttpServer()).get(`/sponsorcompany/${result[0].id}`);
 
-      it("update", async () =>{
-         const data : Prisma.SponsorCompanyUpdateInput = {
-            name: "会社名2"
-         }
+         expect(res.body).toEqual(result[0]);
+      });
 
-         const res = await request(app.getHttpServer()).put(`/sponsorcompany/${result[0].id}`).send(data)
+      it('update', async () => {
+         const data: Prisma.SponsorCompanyUpdateInput = {
+            name: '会社名2',
+         };
+
+         const res = await request(app.getHttpServer()).put(`/sponsorcompany/${result[0].id}`).send(data);
 
          const expectedResult = {
-            id : result[0].id,
-            name : data.name
-         }
+            id: result[0].id,
+            name: data.name,
+         };
 
-         expect(res.body).toEqual(expectedResult)
-      })
+         expect(res.body).toEqual(expectedResult);
+      });
 
-      it("delete", async () => {
-         await request(app.getHttpServer()).delete(`/sponsorcompany/${result[0].id}`)
+      it('delete', async () => {
+         await request(app.getHttpServer()).delete(`/sponsorcompany/${result[0].id}`);
 
-         const res = await request(app.getHttpServer()).get("/sponsorcompany")
+         const res = await request(app.getHttpServer()).get('/sponsorcompany');
 
-         expect(res.body).toEqual([])
-      
-      })
-   })
+         expect(res.body).toEqual([]);
+      });
+   });
 });

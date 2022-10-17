@@ -1,11 +1,11 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateSponsorComDto {
-  @ApiProperty()
-  name : string
+   @ApiProperty()
+   name: string;
 }
 
 export class UpdateSponsorComDto {
-  @ApiProperty()
-  name : string
+   @ApiProperty()
+   name: string;
 }

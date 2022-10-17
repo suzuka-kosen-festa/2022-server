@@ -54,7 +54,7 @@ export class StudentController {
          data: {
             Guest: {
                create: {
-                  ...rest
+                  ...rest,
                },
             },
          },
