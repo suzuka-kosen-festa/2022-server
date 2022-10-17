@@ -5,7 +5,7 @@ import { JhsService } from '../jhs/jhs.service';
 import { ObService } from '../ob/ob.service';
 import { SponsorService } from '../sponsor/sponsor.service';
 import { StudentService } from '../student/student.service';
-import { ExportJhsGuest, ExportOb, ExportSponsor, ExportStudentGuest } from './types/types';
+import { ExportJhsGuest, ExportOb, ExportSponsor, ExportStudentGuest } from './types';
 
 @Injectable()
 export class AdminService {
