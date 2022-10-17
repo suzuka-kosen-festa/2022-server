@@ -65,7 +65,7 @@ export class AdminService {
       });
    }
 
-   async parseUuid(reqUuid: string): Promise<Student | OB | Guest | JHStudent | Sponsor> {
+   async parseUuid(reqUuid: string): Promise<Student | OB | Guest | JHStudent | Sponsor | null> {
       const [type, ...id] = reqUuid;
       const uuid = reqUuid.slice(1);
 
