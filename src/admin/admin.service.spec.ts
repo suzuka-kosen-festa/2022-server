@@ -21,7 +21,7 @@ const sponsorData = { sponsorId: 'uuid1', name: 'てすと1', email: 'test1@exam
 describe('AdminService', () => {
    let service: AdminService;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          providers: [
             {
