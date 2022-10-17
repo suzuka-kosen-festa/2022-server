@@ -10,7 +10,7 @@ export class SponsorcompanyService {
     return this.prisma.sponsorCompany.findMany()
   }
 
-  async getById(where : Prisma.SponsorCompanyWhereUniqueInput) : Promise<SponsorCompany>{
+  async getById(where : Prisma.SponsorCompanyWhereUniqueInput) : Promise<SponsorCompany | null>{
     return this.prisma.sponsorCompany.findUnique({
       where
     })
