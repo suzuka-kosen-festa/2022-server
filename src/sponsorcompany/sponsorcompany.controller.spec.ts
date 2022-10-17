@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SponsorService } from '../sponsor/sponsor.service';
 import { SponsorcompanyController } from './sponsorcompany.controller';
+import { SponsorcompanyService } from './sponsorcompany.service';
 
 
 const sponsorComArray =[
@@ -18,7 +18,7 @@ describe('SponsorcompanyController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [SponsorcompanyController],
       providers: [{
-        provide: SponsorService,
+        provide: SponsorcompanyService,
         useValue:{
           getAll: jest.fn().mockResolvedValue(sponsorComArray),
           getById: jest.fn().mockResolvedValue(singleRecord),
