@@ -21,7 +21,7 @@ export class SponsorcompanyController {
   @Get(":id")
   @ApiOperation({ summary : "id指定で取得" })
   @ApiOkResponse({ type : SponsorComEntity })
-  async getSponsorCom(@Param("id") id : number) : Promise<SponsorCompany | null> {
+  async getSponsorCom(@Param("id") id : string) : Promise<SponsorCompany | null> {
     return this.service.getById({id : Number(id) })
   }
 
