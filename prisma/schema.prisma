@@ -90,6 +90,7 @@ enum LivaStage {
 
 model LiveEvent {
   id           Int       @id @default(autoincrement())
+  title        String
   descriptions String
   date         String
   venue        String
