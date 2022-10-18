@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
-import { Prisma, SponsorCompany } from '@prisma/client';
+import { LiveEvent, Prisma, SponsorCompany } from '@prisma/client';
 import * as request from 'supertest';
 import { JhsTestRecord, StudentTestRecord, ObTestRecord, SponsorTestRecord } from './types';
 
@@ -572,6 +572,196 @@ describe('App (e2e)', () => {
          const res = await request(app.getHttpServer()).get('/sponsorcompany');
 
          expect(res.body).toEqual([]);
+      });
+   });
+
+   describe('LiveEvent Module(e2e)', () => {
+      const dataList: Prisma.LiveEventCreateInput[] = [
+         {
+            title: 'タイトル1',
+            descriptions: '説明1',
+            date: '2022-10-30 09:30',
+            venue: '会場1',
+            start_time: '2022-10-30 09:30',
+            end_time: '2022-10-30 11:00',
+            stage: 'main',
+         },
+         {
+            title: 'タイトル2',
+            descriptions: '説明2',
+            date: '2022-10-31 11:30',
+            venue: '会場2',
+            start_time: '2022-10-31 11:30',
+            end_time: '2022-10-31 13:00',
+            stage: 'sub',
+         },
+         {
+            title: 'タイトル3',
+            descriptions: '説明3',
+            date: '2022-10-31 10:30',
+            venue: '会場3',
+            start_time: '2022-10-30 12:30',
+            end_time: '2022-10-30 11:00',
+            stage: 'game',
+         },
+         {
+            title: 'タイトル4',
+            descriptions: '説明4',
+            date: '2022-10-30 09:30',
+            venue: '会場4',
+            start_time: '2022-10-30 09:30',
+            end_time: '2022-10-30 12:00',
+            stage: 'sub',
+         },
+         {
+            title: 'タイトル5',
+            descriptions: '説明5',
+            date: '2022-10-30 14:30',
+            venue: '会場5',
+            start_time: '2022-10-31 14:30',
+            end_time: '2022-10-31 16:00',
+            stage: 'live',
+         },
+         {
+            title: 'タイトル6',
+            descriptions: '説明6',
+            date: '2022-10-30 09:00',
+            venue: '会場6',
+            start_time: '2022-10-30 09:00',
+            end_time: '2022-10-30 13:00',
+            stage: 'live',
+         },
+         {
+            title: 'タイトル7',
+            descriptions: '説明7',
+            date: '2022-10-30 09:30',
+            venue: '会場7',
+            start_time: '2022-10-31 09:30',
+            end_time: '2022-10-30 11:00',
+            stage: 'game',
+         },
+      ];
+
+      it('create and get it', async () => {
+         const expectedResult = {
+            main: [
+               {
+                  id: 1,
+                  ...dataList[0],
+               },
+            ],
+            sub: [
+               {
+                  id: 4,
+                  ...dataList[3],
+               },
+               {
+                  id: 2,
+                  ...dataList[1],
+               },
+            ],
+            live: [
+               {
+                  id: 6,
+                  ...dataList[5],
+               },
+               {
+                  id: 5,
+                  ...dataList[4],
+               },
+            ],
+            game: [
+               {
+                  id: 3,
+                  ...dataList[2],
+               },
+               {
+                  id: 7,
+                  ...dataList[6],
+               },
+            ],
+         };
+
+         await request(app.getHttpServer())
+            .post('/liveevent')
+            .send(dataList[0])
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[1]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[2]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[3]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[4]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[5]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[6]));
+
+         // 信じてたのに...😥
+         // await Promise.all(
+         //    dataList.map((data) => new Promise((resolve) => resolve(request(app.getHttpServer()).post('/liveevent').send(data)))),
+         // )
+
+         const res = await request(app.getHttpServer()).get('/liveevent');
+
+         expect(res.body).toEqual(expectedResult);
+      });
+
+      it('get upcoming events ', async () => {
+         const res = await request(app.getHttpServer()).get('/liveevent/near');
+         const date = new Date().toLocaleString('ja', { timeZone: 'Asia/Tokyo' });
+         const now = date.replace(/\//g, '-');
+
+         const sortData = (
+            dataList.flatMap((data) => {
+               return now < data.date ? data : [];
+            }) as LiveEvent[]
+         ).sort((a, b) => {
+            return a.start_time > b.start_time ? 1 : -1;
+         });
+
+         expect(res.body).toEqual(sortData.slice(0, 4));
+      });
+
+      it('get by date', async () => {
+         const date = encodeURI('2022-10-30 09:30');
+         const data = await request(app.getHttpServer()).get(`/liveevent/${date}`);
+
+         const expectedResult = dataList.filter((data) => data.date === '2022-10-30 09:30');
+
+         expect(data.body).toEqual(expectedResult);
+      });
+
+      it('getById', async () => {
+         const res = await request(app.getHttpServer()).get('/liveevent/id/1');
+
+         const expectedResult = {
+            id: 1,
+            ...dataList[0],
+         };
+
+         expect(res.body).toEqual(expectedResult);
+      });
+
+      it('update', async () => {
+         const data: Prisma.LiveEventUpdateInput = {
+            title: '変更後のタイトル',
+         };
+
+         const res = await request(app.getHttpServer()).put('/liveevent/1').send(data);
+
+         const expectedResult: LiveEvent = {
+            ...dataList[0],
+            title: '変更後のタイトル',
+            id: 1,
+         };
+
+         console.log(expectedResult);
+         expect(res.body).toEqual(expectedResult);
+      });
+
+      it('delete', async () => {
+         for (let id = 1; id <= dataList.length; id++) {
+            await request(app.getHttpServer()).delete(`/liveevent/${id}`);
+         }
+
+         const res = await request(app.getHttpServer()).get('/liveevent');
+         expect(res.body).toEqual({ game: [], live: [], main: [], sub: [] });
       });
    });
 });

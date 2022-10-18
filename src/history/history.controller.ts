@@ -11,7 +11,7 @@ export class HistoryController {
 
    @Get()
    @ApiOperation({ summary: '全テーブルのHistoryを返す' })
-   @ApiOkResponse({ type: AllHistoryEntity })
+   @ApiOkResponse({ type: AllHistoryEntity, isArray: true })
    async getAllHistory(): Promise<History[]> {
       return this.service.getAll();
    }
