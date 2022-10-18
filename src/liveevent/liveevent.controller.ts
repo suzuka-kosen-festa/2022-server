@@ -5,6 +5,7 @@ import { LiveEvent } from '@prisma/client';
 import { CreateEventDto, UpdateEventDto } from './dto/liveEvent.sto';
 import { LiveEventWithIdEntity } from './entity/liveEvent.entity';
 import { LiveeventService } from './liveevent.service';
+import { SeparationEventList } from './types';
 
 @Controller('liveevent')
 export class LiveeventController {
@@ -13,8 +14,13 @@ export class LiveeventController {
   @Get()
   @ApiOperation({ summary: '全件取得' })
   @ApiOkResponse({ type: LiveEventWithIdEntity, isArray: true})
-  async getAllSponsorCom(): Promise<LiveEvent[] | []> {
+  async getAllSponsorCom(): Promise<SeparationEventList | {}> {
      return this.service.getAll();
+  }
+
+  @Get("test")
+  async get() {
+    return this.service.getNearTime()
   }
 
   @Get(':id')
