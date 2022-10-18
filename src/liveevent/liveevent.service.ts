@@ -19,7 +19,7 @@ export class LiveeventService {
       return object;
    }
 
-   async getByDate(date: Prisma.LiveEventWhereInput): Promise<LiveEvent[]> {
+   async getByDate(date: Prisma.LiveEventWhereInput): Promise<LiveEvent[] | null> {
       return this.prisma.liveEvent.findMany({ where: date });
    }
 
