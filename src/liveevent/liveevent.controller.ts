@@ -7,7 +7,7 @@ import { LiveEventEntity, LiveEventWithIdEntity, SeparationEventListEntity } fro
 import { LiveeventService } from './liveevent.service';
 import { SeparationEventList } from '../types/liveevent';
 
-@ApiTags("LiveEvent")
+@ApiTags('LiveEvent')
 @Controller('liveevent')
 export class LiveeventController {
    constructor(private readonly service: LiveeventService) {}
