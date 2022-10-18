@@ -81,7 +81,7 @@ model SponsorCompany {
   name String
 }
 
-enum LivaStage {
+enum LiveStage {
   main
   sub
   live
@@ -96,5 +96,5 @@ model LiveEvent {
   venue        String
   start_time   String
   end_time     String
-  stage        LivaStage
+  stage        LiveStage
 }
