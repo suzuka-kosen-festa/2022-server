@@ -1,5 +1,5 @@
-import { LiveEvent, LiveStage } from "@prisma/client";
+import { LiveEvent, LiveStage } from '@prisma/client';
 
 export type SeparationEventList = {
-  [ key in LiveStage]: LiveEvent[] | []
-}
+   [key in LiveStage]: LiveEvent[] | [];
+};

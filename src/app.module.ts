@@ -24,6 +24,6 @@ import { LiveeventModule } from './liveevent/liveevent.module';
       HistoryModule,
       SponsorcompanyModule,
       LiveeventModule,
-   ]
+   ],
 })
 export class AppModule {}
