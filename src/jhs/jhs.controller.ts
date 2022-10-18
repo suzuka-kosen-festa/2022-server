@@ -34,7 +34,7 @@ export class JhsController {
 
    @Get(':name')
    @ApiOperation({ summary: '中学生を名前で検索' })
-   @ApiOkResponse({ type: JhsEntity, isArray: true })
+   @ApiOkResponse({ type: JhswithParentEntity, isArray: true })
    async searchJhsByName(@Param('name') name: string): Promise<JHStudent[] | null> {
       return this.service.searchByName({ name: name });
    }
