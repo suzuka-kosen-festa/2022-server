@@ -21,6 +21,6 @@ export class ObWithHistoryEntity {
    name: string;
    @ApiProperty()
    age: string;
-   @ApiProperty()
-   History: ReadonlyArray<HistoryEntity>;
+   @ApiProperty({ type: [HistoryEntity] })
+   History: HistoryEntity;
 }
