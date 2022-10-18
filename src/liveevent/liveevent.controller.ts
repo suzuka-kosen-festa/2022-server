@@ -27,8 +27,8 @@ export class LiveeventController {
 
    @Get(':date')
    @ApiOperation({ summary: 'dateで取得' })
-   @ApiOkResponse({ type: LiveEventWithIdEntity })
-   async getEventBydate(@Param('date') date: string): Promise<LiveEvent[] | null> {
+   @ApiOkResponse({ type: LiveEventEntity })
+   async getEventBydate(@Param('date') date: string) {
       return this.service.getByDate({ date });
    }
 

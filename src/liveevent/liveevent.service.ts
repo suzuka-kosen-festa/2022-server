@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { LiveEvent, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { formatEvent } from './lib/format';
-import { SeparationEventList } from './types';
+import { LiveEventWithoutId, SeparationEventList } from './types';
 
 @Injectable()
 export class LiveeventService {
@@ -15,8 +15,19 @@ export class LiveeventService {
       return object;
    }
 
-   async getByDate(date: Prisma.LiveEventWhereInput): Promise<LiveEvent[] | null> {
-      return this.prisma.liveEvent.findMany({ where: date });
+   async getByDate(date: Prisma.LiveEventWhereInput) : Promise<LiveEventWithoutId[] | null>{
+      return this.prisma.liveEvent.findMany({
+          where: date,
+          select : {
+            title: true,
+            venue: true,
+            descriptions : true,
+            date : true,
+            stage : true,
+            start_time : true,
+            end_time : true,
+         }
+      });
    }
 
    async getNearTime(): Promise<LiveEvent[]> {
