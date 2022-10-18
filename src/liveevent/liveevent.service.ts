@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { LiveEvent, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { formatEvent } from './lib/format';
-import { LiveEventWithoutId, SeparationEventList } from './types';
+import { LiveEventWithoutId, SeparationEventList } from '../types/liveevent';
 
 @Injectable()
 export class LiveeventService {

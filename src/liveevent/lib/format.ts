@@ -1,5 +1,5 @@
 import { LiveEvent } from '@prisma/client';
-import { SeparationEventList } from '../types';
+import { SeparationEventList } from '../../types/liveevent';
 
 const filterAndSort = (array: LiveEvent[], filter: string) =>
    array

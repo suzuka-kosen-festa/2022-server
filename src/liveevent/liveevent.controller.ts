@@ -1,12 +1,13 @@
 // eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LiveEvent } from '@prisma/client';
 import { CreateEventDto, UpdateEventDto } from './dto/liveEvent.sto';
 import { LiveEventEntity, LiveEventWithIdEntity, SeparationEventListEntity } from './entity/liveEvent.entity';
 import { LiveeventService } from './liveevent.service';
-import { SeparationEventList } from './types';
+import { SeparationEventList } from '../types/liveevent';
 
+@ApiTags("LiveEvent")
 @Controller('liveevent')
 export class LiveeventController {
    constructor(private readonly service: LiveeventService) {}

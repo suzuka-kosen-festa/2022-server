@@ -10,6 +10,6 @@ export class StudentEntity {
    email: string;
 }
 export class StudentwithGuestEntity extends StudentEntity {
-   @ApiProperty()
+   @ApiProperty({ type: [GuestEntity] })
    guest: GuestEntity;
 }
