@@ -10,7 +10,7 @@ class ExportGuestEntity {
 export class ExportStudentGuestEntity {
    @ApiProperty()
    email: string;
-   @ApiProperty({type : [ExportGuestEntity]})
+   @ApiProperty({ type: [ExportGuestEntity] })
    guest: ExportGuestEntity;
 }
 
@@ -19,8 +19,8 @@ export class ExportJhsGuestEntity {
    email: string;
    @ApiProperty()
    jhsId: string;
-   @ApiProperty({type : [ExportGuestEntity]})
-   parents: ExportGuestEntity
+   @ApiProperty({ type: [ExportGuestEntity] })
+   parents: ExportGuestEntity;
 }
 
 export class ExportObEntity {

@@ -25,6 +25,6 @@ export class GuestWithHistoryEntity {
    name: string;
    @ApiProperty()
    hostId: string;
-   @ApiProperty()
-   History: ReadonlyArray<HistoryEntity>;
+   @ApiProperty({ type: [HistoryEntity] })
+   History: HistoryEntity;
 }

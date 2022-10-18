@@ -17,6 +17,6 @@ export class SponsorWithHistoryEntity {
    name: string;
    @ApiProperty()
    email: string;
-   @ApiProperty()
-   History: ReadonlyArray<HistoryEntity>;
+   @ApiProperty({ type: [HistoryEntity] })
+   History: HistoryEntity;
 }
