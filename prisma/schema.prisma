@@ -98,3 +98,24 @@ model LiveEvent {
   end_time     String
   stage        LiveStage
 }
+
+enum BazaarType {
+  eating
+  recreation
+}
+
+model Bazaar {
+  id           Int @id @default(autoincrement())
+  descriptions String
+  image        String
+  gruop        String
+  prices       BazaarPrices[]
+  group_type   BazaarType
+}
+
+model BazaarPrices {
+  id        Int @id @default(autoincrement())
+  price     String
+  Bazaar    Bazaar @relation(fields: [bazaarId], references: [id])
+  bazaarId  Int
+}
