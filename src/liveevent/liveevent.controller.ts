@@ -25,11 +25,11 @@ export class LiveeventController {
       return this.service.getNearTime();
    }
 
-   @Get(":date")
-   @ApiOperation({ summary : "dateで取得"})
-   @ApiOkResponse({ type: LiveEventWithIdEntity})
-   async getEventBydate(@Param("date") date: string) : Promise<LiveEvent[] | null>{
-      return this.service.getByDate({date})
+   @Get(':date')
+   @ApiOperation({ summary: 'dateで取得' })
+   @ApiOkResponse({ type: LiveEventWithIdEntity })
+   async getEventBydate(@Param('date') date: string): Promise<LiveEvent[] | null> {
+      return this.service.getByDate({ date });
    }
 
    @Get(':id')

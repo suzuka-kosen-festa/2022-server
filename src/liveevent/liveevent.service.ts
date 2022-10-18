@@ -10,11 +10,7 @@ export class LiveeventService {
 
    async getAll(): Promise<SeparationEventList> {
       const allData = await this.prisma.liveEvent.findMany();
-      const object = formatEvent(
-         allData.sort((a, b) => {
-            return a.start_time > b.start_time ? 1 : -1;
-         }),
-      );
+      const object = formatEvent(allData);
 
       return object;
    }

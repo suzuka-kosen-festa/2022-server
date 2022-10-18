@@ -1,11 +1,18 @@
 import { LiveEvent } from '@prisma/client';
 import { SeparationEventList } from '../types';
 
+const filterAndSort = (array: LiveEvent[], filter: string) =>
+   array
+      .filter((data) => data.stage === filter)
+      .sort((a, b) => {
+         return a.start_time > b.start_time ? 1 : -1;
+      });
+
 export const formatEvent = (array: LiveEvent[]): SeparationEventList => {
-   const gameStage = array.filter((data) => data.stage === 'game');
-   const mainStage = array.filter((data) => data.stage === 'main');
-   const subStage = array.filter((data) => data.stage === 'sub');
-   const liveStage = array.filter((data) => data.stage === 'live');
+   const gameStage = filterAndSort(array, 'game');
+   const mainStage = filterAndSort(array, 'main');
+   const subStage = filterAndSort(array, 'sub');
+   const liveStage = filterAndSort(array, 'live');
 
    const object: SeparationEventList = {
       main: mainStage,
