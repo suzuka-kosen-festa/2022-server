@@ -15,18 +15,18 @@ export class LiveeventService {
       return object;
    }
 
-   async getByDate(date: Prisma.LiveEventWhereInput) : Promise<LiveEventWithoutId[] | null>{
+   async getByDate(date: Prisma.LiveEventWhereInput): Promise<LiveEventWithoutId[] | null> {
       return this.prisma.liveEvent.findMany({
-          where: date,
-          select : {
+         where: date,
+         select: {
             title: true,
             venue: true,
-            descriptions : true,
-            date : true,
-            stage : true,
-            start_time : true,
-            end_time : true,
-         }
+            descriptions: true,
+            date: true,
+            stage: true,
+            start_time: true,
+            end_time: true,
+         },
       });
    }
 
@@ -36,15 +36,15 @@ export class LiveeventService {
       const date = new Date().toLocaleString('ja', { timeZone: 'Asia/Tokyo' });
       const now = date.replace(/\//g, '-');
       const allData = await this.prisma.liveEvent.findMany({
-         select : {
+         select: {
             title: true,
             venue: true,
-            descriptions : true,
-            date : true,
-            stage : true,
-            start_time : true,
-            end_time : true,
-         }
+            descriptions: true,
+            date: true,
+            stage: true,
+            start_time: true,
+            end_time: true,
+         },
       });
       const sortData = (
          allData.flatMap((data) => {
@@ -54,7 +54,7 @@ export class LiveeventService {
          return a.start_time > b.start_time ? 1 : -1;
       });
 
-      return sortData.slice(0,4)
+      return sortData.slice(0, 4);
    }
 
    async getById(where: Prisma.LiveEventWhereUniqueInput): Promise<LiveEvent | []> {

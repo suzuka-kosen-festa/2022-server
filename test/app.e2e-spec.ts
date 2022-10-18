@@ -643,7 +643,6 @@ describe('App (e2e)', () => {
       ];
 
       it('create and get it', async () => {
-         
          const expectedResult = {
             main: [
                {
@@ -683,27 +682,28 @@ describe('App (e2e)', () => {
             ],
          };
 
-         await request(app.getHttpServer()).post("/liveevent").send(dataList[0])
-         .then(() => request(app.getHttpServer()).post("/liveevent").send(dataList[1]))
-         .then(() =>request(app.getHttpServer()).post("/liveevent").send(dataList[2]))
-         .then(() =>request(app.getHttpServer()).post("/liveevent").send(dataList[3]))
-         .then(() =>request(app.getHttpServer()).post("/liveevent").send(dataList[4]))
-         .then(() =>request(app.getHttpServer()).post("/liveevent").send(dataList[5]))
-         .then(() =>request(app.getHttpServer()).post("/liveevent").send(dataList[6]))
-
+         await request(app.getHttpServer())
+            .post('/liveevent')
+            .send(dataList[0])
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[1]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[2]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[3]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[4]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[5]))
+            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[6]));
 
          // 信じてたのに...😥
          // await Promise.all(
          //    dataList.map((data) => new Promise((resolve) => resolve(request(app.getHttpServer()).post('/liveevent').send(data)))),
          // )
 
-         const res = await request(app.getHttpServer()).get("/liveevent")
+         const res = await request(app.getHttpServer()).get('/liveevent');
 
-         expect(res.body).toEqual(expectedResult)
+         expect(res.body).toEqual(expectedResult);
       });
 
-      it("get upcoming events ", async () => {
-         const res = await request(app.getHttpServer()).get("/liveevent/near")
+      it('get upcoming events ', async () => {
+         const res = await request(app.getHttpServer()).get('/liveevent/near');
          const date = new Date().toLocaleString('ja', { timeZone: 'Asia/Tokyo' });
          const now = date.replace(/\//g, '-');
 
@@ -714,55 +714,54 @@ describe('App (e2e)', () => {
          ).sort((a, b) => {
             return a.start_time > b.start_time ? 1 : -1;
          });
-   
-         expect(res.body).toEqual(sortData.slice(0,4))
 
-      })
+         expect(res.body).toEqual(sortData.slice(0, 4));
+      });
 
-      it("get by date" , async () =>{
-         const date = encodeURI("2022-10-30 09:30");
-         const data = await request(app.getHttpServer()).get(`/liveevent/${date}`)
+      it('get by date', async () => {
+         const date = encodeURI('2022-10-30 09:30');
+         const data = await request(app.getHttpServer()).get(`/liveevent/${date}`);
 
-         const expectedResult = dataList.filter((data) => data.date === "2022-10-30 09:30")
+         const expectedResult = dataList.filter((data) => data.date === '2022-10-30 09:30');
 
-         expect(data.body).toEqual(expectedResult)
-      })
+         expect(data.body).toEqual(expectedResult);
+      });
 
-      it("getById", async () =>{
-         const res = await request(app.getHttpServer()).get("/liveevent/id/1")
+      it('getById', async () => {
+         const res = await request(app.getHttpServer()).get('/liveevent/id/1');
 
          const expectedResult = {
             id: 1,
-            ...dataList[0]
-         }
-
-         expect(res.body).toEqual(expectedResult)
-      })
-
-      it("update",async () => {
-         const data : Prisma.LiveEventUpdateInput = {
-            title: "変更後のタイトル"
-         }
-
-         const res = await request(app.getHttpServer()).put("/liveevent/1").send(data)
-
-         const expectedResult : LiveEvent= {
             ...dataList[0],
-            title: "変更後のタイトル",
-            id:1
+         };
+
+         expect(res.body).toEqual(expectedResult);
+      });
+
+      it('update', async () => {
+         const data: Prisma.LiveEventUpdateInput = {
+            title: '変更後のタイトル',
+         };
+
+         const res = await request(app.getHttpServer()).put('/liveevent/1').send(data);
+
+         const expectedResult: LiveEvent = {
+            ...dataList[0],
+            title: '変更後のタイトル',
+            id: 1,
+         };
+
+         console.log(expectedResult);
+         expect(res.body).toEqual(expectedResult);
+      });
+
+      it('delete', async () => {
+         for (let id = 1; id <= dataList.length; id++) {
+            await request(app.getHttpServer()).delete(`/liveevent/${id}`);
          }
 
-         console.log(expectedResult)
-         expect(res.body).toEqual(expectedResult)
-      })
-
-      it("delete", async () => {
-         for(let id = 1; id <= dataList.length; id++){
-            await request(app.getHttpServer()).delete(`/liveevent/${id}`)
-         }
-
-         const res = await request(app.getHttpServer()).get("/liveevent")
-         expect(res.body).toEqual({"game": [], "live": [], "main": [], "sub": []})
-      })
+         const res = await request(app.getHttpServer()).get('/liveevent');
+         expect(res.body).toEqual({ game: [], live: [], main: [], sub: [] });
+      });
    });
 });
