@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { LiveEvent } from '@prisma/client';
 import { CreateEventDto, UpdateEventDto } from './dto/liveEvent.sto';
-import { LiveEventWithIdEntity, SeparationEventListEntity } from './entity/liveEvent.entity';
+import { LiveEventEntity, LiveEventWithIdEntity, SeparationEventListEntity } from './entity/liveEvent.entity';
 import { LiveeventService } from './liveevent.service';
 import { SeparationEventList } from './types';
 
@@ -20,8 +20,8 @@ export class LiveeventController {
 
    @Get('near')
    @ApiOperation({ summary: '直近4件取得' })
-   @ApiOkResponse({ type: SeparationEventListEntity })
-   async getNearEvent(): Promise<SeparationEventList> {
+   @ApiOkResponse({ type: LiveEventEntity, isArray: true })
+   async getNearEvent(): Promise<LiveEvent[]> {
       return this.service.getNearTime();
    }
 

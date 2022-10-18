@@ -19,12 +19,22 @@ export class LiveeventService {
       return this.prisma.liveEvent.findMany({ where: date });
    }
 
-   async getNearTime(): Promise<SeparationEventList> {
+   async getNearTime(): Promise<LiveEvent[]> {
       // replaceせんくてもいい方法あったら教えてください
       // -> yyyy-MM-dd 形式で出るformatがあれば教えてください
       const date = new Date().toLocaleString('ja', { timeZone: 'Asia/Tokyo' });
       const now = date.replace(/\//g, '-');
-      const allData = await this.prisma.liveEvent.findMany();
+      const allData = await this.prisma.liveEvent.findMany({
+         select : {
+            title: true,
+            venue: true,
+            descriptions : true,
+            date : true,
+            stage : true,
+            start_time : true,
+            end_time : true,
+         }
+      });
       const sortData = (
          allData.flatMap((data) => {
             return now < data.date ? data : [];
@@ -33,9 +43,7 @@ export class LiveeventService {
          return a.start_time > b.start_time ? 1 : -1;
       });
 
-      const object = formatEvent(sortData.slice(0, 4));
-
-      return object;
+      return sortData.slice(0,4)
    }
 
    async getById(where: Prisma.SponsorCompanyWhereUniqueInput): Promise<LiveEvent | null> {
