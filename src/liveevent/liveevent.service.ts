@@ -57,7 +57,7 @@ export class LiveeventService {
       return sortData.slice(0,4)
    }
 
-   async getById(where: Prisma.SponsorCompanyWhereUniqueInput): Promise<LiveEvent | null> {
+   async getById(where: Prisma.LiveEventWhereUniqueInput): Promise<LiveEvent | []> {
       return this.prisma.liveEvent.findUnique({
          where,
       });

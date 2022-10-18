@@ -27,15 +27,15 @@ export class LiveeventController {
 
    @Get(':date')
    @ApiOperation({ summary: 'dateで取得' })
-   @ApiOkResponse({ type: LiveEventEntity })
+   @ApiOkResponse({ type: LiveEventWithIdEntity })
    async getEventBydate(@Param('date') date: string) {
       return this.service.getByDate({ date });
    }
 
-   @Get(':id')
+   @Get('/id/:id')
    @ApiOperation({ summary: 'id指定で取得' })
    @ApiOkResponse({ type: LiveEventWithIdEntity })
-   async getEvent(@Param('id') id: string): Promise<LiveEvent | null> {
+   async getEvent(@Param('id') id: string): Promise<LiveEvent | []> {
       return this.service.getById({ id: Number(id) });
    }
 
