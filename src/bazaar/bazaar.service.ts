@@ -34,7 +34,7 @@ export class BazaarService {
    }
 
    async create(data: Prisma.BazaarCreateInput): Promise<Bazaar> {
-      return this.prisma.bazaar.create({ data });
+      return this.prisma.bazaar.create({ data ,include: {prices : true}});
    }
 
    async update(params: { where: Prisma.BazaarWhereUniqueInput; data: Prisma.BazaarUpdateInput }): Promise<Bazaar> {
