@@ -8,3 +8,12 @@ export type BazaarWithoutId = {
    group: string;
    group_type: BazaarType;
 };
+
+export type BazaarWithId = {
+   name: string;
+   descriptions: string;
+   image: string;
+   prices: ReadonlyArray<BazaarPrices>;
+   group: string;
+   group_type: BazaarType;
+};

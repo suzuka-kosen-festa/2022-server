@@ -8,9 +8,7 @@ export class StudentService {
 
    // Studentテーブルのレコードを作成する関数
    async createStudent(data: Prisma.StudentCreateInput): Promise<Student> {
-      return this.prisma.student.create({
-         data,
-      });
+      return this.prisma.student.create({data});
    }
 
    //uuidの照合
