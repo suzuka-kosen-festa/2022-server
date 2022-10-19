@@ -1,14 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { Bazaar, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { BazaarWithoutId } from '../types/bazaar';
+import { BazaarWithId, BazaarWithoutId } from '../types/bazaar';
 
 @Injectable()
 export class BazaarService {
    constructor(private readonly prisma: PrismaService) {}
 
-   async getAll(): Promise<Bazaar[]> {
-      return this.prisma.bazaar.findMany();
+   async getAll(): Promise<BazaarWithId[]> {
+      return this.prisma.bazaar.findMany({
+        include:{
+          prices: true
+        }
+      });
    }
 
    async getByType(grouptype: Prisma.BazaarWhereInput): Promise<BazaarWithoutId[]> {
@@ -38,6 +42,9 @@ export class BazaarService {
       return this.prisma.bazaar.update({
          where,
          data,
+         include : {
+            prices : true
+         }
       });
    }
 
