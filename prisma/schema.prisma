@@ -106,9 +106,10 @@ enum BazaarType {
 
 model Bazaar {
   id           Int @id @default(autoincrement())
+  name         String
   descriptions String
   image        String
-  gruop        String
+  group        String
   prices       BazaarPrices[]
   group_type   BazaarType
 }
