@@ -11,7 +11,7 @@ export class BazaarpricesController {
 
   @Get()
   @ApiOperation({summary:"レコードを全件返す"})
-  @ApiOkResponse({ type : BazaarPricesEntity})
+  @ApiOkResponse({ type : BazaarPricesEntity , isArray : true})
   async getAllBazaarPrices() : Promise<BazaarPrices[]>{
     return this.service.getAll()
   }
