@@ -25,15 +25,16 @@ export class BazaarService {
       });
    }
 
-   async getById (where : Prisma.BazaarWhereUniqueInput) : Promise<Bazaar>{
-      return this.prisma.bazaar.findUnique({where})
-   } 
+   async getById(where: Prisma.BazaarWhereUniqueInput): Promise<Bazaar> {
+      return this.prisma.bazaar.findUnique({ where });
+   }
 
    async create(data: Prisma.BazaarCreateInput): Promise<Bazaar> {
       return this.prisma.bazaar.create({ data });
    }
 
-   async update(where: Prisma.BazaarWhereUniqueInput, data: Prisma.BazaarUpdateInput): Promise<Bazaar> {
+   async update(params: { where: Prisma.BazaarWhereUniqueInput; data: Prisma.BazaarUpdateInput }): Promise<Bazaar> {
+      const { where, data } = params;
       return this.prisma.bazaar.update({
          where,
          data,
