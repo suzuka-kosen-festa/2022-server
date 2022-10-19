@@ -1,13 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BazaarType } from '@prisma/client';
-
-export class BazaarPricesEntity {
-   @ApiProperty()
-   id: string;
-   @ApiProperty()
-   price: string;
-}
-
+import { BazaarPricesEntity } from '../../bazaarprices/entity/bazaarprices.entity';
 export class BazaarEntity {
    @ApiProperty()
    id: string;
