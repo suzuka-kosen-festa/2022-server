@@ -25,10 +25,10 @@ model Guest {
   sex       String
   jobs      String
   name      String
-  host      Student?   @relation(fields: [hostId], references: [studentId])
+  host      Student?   @relation(fields: [hostId], references: [studentId], onDelete: Cascade)
   hostId    String?
   History   History[]
-  hostJhs   JHStudent? @relation(fields: [hostJhsId], references: [jhsId])
+  hostJhs   JHStudent? @relation(fields: [hostJhsId], references: [jhsId], onDelete: Cascade)
   hostJhsId String?
 }
 
@@ -62,13 +62,13 @@ model OB {
 model History {
   id        Int        @id @default(autoincrement())
   timeStamp DateTime   @default(now()) @db.Timestamptz(3)
-  Guest     Guest?     @relation(fields: [guestId], references: [guestId])
+  Guest     Guest?     @relation(fields: [guestId], references: [guestId], onDelete: Cascade)
   guestId   String?
-  Sponsor   Sponsor?   @relation(fields: [sponsorId], references: [sponsorId])
+  Sponsor   Sponsor?   @relation(fields: [sponsorId], references: [sponsorId], onDelete: Cascade)
   sponsorId String?
-  JHStudent JHStudent? @relation(fields: [jhsId], references: [jhsId])
+  JHStudent JHStudent? @relation(fields: [jhsId], references: [jhsId], onDelete: Cascade)
   jhsId     String?
-  OB        OB?        @relation(fields: [obId], references: [obId])
+  OB        OB?        @relation(fields: [obId], references: [obId], onDelete: Cascade)
   obId      String?
 }
 
@@ -117,6 +117,6 @@ model Bazaar {
 model BazaarPrices {
   id        Int @id @default(autoincrement())
   price     String
-  Bazaar    Bazaar @relation(fields: [bazaarId], references: [id])
+  Bazaar    Bazaar @relation(fields: [bazaarId], references: [id], onDelete: Cascade)
   bazaarId  Int
 }
