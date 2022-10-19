@@ -10,7 +10,6 @@ const pricesArray = [
    {id : 5, prices: "値段110円", bazaarId: 5}
 ]
 
-
 describe('BazaarpricesController', () => {
    let controller: BazaarpricesController;
 
@@ -34,4 +33,27 @@ describe('BazaarpricesController', () => {
    it('should be defined', () => {
       expect(controller).toBeDefined();
    });
+
+   it('getAllBazaar', async () =>{
+      const data = await controller.getAllBazaarPrices()
+      expect(data).toEqual(pricesArray)
+   })
+
+   it("getById", async () =>{
+      const data = await controller.getBazaarPricesById("1")
+
+      expect(data).toEqual(pricesArray[0])
+   })
+
+   it("update", async ()=>{
+      const data = await controller.updateBazaarPrices("1", {price : "1"})
+
+      expect(data).toEqual(pricesArray[0])
+   })
+
+   it("delete", async () =>{
+      const data = await controller.deleteBazaarPrices("1")
+
+      expect(data).toEqual(pricesArray[0])
+   })
 });
