@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Put  } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { BazaarPrices } from '@prisma/client';
-import { BazaarEntity } from '../bazaar/entity';
+import { BazaarEntity } from '../bazaar/entity/bazaar.entity';
 import { BazaarpricesService } from './bazaarprices.service';
 import { BazaarPricesEntity } from './entity/bazaarprices.entity';
 

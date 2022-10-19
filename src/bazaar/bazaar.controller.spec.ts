@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BazaarController } from './bazaar.controller';
 import { BazaarService } from './bazaar.service';
-import { CreateBazaarDto, UpdateBazaarDto } from './dto';
+import { CreateBazaarDto, UpdateBazaarDto } from './dto/bazaar.dto';
 
 const bazaarArray = [
    {

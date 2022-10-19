@@ -4,8 +4,8 @@ import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestj
 import { Bazaar, BazaarType, Prisma } from '@prisma/client';
 import { BazaarWithId, BazaarWithoutId } from '../types/bazaar';
 import { BazaarService } from './bazaar.service';
-import { CreateBazaarDto } from './dto';
-import { BazaarEntity, BazaarWithoutIdEntity } from './entity';
+import { CreateBazaarDto } from './dto/bazaar.dto';
+import { BazaarEntity, BazaarWithoutIdEntity } from './entity/bazaar.entity';
 
 @ApiTags('Bazaar')
 @Controller('bazaar')
