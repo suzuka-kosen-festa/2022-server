@@ -1,4 +1,4 @@
-import { BazaarPrices, BazaarType } from '@prisma/client';
+import { BazaarPrices, BazaarType } from './prisma';
 
 export type BazaarWithoutId = {
    name: string;
