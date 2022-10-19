@@ -9,9 +9,9 @@ export class BazaarService {
 
    async getAll(): Promise<BazaarWithId[]> {
       return this.prisma.bazaar.findMany({
-        include:{
-          prices: true
-        }
+         include: {
+            prices: true,
+         },
       });
    }
 
@@ -42,9 +42,9 @@ export class BazaarService {
       return this.prisma.bazaar.update({
          where,
          data,
-         include : {
-            prices : true
-         }
+         include: {
+            prices: true,
+         },
       });
    }
 

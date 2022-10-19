@@ -7,48 +7,48 @@ import { BazaarService } from './bazaar.service';
 import { CreateBazaarDto } from './dto';
 import { BazaarEntity, BazaarWithoutIdEntity } from './entity';
 
-@ApiTags("Bazaar")
+@ApiTags('Bazaar')
 @Controller('bazaar')
 export class BazaarController {
    constructor(private readonly service: BazaarService) {}
 
    @Get()
-   @ApiOperation({ summary: "すべてのレコードのデータを返す" })
-   @ApiOkResponse({ type : BazaarEntity })
+   @ApiOperation({ summary: 'すべてのレコードのデータを返す' })
+   @ApiOkResponse({ type: BazaarEntity })
    async getAllBazaar(): Promise<BazaarWithId[]> {
       return this.service.getAll();
    }
 
    @Get(':id')
-   @ApiOperation({ summary : "レコードをIDによって取得" })
-   @ApiOkResponse({ type : BazaarEntity })
+   @ApiOperation({ summary: 'レコードをIDによって取得' })
+   @ApiOkResponse({ type: BazaarEntity })
    async getBazaarById(@Param('id') id: string): Promise<Bazaar> {
       return this.service.getById({ id: Number(id) });
    }
 
    @Get('data/:type')
-   @ApiOperation({ summary : "レコードをtypeによって取得" })
-   @ApiOkResponse({ type : BazaarWithoutIdEntity })
+   @ApiOperation({ summary: 'レコードをtypeによって取得' })
+   @ApiOkResponse({ type: BazaarWithoutIdEntity })
    async getBazzarByType(@Param('type') type: BazaarType): Promise<BazaarWithoutId[]> {
       return this.service.getByType({ group_type: type });
    }
 
    @Post()
-   @ApiOperation({ summary : "レコードの作成" })
+   @ApiOperation({ summary: 'レコードの作成' })
    @ApiCreatedResponse({ type: BazaarEntity })
    async createBazaar(@Body() data: CreateBazaarDto): Promise<Bazaar> {
       return this.service.create(data);
    }
 
    @Put(':id')
-   @ApiOperation({ summary: "レコードのアップデート" })
+   @ApiOperation({ summary: 'レコードのアップデート' })
    @ApiOkResponse({ type: BazaarEntity })
    async updateBazaar(@Param('id') id: string, @Body() data: Prisma.BazaarUpdateInput): Promise<Bazaar> {
       return this.service.update({ where: { id: Number(id) }, data });
    }
 
    @Delete(':id')
-   @ApiOperation({ summary: "レコードの削除" })
+   @ApiOperation({ summary: 'レコードの削除' })
    @ApiOkResponse({ type: BazaarEntity })
    async deleteBazaar(@Param('id') id: string): Promise<Bazaar> {
       return this.service.delete({ id: Number(id) });
