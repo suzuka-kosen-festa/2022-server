@@ -11,6 +11,7 @@ import { HistoryModule } from './history/history.module';
 import { SponsorcompanyModule } from './sponsorcompany/sponsorcompany.module';
 import { LiveeventModule } from './liveevent/liveevent.module';
 import { BazaarModule } from './bazaar/bazaar.module';
+import { BazaarpricesModule } from './bazaarprices/bazaarprices.module';
 
 @Module({
    imports: [
@@ -26,6 +27,7 @@ import { BazaarModule } from './bazaar/bazaar.module';
       SponsorcompanyModule,
       LiveeventModule,
       BazaarModule,
+      BazaarpricesModule,
    ],
 })
 export class AppModule {}
