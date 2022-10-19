@@ -28,7 +28,7 @@ export class BazaarController {
 
    @Get('data/:type')
    @ApiOperation({ summary: 'レコードをtypeによって取得' })
-   @ApiOkResponse({ type: BazaarWithoutIdEntity , isArray: true})
+   @ApiOkResponse({ type: BazaarWithoutIdEntity, isArray: true })
    async getBazzarByType(@Param('type') type: BazaarType): Promise<BazaarWithoutId[]> {
       return this.service.getByType({ group_type: type });
    }
