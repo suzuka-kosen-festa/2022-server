@@ -37,8 +37,8 @@ export class BazaarService {
       return this.prisma.bazaar.create({ data, include: { prices: true } });
    }
 
-   async createMany(data : Prisma.BazaarCreateManyInput) : Promise<Prisma.BatchPayload>{
-      return this.prisma.bazaar.createMany({data})
+   async createMany(data: Prisma.BazaarCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.prisma.bazaar.createMany({ data });
    }
 
    async update(params: { where: Prisma.BazaarWhereUniqueInput; data: Prisma.BazaarUpdateInput }): Promise<Bazaar> {
@@ -56,7 +56,7 @@ export class BazaarService {
       return this.prisma.bazaar.delete({ where });
    }
 
-   async deleteAll() : Promise<Prisma.BatchPayload>{
-      return this.prisma.bazaar.deleteMany()
+   async deleteAll(): Promise<Prisma.BatchPayload> {
+      return this.prisma.bazaar.deleteMany();
    }
 }

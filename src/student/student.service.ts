@@ -11,8 +11,8 @@ export class StudentService {
       return this.prisma.student.create({ data ,include :{ Guest : true}});
    }
 
-   async createMany(data : Prisma.StudentCreateManyInput) : Promise<Prisma.BatchPayload>{
-      return this.prisma.student.createMany({data})
+   async createMany(data: Prisma.StudentCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.prisma.student.createMany({ data });
    }
 
    //uuidの照合
@@ -52,8 +52,8 @@ export class StudentService {
    async deleteStudent(where: Prisma.StudentWhereUniqueInput): Promise<Student> {
       return this.prisma.student.delete({ where: where });
    }
-   
-   async deleteAll() : Promise<Prisma.BatchPayload> {
-      return this.prisma.student.deleteMany()
+
+   async deleteAll(): Promise<Prisma.BatchPayload> {
+      return this.prisma.student.deleteMany();
    }
 }

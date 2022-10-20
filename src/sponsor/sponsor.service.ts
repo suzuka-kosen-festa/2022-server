@@ -14,8 +14,8 @@ export class SponsorService {
       return this.prisma.sponsor.create({ data });
    }
 
-   async createMany(data : Prisma.SponsorCreateManyInput) : Promise<Prisma.BatchPayload> {
-      return this.prisma.sponsor.createMany({data})
+   async createMany(data: Prisma.SponsorCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.prisma.sponsor.createMany({ data });
    }
 
    async checkSponsorExist(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor | null> {
@@ -64,15 +64,15 @@ export class SponsorService {
       });
    }
 
-   async update(params:{where: Prisma.SponsorWhereUniqueInput, data : Prisma.SponsorUpdateInput}) : Promise<Sponsor> {
-      return this.prisma.sponsor.update(params)
+   async update(params: { where: Prisma.SponsorWhereUniqueInput; data: Prisma.SponsorUpdateInput }): Promise<Sponsor> {
+      return this.prisma.sponsor.update(params);
    }
 
    async deleteSponsor(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {
       return this.prisma.sponsor.delete({ where: where });
    }
 
-   async deleteAll() : Promise<Prisma.BatchPayload> {
-      return this.prisma.sponsor.deleteMany()
+   async deleteAll(): Promise<Prisma.BatchPayload> {
+      return this.prisma.sponsor.deleteMany();
    }
 }

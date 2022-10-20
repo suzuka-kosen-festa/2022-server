@@ -72,7 +72,7 @@ export class ObService {
       return this.prisma.oB.delete({ where: where });
    }
 
-   async deleteAll() : Promise<Prisma.BatchPayload> {
-      return this.prisma.oB.deleteMany()
+   async deleteAll(): Promise<Prisma.BatchPayload> {
+      return this.prisma.oB.deleteMany();
    }
 }

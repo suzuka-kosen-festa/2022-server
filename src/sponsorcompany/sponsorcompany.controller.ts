@@ -33,9 +33,9 @@ export class SponsorcompanyController {
    }
 
    @Post('many')
-   @ApiOperation({ summary : "レコードを複数作成" })
-   async createManySponsorCom(@Body() data : Prisma.SponsorCompanyCreateManyInput) : Promise<Prisma.BatchPayload> {
-      return this.service.createMany(data)
+   @ApiOperation({ summary: 'レコードを複数作成' })
+   async createManySponsorCom(@Body() data: Prisma.SponsorCompanyCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.service.createMany(data);
    }
 
    @Put(':id')
@@ -62,8 +62,8 @@ export class SponsorcompanyController {
    }
 
    @Delete()
-   @ApiOperation({ summary : "レコード全削除" })
-   async deleteAllSponsorCom() : Promise<Prisma.BatchPayload> {
-      return this.service.deleteAll()
+   @ApiOperation({ summary: 'レコード全削除' })
+   async deleteAllSponsorCom(): Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll();
    }
 }

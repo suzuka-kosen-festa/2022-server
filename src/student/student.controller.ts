@@ -40,19 +40,19 @@ export class StudentController {
       return this.studentService.createStudent(data);
    }
 
-   @Post("many")
-   @ApiOperation({ summary : "学生のデータを複数作る" })
-   async createManyStudent(@Body() data : Prisma.StudentCreateManyInput) : Promise<Prisma.BatchPayload> {
-      return this.studentService.createMany(data)
-   } 
+   @Post('many')
+   @ApiOperation({ summary: '学生のデータを複数作る' })
+   async createManyStudent(@Body() data: Prisma.StudentCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.studentService.createMany(data);
+   }
 
-   @Put(":email")
+   @Put(':email')
    @ApiOperation({ summary: '学生のデータの更新' })
    @ApiCreatedResponse({ type: StudentEntity })
-   async update( @Param("email") email : string, @Body() data: updateStudentDto): Promise<Student> {
+   async update(@Param('email') email: string, @Body() data: updateStudentDto): Promise<Student> {
       return this.studentService.updateStudent({
          where: { email },
-         data
+         data,
       });
    }
 
@@ -66,8 +66,8 @@ export class StudentController {
    }
 
    @Delete()
-   @ApiOperation({ summary : "全削除" })
-   async deleteManyStudent() : Promise<Prisma.BatchPayload> {
-      return this.studentService.deleteAll()
+   @ApiOperation({ summary: '全削除' })
+   async deleteManyStudent(): Promise<Prisma.BatchPayload> {
+      return this.studentService.deleteAll();
    }
 }

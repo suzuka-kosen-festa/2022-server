@@ -40,10 +40,10 @@ export class BazaarController {
       return this.service.create(data);
    }
 
-   @Post("many")
-   @ApiOperation({ summary : "レコードを複数を作成" })
-   async createManyBazaar(data : Prisma.BazaarCreateManyInput) : Promise<Prisma.BatchPayload>{
-      return this.service.createMany(data)
+   @Post('many')
+   @ApiOperation({ summary: 'レコードを複数を作成' })
+   async createManyBazaar(data: Prisma.BazaarCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.service.createMany(data);
    }
 
    @Put(':id')
@@ -61,10 +61,8 @@ export class BazaarController {
    }
 
    @Delete()
-   @ApiOperation({ summary: 'レコードを全削除'})
-   async deleteAllBazaar() : Promise<Prisma.BatchPayload> {
-      return this.service.deleteAll()
+   @ApiOperation({ summary: 'レコードを全削除' })
+   async deleteAllBazaar(): Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll();
    }
-
-
 }

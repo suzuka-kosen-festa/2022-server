@@ -9,7 +9,7 @@ export class createSponsorDto {
 
 export class UpdateSponsorDto {
    @ApiProperty()
-   email? : string
+   email?: string;
    @ApiProperty()
    name?: string;
 }
