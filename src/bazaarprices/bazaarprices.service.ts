@@ -10,7 +10,7 @@ export class BazaarpricesService {
       return this.prisma.bazaarPrices.findMany();
    }
 
-   async getById(where: Prisma.BazaarPricesWhereUniqueInput): Promise<BazaarPrices> {
+   async getById(where: Prisma.BazaarPricesWhereUniqueInput): Promise<BazaarPrices | null> {
       return this.prisma.bazaarPrices.findUnique({ where });
    }
 
