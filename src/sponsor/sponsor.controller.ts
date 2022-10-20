@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-redeclare
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Prisma, Sponsor } from '@prisma/client';
-import { createSponsorDto } from './dto/sponsor.dto';
+import { createSponsorDto, UpdateSponsorDto } from './dto/sponsor.dto';
 import { SponsorEntity, SponsorWithHistoryEntity } from './entity/sponsor.entity';
 import { SponsorService } from './sponsor.service';
 
@@ -51,6 +51,14 @@ export class SponsorController {
    async createManySponsor(@Body() data : Prisma.SponsorCreateManyInput): Promise<Prisma.BatchPayload> {
       return this.service.createMany(data)
    }
+
+   @Put(":uuid")
+   @ApiOperation({ summary : "レコードの更新" })
+   @ApiOkResponse({ type : SponsorEntity })
+   async update(@Param("uuid") uuid : string , @Body() data : UpdateSponsorDto) : Promise<Sponsor>{
+      return this.service.update({where:{sponsorId: uuid}, data})
+   }
+
 
    @Delete(':uuid')
    @ApiOperation({ summary: 'Sponsorレコードの削除' })

@@ -64,6 +64,10 @@ export class SponsorService {
       });
    }
 
+   async update(params:{where: Prisma.SponsorWhereUniqueInput, data : Prisma.SponsorUpdateInput}) : Promise<Sponsor> {
+      return this.prisma.sponsor.update(params)
+   }
+
    async deleteSponsor(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {
       return this.prisma.sponsor.delete({ where: where });
    }
