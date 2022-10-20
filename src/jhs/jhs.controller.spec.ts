@@ -71,7 +71,7 @@ describe('JhsController', () => {
    });
 
    it('update student', async () => {
-      const data = await controller.update("test@example",{name: 'てすと１', age : "13"});
+      const data = await controller.update('test@example', { name: 'てすと１', age: '13' });
       await expect(data).toEqual(singleRecordwithParents);
    });
 

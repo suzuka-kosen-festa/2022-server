@@ -70,9 +70,9 @@ export class JhsService {
    async createJhs(data: Prisma.JHStudentCreateInput): Promise<JHStudent> {
       return this.prisma.jHStudent.create({
          data,
-         include:{
-            parents: true
-         }
+         include: {
+            parents: true,
+         },
       });
    }
 

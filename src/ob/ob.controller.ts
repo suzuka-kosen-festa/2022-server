@@ -55,8 +55,8 @@ export class ObController {
    @Put(":uuid")
    @ApiOperation({ summary : "OBレコードの更新" })
    @ApiOkResponse({ type: ObEntity })
-   async updateOb(@Param("uuid") uuid : string ,@Body() data : UpdateObDto) : Promise<OB> {
-      return this.service.update({where:{obId : uuid} , data})
+   async updateOb(@Param('uuid') uuid: string, @Body() data: UpdateObDto): Promise<OB> {
+      return this.service.update({ where: { obId: uuid }, data });
    }
 
    @Delete(':uuid')
