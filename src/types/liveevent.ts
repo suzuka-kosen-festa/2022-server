@@ -1,4 +1,4 @@
-import { LiveEvent, LiveStage } from '@prisma/client';
+import { LiveEvent, LiveStage } from './prisma';
 
 export type SeparationEventList = {
    [key in LiveStage]: LiveEvent[] | [];

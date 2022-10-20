@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
-import { LiveEvent, Prisma, SponsorCompany } from '@prisma/client';
+import { Bazaar, LiveEvent, Prisma, SponsorCompany } from '@prisma/client';
 import * as request from 'supertest';
 import { JhsTestRecord, StudentTestRecord, ObTestRecord, SponsorTestRecord } from './types';
 
@@ -762,6 +762,103 @@ describe('App (e2e)', () => {
 
          const res = await request(app.getHttpServer()).get('/liveevent');
          expect(res.body).toEqual({ game: [], live: [], main: [], sub: [] });
+      });
+   });
+
+   describe('bazaar Module(e2e)', () => {
+      it('create and get it', async () => {
+         const bazaarData: Prisma.BazaarCreateInput = {
+            name: 'バザー1',
+            descriptions: '説明1',
+            image: 'url1.com',
+            group: '部活1',
+            group_type: 'eating',
+         };
+
+         const pricesList = [
+            {
+               price: '130円',
+            },
+            {
+               price: '130円',
+            },
+         ];
+
+         const pricesData: Prisma.BazaarPricesUpdateManyWithoutBazaarNestedInput = {
+            create: pricesList,
+         };
+
+         const data: Prisma.BazaarCreateInput = {
+            ...bazaarData,
+            prices: pricesData,
+         };
+         const res = await request(app.getHttpServer()).post('/bazaar').send(data);
+
+         const expectedResult = {
+            id: 1,
+            ...bazaarData,
+            prices: [
+               {
+                  bazaarId: 1,
+                  id: 1,
+                  price: '130円',
+               },
+               {
+                  bazaarId: 1,
+                  id: 2,
+                  price: '130円',
+               },
+            ],
+         };
+
+         expect(res.body).toEqual(expectedResult);
+      });
+
+      it('update', async () => {
+         const bazaarData: Bazaar = {
+            id: 1,
+            name: 'バザー2',
+            descriptions: '説明2',
+            image: 'url1.com',
+            group: '部活2',
+            group_type: 'eating',
+         };
+
+         const pricesList = [
+            {
+               price: '130円',
+            },
+            {
+               price: '130円',
+            },
+         ];
+
+         const pricesData: Prisma.BazaarPricesUpdateManyWithoutBazaarNestedInput = {
+            create: pricesList,
+         };
+
+         const data: Prisma.BazaarUpdateInput = {
+            ...bazaarData,
+            prices: pricesData,
+         };
+
+         const res = await request(app.getHttpServer()).put('/bazaar/1').send(data);
+
+         const priceres = await request(app.getHttpServer()).get('/bazaarprices');
+
+         const expectedResult = {
+            ...bazaarData,
+            prices: priceres.body,
+         };
+
+         expect(res.body).toEqual(expectedResult);
+      });
+
+      it('delete', async () => {
+         await request(app.getHttpServer()).delete(`/bazaar/1`);
+         const res = await request(app.getHttpServer()).get('/bazaar');
+
+         expect(res.body).toEqual([]);
       });
    });
 });
