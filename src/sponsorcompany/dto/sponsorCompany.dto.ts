@@ -7,5 +7,5 @@ export class CreateSponsorComDto {
 
 export class UpdateSponsorComDto {
    @ApiProperty()
-   name: string;
+   name?: string;
 }
