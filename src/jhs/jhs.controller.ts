@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JHStudent } from '@prisma/client';
+import { JHStudent, Prisma } from '@prisma/client';
 import { createJhsStudentDto, updateJhsStudentDto } from './dto/jhs.dto';
 import { JhsEntity, JhsWithHistoryEntity, JhswithParentEntity } from './entity/jhs.entiry';
 import { JhsService } from './jhs.service';
@@ -64,5 +64,12 @@ export class JhsController {
       return this.service.deleteJhs({
          jhsId: uuid,
       });
+   }
+
+   @Delete()
+   @ApiOperation({ summary: '学生のデータの削除' })
+   @ApiResponse({ type: JhsEntity })
+   async deleteAllJhs(): Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll();
    }
 }
