@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { OB } from '@prisma/client';
+import { OB, Prisma } from '@prisma/client';
 import { createObDto } from './dto/ob.dto';
 import { ObEntity, ObWithHistoryEntity } from './entity/ob.dto';
 import { ObService } from './ob.service';
@@ -51,4 +51,12 @@ export class ObController {
    async delete(@Param('uuid') uuid: string): Promise<OB> {
       return this.service.deleteOb({ obId: uuid });
    }
+
+   @Delete()
+   @ApiOperation({ summary : "OBレコードを全削除" })
+   async deleteAllOb() : Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll()
+   }
+
+
 }
