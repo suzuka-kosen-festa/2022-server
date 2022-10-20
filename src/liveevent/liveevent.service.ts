@@ -69,10 +69,6 @@ export class LiveeventService {
       });
    }
 
-   async createMany(data: Prisma.LiveEventCreateInput): Promise<Prisma.BatchPayload> {
-      return this.prisma.liveEvent.createMany({ data });
-   }
-
    async update(params: {
       where: Prisma.LiveEventWhereUniqueInput;
       data: Prisma.LiveEventUpdateInput;

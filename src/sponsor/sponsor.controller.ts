@@ -46,12 +46,6 @@ export class SponsorController {
       return this.service.createSponsor(data);
    }
 
-   @Post('many')
-   @ApiOperation({ summary: 'レコードを複数を作成' })
-   async createManySponsor(@Body() data: Prisma.SponsorCreateManyInput): Promise<Prisma.BatchPayload> {
-      return this.service.createMany(data);
-   }
-
    @Put(':uuid')
    @ApiOperation({ summary: 'レコードの更新' })
    @ApiOkResponse({ type: SponsorEntity })

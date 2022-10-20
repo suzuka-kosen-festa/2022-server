@@ -50,10 +50,6 @@ export class ObService {
       return this.prisma.oB.update(params)
    }
 
-   async createMany(data : Prisma.OBCreateManyInput) : Promise<Prisma.BatchPayload> {
-      return this.prisma.oB.createMany({data})
-   }
-
    async checkObExist(uuid: Prisma.OBWhereUniqueInput): Promise<OB | null> {
       await this.updateTimeStamp(uuid);
       return this.prisma.oB.findUnique({
