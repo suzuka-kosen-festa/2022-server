@@ -41,7 +41,7 @@ export class JhsController {
 
    @Post()
    @ApiOperation({ summary: '中学生のレコード作成' })
-   @ApiCreatedResponse({ type: JhsEntity })
+   @ApiCreatedResponse({ type: JhswithParentEntity })
    async create(@Body() data: createJhsStudentDto): Promise<JHStudent> {
       return this.service.createJhs(data);
    }
