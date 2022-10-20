@@ -29,7 +29,7 @@ export class BazaarService {
       });
    }
 
-   async getById(where: Prisma.BazaarWhereUniqueInput): Promise<Bazaar> {
+   async getById(where: Prisma.BazaarWhereUniqueInput): Promise<Bazaar | null> {
       return this.prisma.bazaar.findUnique({ where });
    }
 
