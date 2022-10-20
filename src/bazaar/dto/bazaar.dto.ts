@@ -16,13 +16,13 @@ export class CreateBazaarDto {
 
 export class UpdateBazaarDto {
    @ApiProperty()
-   name: string;
+   name?: string;
    @ApiProperty()
-   descriptions: string;
+   descriptions?: string;
    @ApiProperty()
-   image: string;
+   image?: string;
    @ApiProperty()
-   group: string;
+   group?: string;
    @ApiProperty()
-   group_type: BazaarType;
+   group_type?: BazaarType;
 }

@@ -2,9 +2,9 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class UpdateGuestDto {
   @ApiProperty()
-  sex: string;
+  sex?: string;
   @ApiProperty()
-  jobs: string;
+  jobs?: string;
   @ApiProperty()
-  name: string;
+  name?: string;
 }

@@ -9,7 +9,7 @@ export class createObDto {
 
 export class UpdateObDto {
    @ApiProperty()
-   email: string;
+   email?: string;
    @ApiProperty()
-   name: string;
+   name?: string;
 }

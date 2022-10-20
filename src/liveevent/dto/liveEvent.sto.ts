@@ -19,17 +19,17 @@ export class CreateEventDto {
 
 export class UpdateEventDto {
    @ApiProperty()
-   title: string;
+   title?: string;
    @ApiProperty()
-   descriptions: string;
+   descriptions?: string;
    @ApiProperty()
-   date: string;
+   date?: string;
    @ApiProperty()
-   venue: string;
+   venue?: string;
    @ApiProperty()
-   start_time: string;
+   start_time?: string;
    @ApiProperty()
-   end_time: string;
+   end_time?: string;
    @ApiProperty()
-   stage: 'main' | 'sub' | 'live' | 'game';
+   stage?: 'main' | 'sub' | 'live' | 'game';
 }
