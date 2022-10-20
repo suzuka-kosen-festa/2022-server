@@ -11,6 +11,10 @@ export class StudentService {
       return this.prisma.student.create({ data });
    }
 
+   async createMany(data : Prisma.StudentCreateManyInput) : Promise<Prisma.BatchPayload>{
+      return this.prisma.student.createMany({data})
+   }
+
    //uuidの照合
    async checkStudentExist(uuid: Prisma.StudentWhereUniqueInput): Promise<Student | null> {
       //TODO: 値の返し方はQRコード読み取り側と相談したい
@@ -54,5 +58,9 @@ export class StudentService {
 
    async deleteStudent(where: Prisma.StudentWhereUniqueInput): Promise<Student> {
       return this.prisma.student.delete({ where: where });
+   }
+   
+   async deleteAll() : Promise<Prisma.BatchPayload> {
+      return this.prisma.student.deleteMany()
    }
 }

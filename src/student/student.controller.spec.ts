@@ -73,12 +73,7 @@ describe('StudentController', () => {
    });
 
    it('update Student', async () => {
-      const data = await controller.update({
-         email: 'example2.com',
-         sex: '男',
-         jobs: '祖父',
-         name: 'テストゲスト',
-      });
+      const data = await controller.update("1",{ kana : "てすと" });
       await expect(data).toEqual(singleRecordwithGuest);
    });
 });
