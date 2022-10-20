@@ -65,7 +65,7 @@ export class StudentController {
       });
    }
 
-   @Delete("many")
+   @Delete()
    @ApiOperation({ summary : "全削除" })
    async deleteManyStudent() : Promise<Prisma.BatchPayload> {
       return this.studentService.deleteAll()

@@ -14,6 +14,10 @@ export class SponsorService {
       return this.prisma.sponsor.create({ data });
    }
 
+   async createMany(data : Prisma.SponsorCreateManyInput) : Promise<Prisma.BatchPayload> {
+      return this.prisma.sponsor.createMany({data})
+   }
+
    async checkSponsorExist(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor | null> {
       await this.updateTimeStamp(where);
       return this.prisma.sponsor.findUnique({
@@ -62,5 +66,9 @@ export class SponsorService {
 
    async deleteSponsor(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor> {
       return this.prisma.sponsor.delete({ where: where });
+   }
+
+   async deleteAll() : Promise<Prisma.BatchPayload> {
+      return this.prisma.sponsor.deleteMany()
    }
 }
