@@ -69,20 +69,24 @@ export class LiveeventService {
       });
    }
 
+   async createMany(data: Prisma.LiveEventCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.prisma.liveEvent.createMany({ data });
+   }
+
    async update(params: {
       where: Prisma.LiveEventWhereUniqueInput;
       data: Prisma.LiveEventUpdateInput;
    }): Promise<LiveEvent> {
-      const { where, data } = params;
-      return this.prisma.liveEvent.update({
-         where,
-         data,
-      });
+      return this.prisma.liveEvent.update(params);
    }
 
    async delete(where: Prisma.LiveEventWhereUniqueInput): Promise<LiveEvent> {
       return this.prisma.liveEvent.delete({
          where,
       });
+   }
+
+   async deleteAll(): Promise<Prisma.BatchPayload> {
+      return this.prisma.liveEvent.deleteMany();
    }
 }

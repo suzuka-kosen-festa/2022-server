@@ -51,4 +51,8 @@ export class BazaarService {
    async delete(where: Prisma.BazaarWhereUniqueInput): Promise<Bazaar> {
       return this.prisma.bazaar.delete({ where });
    }
+
+   async deleteAll(): Promise<Prisma.BatchPayload> {
+      return this.prisma.bazaar.deleteMany();
+   }
 }

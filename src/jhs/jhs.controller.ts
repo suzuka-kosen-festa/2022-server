@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JHStudent } from '@prisma/client';
+import { JHStudent, Prisma } from '@prisma/client';
 import { createJhsStudentDto, updateJhsStudentDto } from './dto/jhs.dto';
 import { JhsEntity, JhsWithHistoryEntity, JhswithParentEntity } from './entity/jhs.entiry';
 import { JhsService } from './jhs.service';
@@ -13,7 +13,7 @@ export class JhsController {
 
    @Get()
    @ApiOperation({ summary: '中学生のデータ全件取得' })
-   @ApiOkResponse({ type: JhsEntity, isArray: true })
+   @ApiOkResponse({ type: JhswithParentEntity, isArray: true })
    async getAll(): Promise<JHStudent[]> {
       return this.service.getAllJhs();
    }
@@ -41,28 +41,19 @@ export class JhsController {
 
    @Post()
    @ApiOperation({ summary: '中学生のレコード作成' })
-   @ApiCreatedResponse({ type: JhsEntity })
+   @ApiCreatedResponse({ type: JhswithParentEntity })
    async create(@Body() data: createJhsStudentDto): Promise<JHStudent> {
       return this.service.createJhs(data);
    }
 
-   @Put()
-   @ApiOperation({ summary: '中学生と保護者のリレーション作成' })
+   @Put(':email')
+   @ApiOperation({ summary: '中学生のデータ更新' })
    @ApiCreatedResponse({ type: JhswithParentEntity })
-   async update(@Body() data: updateJhsStudentDto): Promise<JHStudent> {
-      const { email, sex, jobs, name } = data;
+   async update(@Param('email') email: string, @Body() data: updateJhsStudentDto): Promise<JHStudent> {
       //serviceの部分の引数の型を変えればdataをそのまま代入できるかもしれない
       return this.service.updateJhs({
          where: { email },
-         data: {
-            parents: {
-               create: {
-                  sex: sex,
-                  jobs: jobs,
-                  name: name,
-               },
-            },
-         },
+         data,
       });
    }
 
@@ -73,5 +64,12 @@ export class JhsController {
       return this.service.deleteJhs({
          jhsId: uuid,
       });
+   }
+
+   @Delete()
+   @ApiOperation({ summary: '学生のデータの削除' })
+   @ApiResponse({ type: JhsEntity })
+   async deleteAllJhs(): Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll();
    }
 }

@@ -1,6 +1,7 @@
-import { Controller, Delete, Get, Param } from '@nestjs/common';
+// eslint-disable-next-line no-redeclare
+import { Body, Controller, Delete, Get, Param, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Guest } from '@prisma/client';
+import { Guest, Prisma } from '@prisma/client';
 import { GuestEntity, GuestWithHistoryEntity } from './entity/guest.entity';
 import { GuestService } from './guest.service';
 
@@ -21,6 +22,13 @@ export class GuestController {
    @ApiOkResponse({ type: GuestWithHistoryEntity, isArray: true })
    async getAllSponsorHistory(): Promise<Guest[]> {
       return this.service.getAllHistory();
+   }
+
+   @Put(':uuid')
+   @ApiOperation({ summary: 'Guestのデータ更新' })
+   @ApiOkResponse({ type: GuestEntity })
+   async updateGuest(@Param('uuid') uuid: string, @Body() data: Prisma.GuestUpdateInput): Promise<Guest> {
+      return this.service.update({ where: { guestId: uuid }, data });
    }
 
    @Get('check/:uuid')

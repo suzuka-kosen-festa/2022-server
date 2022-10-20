@@ -9,11 +9,7 @@ export class createStudentDto {
 
 export class updateStudentDto {
    @ApiProperty()
-   email: string;
+   email?: string;
    @ApiProperty()
-   sex: string;
-   @ApiProperty()
-   jobs: string;
-   @ApiProperty()
-   name: string;
+   kana?: string;
 }

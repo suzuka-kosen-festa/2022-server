@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { SponsorCompany } from '@prisma/client';
+import { Prisma, SponsorCompany } from '@prisma/client';
 import { CreateSponsorComDto, UpdateSponsorComDto } from './dto/sponsorCompany.dto';
 import { SponsorComEntity } from './entity/sponsorCom.entity';
 import { SponsorcompanyService } from './sponsorcompany.service';
@@ -32,6 +32,12 @@ export class SponsorcompanyController {
       return this.service.create(data);
    }
 
+   @Post('many')
+   @ApiOperation({ summary: 'レコード作成' })
+   async createManySponsorCom(@Body() data: Prisma.SponsorCompanyCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.service.createMany(data);
+   }
+
    @Put(':id')
    @ApiOperation({ summary: 'レコード更新' })
    @ApiOkResponse({ type: SponsorComEntity })
@@ -53,5 +59,11 @@ export class SponsorcompanyController {
       return this.service.delete({
          id: Number(id),
       });
+   }
+
+   @Delete()
+   @ApiOperation({ summary: 'レコード全削除' })
+   async deleteAllSponsorCom(): Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll();
    }
 }

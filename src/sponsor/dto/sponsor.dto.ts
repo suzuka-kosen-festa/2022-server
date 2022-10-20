@@ -6,3 +6,10 @@ export class createSponsorDto {
    @ApiProperty()
    name: string;
 }
+
+export class UpdateSponsorDto {
+   @ApiProperty()
+   email?: string;
+   @ApiProperty()
+   name?: string;
+}

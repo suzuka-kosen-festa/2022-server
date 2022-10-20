@@ -6,3 +6,10 @@ export class createObDto {
    @ApiProperty()
    name: string;
 }
+
+export class UpdateObDto {
+   @ApiProperty()
+   email?: string;
+   @ApiProperty()
+   name?: string;
+}

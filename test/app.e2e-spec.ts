@@ -73,6 +73,13 @@ describe('App (e2e)', () => {
          const record: Prisma.StudentCreateInput = {
             email: 'test@example.com',
             kana: 'てすと',
+            Guest: {
+               create: {
+                  name: 'てすと',
+                  sex: '男',
+                  jobs: '祖父',
+               },
+            },
          };
 
          const res = await request(app.getHttpServer())
@@ -80,12 +87,21 @@ describe('App (e2e)', () => {
             .send(record)
             .then((res) => res.body);
 
-         result = [
-            {
-               Guest: [],
-               ...res,
-            },
-         ];
+         result[0] = {
+            studentId: res.studentId,
+            email: 'test@example.com',
+            kana: 'てすと',
+            Guest: [
+               {
+                  hostId: res.Guest[0].hostId,
+                  guestId: res.Guest[0].guestId,
+                  name: 'てすと',
+                  sex: '男',
+                  jobs: '祖父',
+                  hostJhsId: null,
+               },
+            ],
+         };
 
          expect(
             await request(app.getHttpServer())
@@ -95,30 +111,16 @@ describe('App (e2e)', () => {
       });
 
       it('update student record and get it', async () => {
-         const guestRecord: Pick<Prisma.StudentUpdateInput, 'email'> & Prisma.GuestCreateInput = {
-            email: 'test@example.com',
-            name: 'てすとほすと',
-            sex: '男',
-            jobs: '祖父',
+         const data = {
+            kana: 'てすと2',
          };
 
-         const res = await request(app.getHttpServer())
-            .put('/student')
-            .send(guestRecord)
+         await request(app.getHttpServer())
+            .put(`/student/${result[0].email}`)
+            .send(data)
             .then((res) => res.body);
 
-         const resGuestData = res.Guest[0];
-
-         const { email, ...rest } = guestRecord;
-
-         result[0].Guest = [
-            {
-               guestId: resGuestData.guestId,
-               hostId: resGuestData.hostId,
-               hostJhsId: null,
-               ...rest,
-            },
-         ];
+         result[0].kana = data.kana;
 
          expect(
             await request(app.getHttpServer())
@@ -189,20 +191,36 @@ describe('App (e2e)', () => {
             age: '20',
             name: 'てすと',
             email: 'test1@example.com',
+            parents: {
+               create: {
+                  name: 'てすとぺあれんと',
+                  sex: '男',
+                  jobs: '保護者',
+               },
+            },
          };
 
-         const createdResult = await request(app.getHttpServer())
+         const res = await request(app.getHttpServer())
             .post('/jhs')
             .send(record)
             .then((res) => res.body);
 
-         result = [
-            {
-               jhsId: createdResult.jhsId,
-               ...record,
-               parents: [],
-            },
-         ];
+         result[0] = {
+            jhsId: res.jhsId,
+            email: 'test1@example.com',
+            name: 'てすと',
+            age: '20',
+            parents: [
+               {
+                  guestId: res.parents[0].guestId,
+                  name: 'てすとぺあれんと',
+                  sex: '男',
+                  jobs: '保護者',
+                  hostJhsId: res.parents[0].hostJhsId,
+                  hostId: null,
+               },
+            ],
+         };
 
          const expectedResult = await request(app.getHttpServer())
             .get('/jhs')
@@ -212,25 +230,16 @@ describe('App (e2e)', () => {
       });
 
       it('update jhs and get it', async () => {
-         const parentsRecord: Pick<Prisma.JHStudentUpdateInput, 'email'> & Prisma.GuestCreateInput = {
-            email: 'test1@example.com',
-            name: 'てすとぺあれんと',
-            sex: '男',
-            jobs: '保護者',
+         const data = {
+            name: 'てすと',
          };
 
-         const updatedRecord = await request(app.getHttpServer())
+         await request(app.getHttpServer())
             .put('/jhs')
-            .send(parentsRecord)
+            .send(data)
             .then((res) => res.body);
 
-         const parentsData = updatedRecord.parents[0];
-
-         result[0].parents = [
-            {
-               ...parentsData,
-            },
-         ];
+         result[0].name = data.name;
 
          expect(
             await request(app.getHttpServer())
@@ -384,26 +393,24 @@ describe('App (e2e)', () => {
          const studentData: Prisma.StudentCreateInput = {
             kana: 'てすと',
             email: 'test@example.com',
+            Guest: {
+               create: {
+                  name: 'てすと',
+                  sex: '男',
+                  jobs: '祖父',
+               },
+            },
          };
 
-         await request(app.getHttpServer()).post('/student').send(studentData);
-
-         const guestData = {
-            email: studentData.email,
-            name: 'てすと',
-            sex: '男',
-            jobs: '祖父',
-         };
-
-         const guestResData = await request(app.getHttpServer()).put('/student').send(guestData);
+         const createData = await request(app.getHttpServer()).post('/student').send(studentData);
 
          const expectData = [
             {
                email: 'test@example.com',
                guest: [
                   {
-                     guestId: 'G' + guestResData.body.Guest[0].guestId,
-                     name: guestResData.body.Guest[0].name,
+                     guestId: 'G' + createData.body.Guest[0].guestId,
+                     name: createData.body.Guest[0].name,
                   },
                ],
             },
@@ -427,18 +434,16 @@ describe('App (e2e)', () => {
             email: 'test@example.com',
             name: 'てすと',
             age: '15',
+            parents: {
+               create: {
+                  name: 'てすと',
+                  sex: '男',
+                  jobs: '祖父',
+               },
+            },
          };
 
          const jhsResData = await request(app.getHttpServer()).post('/jhs').send(jhsData);
-
-         const guestData = {
-            email: jhsData.email,
-            name: 'てすと',
-            sex: '男',
-            jobs: '祖父',
-         };
-
-         const guestResData = await request(app.getHttpServer()).put('/jhs').send(guestData);
 
          const expectData = [
             {
@@ -447,8 +452,8 @@ describe('App (e2e)', () => {
                name: jhsResData.body.name,
                parents: [
                   {
-                     guestId: 'G' + guestResData.body.parents[0].guestId,
-                     name: guestResData.body.parents[0].name,
+                     guestId: 'G' + jhsResData.body.parents[0].guestId,
+                     name: jhsResData.body.parents[0].name,
                   },
                ],
             },
@@ -751,7 +756,6 @@ describe('App (e2e)', () => {
             id: 1,
          };
 
-         console.log(expectedResult);
          expect(res.body).toEqual(expectedResult);
       });
 

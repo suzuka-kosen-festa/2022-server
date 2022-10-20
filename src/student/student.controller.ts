@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-redeclare
 import { Post, Controller, Body, Get, Put, Param, Delete } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Guest, Student } from '@prisma/client';
+import { Guest, Prisma, Student } from '@prisma/client';
 import { createStudentDto, updateStudentDto } from './dto/student.dto';
 import { StudentEntity, StudentwithGuestEntity } from './entities/student.entity';
 import { StudentService } from './student.service';
@@ -40,24 +40,13 @@ export class StudentController {
       return this.studentService.createStudent(data);
    }
 
-   @Put()
-   @ApiOperation({ summary: '学生のデータに招待客のデータを加える' })
-   @ApiCreatedResponse({ type: StudentwithGuestEntity })
-   async update(
-      @Body()
-      data: updateStudentDto,
-   ): Promise<Student> {
-      const { email, ...rest } = data;
-      //serviceの部分の引数の型を変えればdataをそのまま代入できるかもしれない
+   @Put(':email')
+   @ApiOperation({ summary: '学生のデータの更新' })
+   @ApiCreatedResponse({ type: StudentEntity })
+   async update(@Param('email') email: string, @Body() data: updateStudentDto): Promise<Student> {
       return this.studentService.updateStudent({
          where: { email },
-         data: {
-            Guest: {
-               create: {
-                  ...rest,
-               },
-            },
-         },
+         data,
       });
    }
 
@@ -68,5 +57,11 @@ export class StudentController {
       return this.studentService.deleteStudent({
          studentId: uuid,
       });
+   }
+
+   @Delete()
+   @ApiOperation({ summary: '全削除' })
+   async deleteManyStudent(): Promise<Prisma.BatchPayload> {
+      return this.studentService.deleteAll();
    }
 }

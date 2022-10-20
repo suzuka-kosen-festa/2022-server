@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-redeclare
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { OB } from '@prisma/client';
-import { createObDto } from './dto/ob.dto';
+import { OB, Prisma } from '@prisma/client';
+import { createObDto, UpdateObDto } from './dto/ob.dto';
 import { ObEntity, ObWithHistoryEntity } from './entity/ob.dto';
 import { ObService } from './ob.service';
 
@@ -45,10 +45,29 @@ export class ObController {
       return this.service.createOb(data);
    }
 
+   @Post('many')
+   @ApiOperation({ summary: 'OBレコードの複数作成' })
+   async createManyOB(@Body() data: Prisma.OBCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.service.createMany(data);
+   }
+
+   @Put(':uuid')
+   @ApiOperation({ summary: 'OBレコードの更新' })
+   @ApiOkResponse({ type: ObEntity })
+   async updateOb(@Param('uuid') uuid: string, @Body() data: UpdateObDto): Promise<OB> {
+      return this.service.update({ where: { obId: uuid }, data });
+   }
+
    @Delete(':uuid')
    @ApiOperation({ summary: 'OBレコードの削除' })
    @ApiResponse({ type: ObEntity })
    async delete(@Param('uuid') uuid: string): Promise<OB> {
       return this.service.deleteOb({ obId: uuid });
+   }
+
+   @Delete()
+   @ApiOperation({ summary: 'OBレコードを全削除' })
+   async deleteAllOb(): Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll();
    }
 }

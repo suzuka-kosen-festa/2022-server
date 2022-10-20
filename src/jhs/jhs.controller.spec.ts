@@ -71,14 +71,7 @@ describe('JhsController', () => {
    });
 
    it('update student', async () => {
-      const data = await controller.update({
-         email: 'test2@example.com',
-         name: 'てすと親',
-         age: 40,
-         sex: '女性',
-         //TODO:保護者の続柄の確認
-         jobs: '保護者',
-      });
+      const data = await controller.update('test@example', { name: 'てすと１', age: '13' });
       await expect(data).toEqual(singleRecordwithParents);
    });
 

@@ -8,7 +8,7 @@ export class StudentService {
 
    // Studentテーブルのレコードを作成する関数
    async createStudent(data: Prisma.StudentCreateInput): Promise<Student> {
-      return this.prisma.student.create({ data });
+      return this.prisma.student.create({ data, include: { Guest: true } });
    }
 
    //uuidの照合
@@ -37,22 +37,18 @@ export class StudentService {
       });
    }
 
-   // StudentテーブルにGuestとリレーションを作る
    async updateStudent(params: {
       where: Prisma.StudentWhereUniqueInput;
       data: Prisma.StudentUpdateInput;
    }): Promise<Student> {
-      const { where, data } = params;
-      return this.prisma.student.update({
-         where,
-         data,
-         include: {
-            Guest: true,
-         },
-      });
+      return this.prisma.student.update(params);
    }
 
    async deleteStudent(where: Prisma.StudentWhereUniqueInput): Promise<Student> {
       return this.prisma.student.delete({ where: where });
+   }
+
+   async deleteAll(): Promise<Prisma.BatchPayload> {
+      return this.prisma.student.deleteMany();
    }
 }
