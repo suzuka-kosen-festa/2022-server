@@ -47,10 +47,10 @@ export class LiveeventController {
       return this.service.create(data);
    }
 
-   @Post("many")
-   @ApiOperation({ summary: "レコードを複数作成" })
-   async createManyEvent(@Body() data : Prisma.LiveEventCreateManyInput) : Promise<Prisma.BatchPayload>{
-      return this.service.createMany(data)
+   @Post('many')
+   @ApiOperation({ summary: 'レコードを複数作成' })
+   async createManyEvent(@Body() data: Prisma.LiveEventCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.service.createMany(data);
    }
 
    @Put(':id')
