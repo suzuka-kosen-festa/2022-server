@@ -21,7 +21,7 @@ export class BazaarpricesController {
    @Get(':id')
    @ApiOperation({ summary: 'idで取得' })
    @ApiOkResponse({ type: BazaarEntity })
-   async getBazaarPricesById(@Param('id') id: string): Promise<BazaarPrices> {
+   async getBazaarPricesById(@Param('id') id: string): Promise<BazaarPrices | null> {
       return this.service.getById({ id: Number(id) });
    }
 
