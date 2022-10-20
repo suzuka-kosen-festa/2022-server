@@ -54,8 +54,8 @@ export class GuestService {
       });
    }
 
-   async update(params : {where : Prisma.GuestWhereUniqueInput, data : Prisma.GuestUpdateInput}): Promise<Guest> {
-      return this.prisma.guest.update(params)
+   async update(params: { where: Prisma.GuestWhereUniqueInput; data: Prisma.GuestUpdateInput }): Promise<Guest> {
+      return this.prisma.guest.update(params);
    }
 
    async deleteGuest(where: Prisma.GuestWhereUniqueInput): Promise<Guest> {

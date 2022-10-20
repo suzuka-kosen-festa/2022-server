@@ -53,10 +53,8 @@ export class ObController {
    }
 
    @Delete()
-   @ApiOperation({ summary : "OBレコードを全削除" })
-   async deleteAllOb() : Promise<Prisma.BatchPayload> {
-      return this.service.deleteAll()
+   @ApiOperation({ summary: 'OBレコードを全削除' })
+   async deleteAllOb(): Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll();
    }
-
-
 }

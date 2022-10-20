@@ -22,8 +22,8 @@ export class SponsorcompanyService {
       });
    }
 
-   async createMany(data : Prisma.SponsorCompanyCreateManyInput) : Promise<Prisma.BatchPayload>{
-      return this.prisma.sponsorCompany.createMany({ data })
+   async createMany(data: Prisma.SponsorCompanyCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.prisma.sponsorCompany.createMany({ data });
    }
 
    async update(params: {
@@ -43,7 +43,7 @@ export class SponsorcompanyService {
       });
    }
 
-   async deleteAll() : Promise<Prisma.BatchPayload> {
-      return this.prisma.sponsorCompany.deleteMany()
+   async deleteAll(): Promise<Prisma.BatchPayload> {
+      return this.prisma.sponsorCompany.deleteMany();
    }
 }

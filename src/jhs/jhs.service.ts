@@ -91,7 +91,7 @@ export class JhsService {
       return this.prisma.jHStudent.delete({ where: where });
    }
 
-   async deleteAll() : Promise<Prisma.BatchPayload> {
-      return this.prisma.jHStudent.deleteMany()
+   async deleteAll(): Promise<Prisma.BatchPayload> {
+      return this.prisma.jHStudent.deleteMany();
    }
 }

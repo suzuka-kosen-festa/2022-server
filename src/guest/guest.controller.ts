@@ -24,11 +24,11 @@ export class GuestController {
       return this.service.getAllHistory();
    }
 
-   @Put(":uuid")
-   @ApiOperation({ summary : "Guestのデータ更新" })
+   @Put(':uuid')
+   @ApiOperation({ summary: 'Guestのデータ更新' })
    @ApiOkResponse({ type: GuestEntity })
-   async updateGuest(@Param("uuid") uuid : string, @Body() data : Prisma.GuestUpdateInput) : Promise<Guest>{
-      return this.service.update({where:{ guestId : uuid} , data})
+   async updateGuest(@Param('uuid') uuid: string, @Body() data: Prisma.GuestUpdateInput): Promise<Guest> {
+      return this.service.update({ where: { guestId: uuid }, data });
    }
 
    @Get('check/:uuid')

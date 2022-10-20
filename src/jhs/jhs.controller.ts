@@ -46,14 +46,14 @@ export class JhsController {
       return this.service.createJhs(data);
    }
 
-   @Put(":email")
+   @Put(':email')
    @ApiOperation({ summary: '中学生のデータ更新' })
    @ApiCreatedResponse({ type: JhswithParentEntity })
-   async update(@Param("email") email: string  ,@Body() data: updateJhsStudentDto): Promise<JHStudent> {
+   async update(@Param('email') email: string, @Body() data: updateJhsStudentDto): Promise<JHStudent> {
       //serviceの部分の引数の型を変えればdataをそのまま代入できるかもしれない
       return this.service.updateJhs({
          where: { email },
-         data
+         data,
       });
    }
 

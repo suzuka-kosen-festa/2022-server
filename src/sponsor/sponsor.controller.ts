@@ -46,19 +46,18 @@ export class SponsorController {
       return this.service.createSponsor(data);
    }
 
-   @Post("many")
-   @ApiOperation({ summary: "レコードを複数を作成"})
-   async createManySponsor(@Body() data : Prisma.SponsorCreateManyInput): Promise<Prisma.BatchPayload> {
-      return this.service.createMany(data)
+   @Post('many')
+   @ApiOperation({ summary: 'レコードを複数を作成' })
+   async createManySponsor(@Body() data: Prisma.SponsorCreateManyInput): Promise<Prisma.BatchPayload> {
+      return this.service.createMany(data);
    }
 
-   @Put(":uuid")
-   @ApiOperation({ summary : "レコードの更新" })
-   @ApiOkResponse({ type : SponsorEntity })
-   async update(@Param("uuid") uuid : string , @Body() data : UpdateSponsorDto) : Promise<Sponsor>{
-      return this.service.update({where:{sponsorId: uuid}, data})
+   @Put(':uuid')
+   @ApiOperation({ summary: 'レコードの更新' })
+   @ApiOkResponse({ type: SponsorEntity })
+   async update(@Param('uuid') uuid: string, @Body() data: UpdateSponsorDto): Promise<Sponsor> {
+      return this.service.update({ where: { sponsorId: uuid }, data });
    }
-
 
    @Delete(':uuid')
    @ApiOperation({ summary: 'Sponsorレコードの削除' })
@@ -68,8 +67,8 @@ export class SponsorController {
    }
 
    @Delete()
-   @ApiOperation({ summary : "全削除" })
-   async deleteAllSponsor() : Promise<Prisma.BatchPayload> {
-      return this.service.deleteAll()
+   @ApiOperation({ summary: '全削除' })
+   async deleteAllSponsor(): Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll();
    }
 }
