@@ -46,8 +46,8 @@ export class ObService {
       return this.prisma.oB.create({ data });
    }
 
-   async update(params : { where: Prisma.OBWhereUniqueInput ,data : Prisma.OBUpdateInput}) : Promise<OB>{
-      return this.prisma.oB.update(params)
+   async update(params: { where: Prisma.OBWhereUniqueInput; data: Prisma.OBUpdateInput }): Promise<OB> {
+      return this.prisma.oB.update(params);
    }
 
    async checkObExist(uuid: Prisma.OBWhereUniqueInput): Promise<OB | null> {
