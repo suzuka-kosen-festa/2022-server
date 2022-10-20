@@ -8,3 +8,12 @@ export class UpdateGuestDto {
   @ApiProperty()
   name?: string;
 }
+
+export class CreateGuestDto {
+  @ApiProperty()
+  sex?: string;
+  @ApiProperty()
+  jobs?: string;
+  @ApiProperty()
+  name?: string;
+}

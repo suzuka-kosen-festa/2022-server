@@ -37,7 +37,6 @@ export class StudentService {
       });
    }
 
-   // StudentテーブルにGuestとリレーションを作る
    async updateStudent(params: {
       where: Prisma.StudentWhereUniqueInput;
       data: Prisma.StudentUpdateInput;
