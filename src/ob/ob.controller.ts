@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-redeclare
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { OB, Prisma } from '@prisma/client';
-import { createObDto } from './dto/ob.dto';
+import { createObDto, UpdateObDto } from './dto/ob.dto';
 import { ObEntity, ObWithHistoryEntity } from './entity/ob.dto';
 import { ObService } from './ob.service';
 
@@ -43,6 +43,13 @@ export class ObController {
    @ApiCreatedResponse({ type: ObEntity })
    async create(@Body() data: createObDto): Promise<OB> {
       return this.service.createOb(data);
+   }
+
+   @Put(":uuid")
+   @ApiOperation({ summary : "OBレコードの更新" })
+   @ApiOkResponse({ type: ObEntity })
+   async updateOb(@Param("uuid") uuid : string ,@Body() data : UpdateObDto) : Promise<OB> {
+      return this.service.update({where:{obId : uuid} , data})
    }
 
    @Delete(':uuid')

@@ -46,6 +46,10 @@ export class ObService {
       return this.prisma.oB.create({ data });
    }
 
+   async update(params : { where: Prisma.OBWhereUniqueInput ,data : Prisma.OBUpdateInput}) : Promise<OB>{
+      return this.prisma.oB.update(params)
+   }
+
    async createMany(data : Prisma.OBCreateManyInput) : Promise<Prisma.BatchPayload> {
       return this.prisma.oB.createMany({data})
    }
