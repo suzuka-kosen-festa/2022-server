@@ -45,6 +45,13 @@ export class ObController {
       return this.service.createOb(data);
    }
 
+   @Post("many")
+   @ApiOperation({ summary : "OBレコードの複数作成"})
+   async createManyOB(@Body() data : Prisma.OBCreateManyInput) : Promise<Prisma.BatchPayload> {
+      return this.service.createMany(data)
+   }
+
+
    @Put(":uuid")
    @ApiOperation({ summary : "OBレコードの更新" })
    @ApiOkResponse({ type: ObEntity })

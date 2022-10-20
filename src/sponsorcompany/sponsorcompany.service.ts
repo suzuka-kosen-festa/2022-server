@@ -22,6 +22,10 @@ export class SponsorcompanyService {
       });
    }
 
+   async createMany(data: Prisma.SponsorCompanyCreateManyInput): Promise<Prisma.BatchPayload>{
+      return this.prisma.sponsorCompany.createMany({data})
+   }
+
    async update(params: {
       where: Prisma.SponsorCompanyWhereUniqueInput;
       data: Prisma.SponsorCompanyUpdateInput;

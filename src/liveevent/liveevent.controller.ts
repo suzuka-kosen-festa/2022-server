@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-redeclare
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { LiveEvent } from '@prisma/client';
+import { LiveEvent, Prisma } from '@prisma/client';
 import { CreateEventDto, UpdateEventDto } from './dto/liveEvent.sto';
 import { LiveEventEntity, LiveEventWithIdEntity, SeparationEventListEntity } from './entity/liveEvent.entity';
 import { LiveeventService } from './liveevent.service';
@@ -45,6 +45,12 @@ export class LiveeventController {
    @ApiOkResponse({ type: LiveEventWithIdEntity })
    async createEvent(@Body() data: CreateEventDto): Promise<LiveEvent> {
       return this.service.create(data);
+   }
+
+   @Post("many")
+   @ApiOperation({ summary: "レコードを複数作成" })
+   async createManyEvent(@Body() data : Prisma.LiveEventCreateManyInput) : Promise<Prisma.BatchPayload>{
+      return this.service.createMany(data)
    }
 
    @Put(':id')

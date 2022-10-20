@@ -14,6 +14,10 @@ export class SponsorService {
       return this.prisma.sponsor.create({ data });
    }
 
+   async createManySponsor(data : Prisma.SponsorCreateManyInput) : Promise<Prisma.BatchPayload>{
+      return this.prisma.sponsor.createMany({data})
+   }
+
    async checkSponsorExist(where: Prisma.SponsorWhereUniqueInput): Promise<Sponsor | null> {
       await this.updateTimeStamp(where);
       return this.prisma.sponsor.findUnique({
