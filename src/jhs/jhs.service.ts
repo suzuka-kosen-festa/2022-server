@@ -79,8 +79,8 @@ export class JhsService {
    }): Promise<JHStudent> {
       const { where, data } = params;
       return this.prisma.jHStudent.update({
-         where: where,
-         data: data,
+         where,
+         data,
          include: {
             parents: true,
          },
@@ -89,5 +89,9 @@ export class JhsService {
 
    async deleteJhs(where: Prisma.JHStudentWhereUniqueInput): Promise<JHStudent> {
       return this.prisma.jHStudent.delete({ where: where });
+   }
+
+   async deleteAll() : Promise<Prisma.BatchPayload> {
+      return this.prisma.jHStudent.deleteMany()
    }
 }

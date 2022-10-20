@@ -11,13 +11,7 @@ export class createJhsStudentDto {
 
 export class updateJhsStudentDto {
    @ApiProperty()
-   email: string;
-   @ApiProperty()
-   sex: string;
-   @ApiProperty()
-   jobs: string;
-   @ApiProperty()
    name: string;
    @ApiProperty()
-   age: number;
+   age: string;
 }
