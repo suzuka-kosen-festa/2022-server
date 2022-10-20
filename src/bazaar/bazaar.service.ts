@@ -7,7 +7,7 @@ import { BazaarWithId, BazaarWithoutId } from '../types/bazaar';
 export class BazaarService {
    constructor(private readonly prisma: PrismaService) {}
 
-   async getAll(): Promise<BazaarWithId[]> {
+   async getAll(): Promise<BazaarWithId[] | []> {
       return this.prisma.bazaar.findMany({
          include: {
             prices: true,
@@ -15,7 +15,7 @@ export class BazaarService {
       });
    }
 
-   async getByType(grouptype: Prisma.BazaarWhereInput): Promise<BazaarWithoutId[]> {
+   async getByType(grouptype: Prisma.BazaarWhereInput): Promise<BazaarWithoutId[] | []> {
       return this.prisma.bazaar.findMany({
          where: grouptype,
          select: {

@@ -15,21 +15,21 @@ export class BazaarController {
    @Get()
    @ApiOperation({ summary: 'すべてのレコードのデータを返す' })
    @ApiOkResponse({ type: BazaarEntity, isArray: true })
-   async getAllBazaar(): Promise<BazaarWithId[]> {
+   async getAllBazaar(): Promise<BazaarWithId[] | []> {
       return this.service.getAll();
    }
 
    @Get(':id')
    @ApiOperation({ summary: 'レコードをIDによって取得' })
    @ApiOkResponse({ type: BazaarEntity })
-   async getBazaarById(@Param('id') id: string): Promise<Bazaar> {
+   async getBazaarById(@Param('id') id: string): Promise<Bazaar | null> {
       return this.service.getById({ id: Number(id) });
    }
 
    @Get('data/:type')
    @ApiOperation({ summary: 'レコードをtypeによって取得' })
    @ApiOkResponse({ type: BazaarWithoutIdEntity, isArray: true })
-   async getBazzarByType(@Param('type') type: BazaarType): Promise<BazaarWithoutId[]> {
+   async getBazzarByType(@Param('type') type: BazaarType): Promise<BazaarWithoutId[] | []> {
       return this.service.getByType({ group_type: type });
    }
 
