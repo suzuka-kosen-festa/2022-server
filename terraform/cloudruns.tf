@@ -15,7 +15,7 @@ resource "google_cloud_run_service" "default" {
 
     spec {
       containers {
-        image = "us-docker.pkg.dev/cloudrun/container/hello"
+        image = "gcr.io/kosen-festa-server/server-image"
         resources {
           limits = { "memory" : "0.5Gi", "cpu": "1" }
         }
