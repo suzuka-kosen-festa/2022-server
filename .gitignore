@@ -1,6 +1,7 @@
 .env
 .env.gcp
 terraform/gcp_key.json
+terraform/.terraform
 
 
 # compiled output
