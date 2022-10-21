@@ -1,15 +1,29 @@
 version: '3'
 services:
   server:
-    build: 
+    container_name: server
+    build:
       context: .
       dockerfile: ./Dockerfiles/prod.Dockerfile
-    volumes:
-      - ./app
+    tty: true
+    working_dir: /app
+    depends_on:
+      - db
+    ports:
+      - 7000:7000
+    env_file:
+      - .env
 
   db:
-    volumes:
-      - postgres_volume:/var/lib/postgresql/data
-
-volumes:
-    postgres_volume:
+    image: postgres:14.4
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      TZ: Asia/Tokyo
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    restart: always
+    hostname: db
+    user: root

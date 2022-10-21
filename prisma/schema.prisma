@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://root:root@db:5432/postgres?schema=public"
 }
 
 //学生用テーブル。QRコードを送り返すときと招待客との関係性もここで確認する。
