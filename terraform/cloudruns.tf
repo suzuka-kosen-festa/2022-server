@@ -67,12 +67,12 @@ resource "google_cloudbuild_worker_pool" "pool" {
 
 resource "google_cloudbuild_trigger" "include-build-logs-trigger" {
   location = "us-west1"
-  name     = "include-build-logs-trigger"
+  name     = "container-builder"
   filename = "cloudbuild.yaml"
 
   github {
-    owner = "hashicorp"
-    name  = "terraform-provider-google-beta"
+    owner = "suzuka-kosen-festa"
+    name  = "2022-server"
     push {
       branch = "^main$"
     }
