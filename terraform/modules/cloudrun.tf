@@ -1,21 +1,13 @@
-variable "region" {
-  type = string
-}
-
-variable "database_url" {
-  type = string
-}
-
 resource "google_cloud_run_service" "default" {
   name     = "server"
-  location = vars.region
+  location = var.region
 
   template {
     metadata {
       annotations = {
-        "autoscaling.knative.dev/maxScale" = "3"
-        "autoscaling.knative.dev/minScale" = "1"
-        "run.googleapis.com/cpu-throttling" = false
+        "autoscaling.knative.dev/maxScale"      = "3"
+        "autoscaling.knative.dev/minScale"      = "1"
+        "run.googleapis.com/cpu-throttling"     = false
         "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.database.connection_name
         "run.googleapis.com/client-name"        = "terraform"
       }
@@ -25,7 +17,7 @@ resource "google_cloud_run_service" "default" {
       containers {
         image = "us-west1-docker.pkg.dev/kosen-festa-server/my-repository/server-image"
         resources {
-          limits = { "memory" : "0.5Gi", "cpu": "1" }
+          limits = { "memory" : "0.5Gi", "cpu" : "1" }
         }
 
         ports {
@@ -45,18 +37,18 @@ resource "google_cloud_run_service" "default" {
           value = google_sql_user.users.password
         }
 
-        env{
-          name = "INSTANCE_UNIX_SOCKET" 
+        env {
+          name  = "INSTANCE_UNIX_SOCKET"
           value = "/cloudsql/kosen-festa-server:us-west1:main-instance"
         }
 
-        env{
-          name = "INSTANCE_CONNECTION_NAME"
+        env {
+          name  = "INSTANCE_CONNECTION_NAME"
           value = "kosen-festa-server:us-west1:main-instance"
         }
-        env{
-          name = "DATABASE_URL"
-          value = vars.database_url
+        env {
+          name  = "DATABASE_URL"
+          value = var.database_url
         }
       }
     }

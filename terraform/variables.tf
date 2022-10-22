@@ -1,5 +1,5 @@
-variable "project_id" {}
 variable "region" {}
-variable "database_url" {}
 variable "user_password" {}
+variable "database_url" {}
+variable "project_id" {}
 variable "db_name" {}

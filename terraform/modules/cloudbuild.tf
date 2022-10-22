@@ -1,10 +1,6 @@
-variable "region" {
-  type = string
-}
-
 resource "google_cloudbuild_worker_pool" "pool" {
-  name = "my-pool"
-  location = vars.region
+  name     = "my-pool"
+  location = var.region
   worker_config {
     disk_size_gb = 100
     machine_type = "e2-standard-2"
@@ -12,7 +8,7 @@ resource "google_cloudbuild_worker_pool" "pool" {
 }
 
 resource "google_cloudbuild_trigger" "include-build-logs-trigger" {
-  location = vars.region
+  location = var.region
   name     = "container-builder"
   filename = "cloudbuild.yaml"
 
