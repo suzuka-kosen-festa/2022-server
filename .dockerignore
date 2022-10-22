@@ -9,3 +9,4 @@ Dockerfile_build
 docker-compose.yml
 docker-compose.prod.yml
 .gitignore
+.env
