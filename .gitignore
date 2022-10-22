@@ -2,6 +2,7 @@
 .env.gcp
 terraform/gcp_key.json
 terraform/.terraform
+terraform/terraform.tfvars
 
 
 # compiled output
