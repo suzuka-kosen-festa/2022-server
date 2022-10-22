@@ -39,12 +39,12 @@ resource "google_cloud_run_service" "default" {
 
         env {
           name  = "INSTANCE_UNIX_SOCKET"
-          value = "/cloudsql/kosen-festa-server:us-west1:main-instance"
+          value = "/cloudsql/kosen-festa-server:us-west1:main"
         }
 
         env {
           name  = "INSTANCE_CONNECTION_NAME"
-          value = "kosen-festa-server:us-west1:main-instance"
+          value = "kosen-festa-server:us-west1:main"
         }
         env {
           name  = "DATABASE_URL"

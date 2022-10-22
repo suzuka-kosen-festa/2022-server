@@ -1,5 +1,7 @@
 resource "google_sql_database_instance" "database" {
-  name             = "main-instance"
+  provider = google-beta
+
+  name             = "main"
   database_version = "POSTGRES_14"
   region           = var.region
 
