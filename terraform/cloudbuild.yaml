@@ -8,6 +8,6 @@ steps:
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'server-image', '--image', 'gcr.io/kosen-festa-server/server-image', '--region', 'REGION']
+  args: ['run', 'deploy', 'server', '--image', 'gcr.io/kosen-festa-server/server-image', '--region', 'REGION']
 images:
 - gcr.io/kosen-festa-server/server-image
