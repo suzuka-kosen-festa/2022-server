@@ -10,6 +10,7 @@ export type BazaarWithoutId = {
 };
 
 export type BazaarWithId = {
+   id : number ;
    name: string;
    descriptions: string;
    image: string;
