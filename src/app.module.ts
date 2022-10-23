@@ -12,6 +12,7 @@ import { SponsorcompanyModule } from './sponsorcompany/sponsorcompany.module';
 import { LiveeventModule } from './liveevent/liveevent.module';
 import { BazaarModule } from './bazaar/bazaar.module';
 import { BazaarpricesModule } from './bazaarprices/bazaarprices.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
    imports: [
@@ -28,6 +29,7 @@ import { BazaarpricesModule } from './bazaarprices/bazaarprices.module';
       LiveeventModule,
       BazaarModule,
       BazaarpricesModule,
+      AuthModule,
    ],
 })
 export class AppModule {}
