@@ -1,15 +1,13 @@
 version: '3'
 services:
   server:
-    build: 
+    container_name: server
+    build:
       context: .
       dockerfile: ./Dockerfiles/prod.Dockerfile
-    volumes:
-      - ./app
-
-  db:
-    volumes:
-      - postgres_volume:/var/lib/postgresql/data
-
-volumes:
-    postgres_volume:
+    tty: true
+    working_dir: /app
+    ports:
+      - 7000:7000
+    env_file:
+      - .env.prod

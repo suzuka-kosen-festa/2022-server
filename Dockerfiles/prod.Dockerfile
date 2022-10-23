@@ -5,7 +5,12 @@ WORKDIR /build
 ENV NODE_ENV=development
 
 COPY package.json yarn.lock ./
-RUN yarn install --immutable
+
+COPY prisma ./prisma
+
+RUN \
+yarn install --immutable;\
+yarn run prisma generate
 
 COPY . ./
 RUN yarn build
@@ -17,9 +22,10 @@ WORKDIR /deps
 ENV NODE_ENV=production
 
 COPY package.json yarn.lock ./
+
 RUN yarn install --immutable
 
-FROM gcr.io/distroless/nodejs:18
+FROM node:16
 
 WORKDIR /app
 
@@ -27,7 +33,11 @@ ENV NODE_ENV=production
 
 COPY --from=build /build/dist /app/dist
 COPY --from=deps /deps/node_modules /app/node_modules
+COPY prisma ./prisma
+COPY package.json ./
+COPY ./start.sh ./
+
 
 EXPOSE 7000
 
-CMD ["node","dist/main"]
+CMD ["./start.sh"]
