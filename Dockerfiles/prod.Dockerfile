@@ -25,21 +25,18 @@ COPY package.json yarn.lock ./
 
 RUN yarn install --immutable
 
-FROM alpine as lib
-
-FROM gcr.io/distroless/nodejs:16
+FROM node:16
 
 WORKDIR /app
 
 ENV NODE_ENV=production
 
-COPY --from=lib /lib/libz.so.1 /lib/libz.so.1
-COPY --from=lib /lib/libc.musl-x86_64.so.1 /lib/libc.musl-x86_64.so.1
 COPY --from=build /build/dist /app/dist
 COPY --from=deps /deps/node_modules /app/node_modules
 COPY prisma ./prisma
 COPY package.json ./
-COPY start.sh ./
+COPY ./start.sh ./
+
 
 EXPOSE 7000
 
