@@ -1,12 +1,14 @@
 // eslint-disable-next-line no-redeclare
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { OB, Prisma } from '@prisma/client';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { createObDto, UpdateObDto } from './dto/ob.dto';
 import { ObEntity, ObWithHistoryEntity } from './entity/ob.dto';
 import { ObService } from './ob.service';
 
 @ApiTags('ob')
+@UseGuards(JwtAuthGuard)
 @Controller('ob')
 export class ObController {
    constructor(private readonly service: ObService) {}

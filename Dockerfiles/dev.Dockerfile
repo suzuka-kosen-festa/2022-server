@@ -11,5 +11,3 @@ RUN yarn install --immutable
 COPY . .
 
 EXPOSE 7000
-
-CMD [ "./start.sh" ]

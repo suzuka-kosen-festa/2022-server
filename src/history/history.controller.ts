@@ -1,11 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 // eslint-disable-next-line no-redeclare
 import { History } from '@prisma/client';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AllHistoryEntity } from './entity/history.entity';
 import { HistoryService } from './history.service';
 
+@ApiTags('history')
 @Controller('history')
+@UseGuards(JwtAuthGuard)
 export class HistoryController {
    constructor(private readonly service: HistoryService) {}
 

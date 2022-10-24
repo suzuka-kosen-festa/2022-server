@@ -46,6 +46,16 @@ resource "google_cloud_run_service" "default" {
           name  = "INSTANCE_CONNECTION_NAME"
           value = "kosen-festa-server:us-west1:main"
         }
+
+        env {
+          name = "JWT_SECRET_KEY"
+          value = var.jwt_secret_key
+        }
+
+        env {
+          name = "PASSWORD"
+          value = var.password
+        }
         env {
           name  = "DATABASE_URL"
           value = var.database_url

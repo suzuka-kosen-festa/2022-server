@@ -7,6 +7,7 @@ import { JhsTestRecord, StudentTestRecord, ObTestRecord, SponsorTestRecord } fro
 
 describe('App (e2e)', () => {
    let app: INestApplication;
+   let jwt_token: string;
 
    beforeAll(async () => {
       const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -18,6 +19,26 @@ describe('App (e2e)', () => {
    });
    afterAll(async () => {
       await app.close();
+   });
+
+   describe('AuthModule(e2e)', () => {
+      it('get token and test', async () => {
+         const authData = {
+            username: 'admin',
+            password: process.env.PASSWORD,
+         };
+         jwt_token = await request(app.getHttpServer())
+            .post('/auth')
+            .send(authData)
+            .then((res) => res.body.access_token);
+
+         const res = await request(app.getHttpServer())
+            .get('/auth/test')
+            .set({ Authorization: `Bearer ${jwt_token}` });
+
+         console.log(res.text);
+         expect(res.text).toEqual('success');
+      });
    });
 
    describe('HealthCheck Module(e2e)', () => {
@@ -39,6 +60,7 @@ describe('App (e2e)', () => {
 
          const testResult = await request(app.getHttpServer())
             .get('/health/http')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
          expect(testResult).toEqual(expectedResult);
       });
@@ -61,6 +83,7 @@ describe('App (e2e)', () => {
 
          const testResult = await request(app.getHttpServer())
             .get('/health/db')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
          expect(testResult).toEqual(expectedResult);
       });
@@ -85,6 +108,7 @@ describe('App (e2e)', () => {
          const res = await request(app.getHttpServer())
             .post('/student')
             .send(record)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          result[0] = {
@@ -106,6 +130,7 @@ describe('App (e2e)', () => {
          expect(
             await request(app.getHttpServer())
                .get('/student')
+               .set({ Authorization: `Bearer ${jwt_token}` })
                .then((res) => res.body),
          ).toEqual(result);
       });
@@ -118,6 +143,7 @@ describe('App (e2e)', () => {
          await request(app.getHttpServer())
             .put(`/student/${result[0].email}`)
             .send(data)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          result[0].kana = data.kana;
@@ -125,6 +151,7 @@ describe('App (e2e)', () => {
          expect(
             await request(app.getHttpServer())
                .get('/student')
+               .set({ Authorization: `Bearer ${jwt_token}` })
                .then((res) => res.body),
          ).toEqual(result);
       });
@@ -132,6 +159,7 @@ describe('App (e2e)', () => {
       it('check uuid exist', async () => {
          const res = await request(app.getHttpServer())
             .get(`/student/check/${result[0].studentId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          const { Guest, ...testResult } = result[0];
@@ -142,10 +170,12 @@ describe('App (e2e)', () => {
       it('get Guest record', async () => {
          result = await request(app.getHttpServer())
             .get('/student')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          const testRecord = await request(app.getHttpServer())
             .get('/guest')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          const { Guest } = result[0];
@@ -156,6 +186,7 @@ describe('App (e2e)', () => {
       it('check uuid exist', async () => {
          const res = await request(app.getHttpServer())
             .get(`/guest/check/${result[0].Guest[0].guestId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          const { Guest } = result[0];
@@ -167,17 +198,22 @@ describe('App (e2e)', () => {
 
       it('search by kana', async () => {
          const kana = encodeURI(result[0].kana);
-         const res = await request(app.getHttpServer()).get(`/student/${kana}`);
+         const res = await request(app.getHttpServer())
+            .get(`/student/${kana}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(res.body).toEqual(result);
       });
 
       it('delete', async () => {
-         await request(app.getHttpServer()).delete(`/student/${result[0].studentId}`);
+         await request(app.getHttpServer())
+            .delete(`/student/${result[0].studentId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(
             await request(app.getHttpServer())
                .get('/student')
+               .set({ Authorization: `Bearer ${jwt_token}` })
                .then((res) => res.body),
          ).toEqual([]);
       });
@@ -203,6 +239,7 @@ describe('App (e2e)', () => {
          const res = await request(app.getHttpServer())
             .post('/jhs')
             .send(record)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          result[0] = {
@@ -224,6 +261,7 @@ describe('App (e2e)', () => {
 
          const expectedResult = await request(app.getHttpServer())
             .get('/jhs')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          expect(expectedResult).toEqual(result);
@@ -237,6 +275,7 @@ describe('App (e2e)', () => {
          await request(app.getHttpServer())
             .put('/jhs')
             .send(data)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          result[0].name = data.name;
@@ -244,6 +283,7 @@ describe('App (e2e)', () => {
          expect(
             await request(app.getHttpServer())
                .get('/jhs')
+               .set({ Authorization: `Bearer ${jwt_token}` })
                .then((res) => res.body),
          ).toEqual(result);
       });
@@ -251,6 +291,7 @@ describe('App (e2e)', () => {
       it('check uuid exist', async () => {
          const res = await request(app.getHttpServer())
             .get(`/jhs/check/${result[0].jhsId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          const { parents, ...testResult } = result[0];
@@ -262,17 +303,22 @@ describe('App (e2e)', () => {
 
       it('search by name', async () => {
          const name = encodeURI(result[0].name);
-         const res = await request(app.getHttpServer()).get(`/jhs/${name}`);
+         const res = await request(app.getHttpServer())
+            .get(`/jhs/${name}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(res.body).toEqual(result);
       });
 
       it('delete', async () => {
-         await request(app.getHttpServer()).delete(`/jhs/${result[0].jhsId}`);
+         await request(app.getHttpServer())
+            .delete(`/jhs/${result[0].jhsId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(
             await request(app.getHttpServer())
                .get('/jhs')
+               .set({ Authorization: `Bearer ${jwt_token}` })
                .then((res) => res.body),
          ).toEqual([]);
       });
@@ -290,6 +336,7 @@ describe('App (e2e)', () => {
          const res = await request(app.getHttpServer())
             .post('/ob')
             .send(obData)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          result = [
@@ -302,6 +349,7 @@ describe('App (e2e)', () => {
          expect(
             await request(app.getHttpServer())
                .get('/ob')
+               .set({ Authorization: `Bearer ${jwt_token}` })
                .then((res) => res.body),
          ).toEqual(result);
       });
@@ -309,6 +357,7 @@ describe('App (e2e)', () => {
       it('check uuid exist', async () => {
          const res = await request(app.getHttpServer())
             .get(`/ob/check/${result[0].obId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          const expectedResult = { History: [{ timeStamp: res.History[0].timeStamp }], ...result[0] };
@@ -317,17 +366,22 @@ describe('App (e2e)', () => {
 
       it('search by name', async () => {
          const name = encodeURI(result[0].name);
-         const res = await request(app.getHttpServer()).get(`/ob/${name}`);
+         const res = await request(app.getHttpServer())
+            .get(`/ob/${name}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(res.body).toEqual(result);
       });
 
       it('delete', async () => {
-         await request(app.getHttpServer()).delete(`/ob/${result[0].obId}`);
+         await request(app.getHttpServer())
+            .delete(`/ob/${result[0].obId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(
             await request(app.getHttpServer())
                .get('/ob')
+               .set({ Authorization: `Bearer ${jwt_token}` })
                .then((res) => res.body),
          ).toEqual([]);
       });
@@ -345,6 +399,7 @@ describe('App (e2e)', () => {
          const res = await request(app.getHttpServer())
             .post('/sponsor')
             .send(sponsorData)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          result = [
@@ -357,6 +412,7 @@ describe('App (e2e)', () => {
          expect(
             await request(app.getHttpServer())
                .get('/sponsor')
+               .set({ Authorization: `Bearer ${jwt_token}` })
                .then((res) => res.body),
          ).toEqual(result);
       });
@@ -364,6 +420,7 @@ describe('App (e2e)', () => {
       it('check record exist', async () => {
          const res = await request(app.getHttpServer())
             .get(`/sponsor/check/${result[0].sponsorId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          const expectedResult = { History: [{ timeStamp: res.History[0].timeStamp }], ...result[0] };
@@ -372,17 +429,22 @@ describe('App (e2e)', () => {
 
       it('search by name', async () => {
          const name = encodeURI(result[0].name);
-         const res = await request(app.getHttpServer()).get(`/sponsor/${name}`);
+         const res = await request(app.getHttpServer())
+            .get(`/sponsor/${name}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(res.body).toEqual(result);
       });
 
       it('delete', async () => {
-         await request(app.getHttpServer()).delete(`/sponsor/${result[0].sponsorId}`);
+         await request(app.getHttpServer())
+            .delete(`/sponsor/${result[0].sponsorId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(
             await request(app.getHttpServer())
                .get('/sponsor')
+               .set({ Authorization: `Bearer ${jwt_token}` })
                .then((res) => res.body),
          ).toEqual([]);
       });
@@ -402,7 +464,10 @@ describe('App (e2e)', () => {
             },
          };
 
-         const createData = await request(app.getHttpServer()).post('/student').send(studentData);
+         const createData = await request(app.getHttpServer())
+            .post('/student')
+            .send(studentData)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          const expectData = [
             {
@@ -418,15 +483,19 @@ describe('App (e2e)', () => {
 
          const res = await request(app.getHttpServer())
             .get('/admin/studentguest')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          expect(res).toEqual(expectData);
 
          const studentId = await request(app.getHttpServer())
             .get('/student')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body[0].studentId);
 
-         await request(app.getHttpServer()).delete(`/student/${studentId}`);
+         await request(app.getHttpServer())
+            .delete(`/student/${studentId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
       });
 
       it('export GuestId by Jhs', async () => {
@@ -443,7 +512,10 @@ describe('App (e2e)', () => {
             },
          };
 
-         const jhsResData = await request(app.getHttpServer()).post('/jhs').send(jhsData);
+         const jhsResData = await request(app.getHttpServer())
+            .post('/jhs')
+            .send(jhsData)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          const expectData = [
             {
@@ -461,15 +533,19 @@ describe('App (e2e)', () => {
 
          const res = await request(app.getHttpServer())
             .get('/admin/jhsguest')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          expect(res).toEqual(expectData);
 
          const jhsId = await request(app.getHttpServer())
             .get('/jhs')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body[0].jhsId);
 
-         await request(app.getHttpServer()).delete(`/jhs/${jhsId}`);
+         await request(app.getHttpServer())
+            .delete(`/jhs/${jhsId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
       });
 
       it('export obId', async () => {
@@ -478,7 +554,10 @@ describe('App (e2e)', () => {
             email: 'test@example.com',
          };
 
-         const obResData = await request(app.getHttpServer()).post('/ob').send(obData);
+         const obResData = await request(app.getHttpServer())
+            .post('/ob')
+            .send(obData)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          const expectData = [
             {
@@ -489,11 +568,14 @@ describe('App (e2e)', () => {
 
          const res = await request(app.getHttpServer())
             .get('/admin/ob')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          expect(res).toEqual(expectData);
 
-         await request(app.getHttpServer()).delete(`/ob/${obResData.body.obId}`);
+         await request(app.getHttpServer())
+            .delete(`/ob/${obResData.body.obId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
       });
 
       it('export SponsorId', async () => {
@@ -502,7 +584,10 @@ describe('App (e2e)', () => {
             name: 'テスト',
          };
 
-         const sponsorResData = await request(app.getHttpServer()).post('/sponsor').send(sponsorData);
+         const sponsorResData = await request(app.getHttpServer())
+            .post('/sponsor')
+            .send(sponsorData)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          const expectData = [
             {
@@ -513,11 +598,14 @@ describe('App (e2e)', () => {
 
          const res = await request(app.getHttpServer())
             .get('/admin/sponsor')
+            .set({ Authorization: `Bearer ${jwt_token}` })
             .then((res) => res.body);
 
          expect(res).toEqual(expectData);
 
-         await request(app.getHttpServer()).delete(`/sponsor/${sponsorResData.body.sponsorId}`);
+         await request(app.getHttpServer())
+            .delete(`/sponsor/${sponsorResData.body.sponsorId}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
       });
    });
 
@@ -537,7 +625,10 @@ describe('App (e2e)', () => {
             name: '会社名1',
          };
 
-         const res = await request(app.getHttpServer()).post('/sponsorcompany').send(data);
+         const res = await request(app.getHttpServer())
+            .post('/sponsorcompany')
+            .send(data)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          result = [
             {
@@ -546,12 +637,16 @@ describe('App (e2e)', () => {
             },
          ];
 
-         const allRecord = await request(app.getHttpServer()).get('/sponsorcompany');
+         const allRecord = await request(app.getHttpServer())
+            .get('/sponsorcompany')
+            .set({ Authorization: `Bearer ${jwt_token}` });
          expect(allRecord.body).toEqual(result);
       });
 
       it('getById', async () => {
-         const res = await request(app.getHttpServer()).get(`/sponsorcompany/${result[0].id}`);
+         const res = await request(app.getHttpServer())
+            .get(`/sponsorcompany/${result[0].id}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(res.body).toEqual(result[0]);
       });
@@ -561,7 +656,10 @@ describe('App (e2e)', () => {
             name: '会社名2',
          };
 
-         const res = await request(app.getHttpServer()).put(`/sponsorcompany/${result[0].id}`).send(data);
+         const res = await request(app.getHttpServer())
+            .put(`/sponsorcompany/${result[0].id}`)
+            .send(data)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          const expectedResult = {
             id: result[0].id,
@@ -572,9 +670,13 @@ describe('App (e2e)', () => {
       });
 
       it('delete', async () => {
-         await request(app.getHttpServer()).delete(`/sponsorcompany/${result[0].id}`);
+         await request(app.getHttpServer())
+            .delete(`/sponsorcompany/${result[0].id}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
-         const res = await request(app.getHttpServer()).get('/sponsorcompany');
+         const res = await request(app.getHttpServer())
+            .get('/sponsorcompany')
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(res.body).toEqual([]);
       });
@@ -690,25 +792,60 @@ describe('App (e2e)', () => {
          await request(app.getHttpServer())
             .post('/liveevent')
             .send(dataList[0])
-            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[1]))
-            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[2]))
-            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[3]))
-            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[4]))
-            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[5]))
-            .then(() => request(app.getHttpServer()).post('/liveevent').send(dataList[6]));
+            .set({ Authorization: `Bearer ${jwt_token}` })
+            .then(() =>
+               request(app.getHttpServer())
+                  .post('/liveevent')
+                  .send(dataList[1])
+                  .set({ Authorization: `Bearer ${jwt_token}` }),
+            )
+            .then(() =>
+               request(app.getHttpServer())
+                  .post('/liveevent')
+                  .send(dataList[2])
+                  .set({ Authorization: `Bearer ${jwt_token}` }),
+            )
+            .then(() =>
+               request(app.getHttpServer())
+                  .post('/liveevent')
+                  .send(dataList[3])
+                  .set({ Authorization: `Bearer ${jwt_token}` }),
+            )
+            .then(() =>
+               request(app.getHttpServer())
+                  .post('/liveevent')
+                  .send(dataList[4])
+                  .set({ Authorization: `Bearer ${jwt_token}` }),
+            )
+            .then(() =>
+               request(app.getHttpServer())
+                  .post('/liveevent')
+                  .send(dataList[5])
+                  .set({ Authorization: `Bearer ${jwt_token}` }),
+            )
+            .then(() =>
+               request(app.getHttpServer())
+                  .post('/liveevent')
+                  .send(dataList[6])
+                  .set({ Authorization: `Bearer ${jwt_token}` }),
+            );
 
          // 信じてたのに...😥
          // await Promise.all(
          //    dataList.map((data) => new Promise((resolve) => resolve(request(app.getHttpServer()).post('/liveevent').send(data)))),
          // )
 
-         const res = await request(app.getHttpServer()).get('/liveevent');
+         const res = await request(app.getHttpServer())
+            .get('/liveevent')
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(res.body).toEqual(expectedResult);
       });
 
       it('get upcoming events ', async () => {
-         const res = await request(app.getHttpServer()).get('/liveevent/near');
+         const res = await request(app.getHttpServer())
+            .get('/liveevent/near')
+            .set({ Authorization: `Bearer ${jwt_token}` });
          const date = new Date().toLocaleString('ja', { timeZone: 'Asia/Tokyo' });
          const now = date.replace(/\//g, '-');
 
@@ -724,16 +861,76 @@ describe('App (e2e)', () => {
       });
 
       it('get by date', async () => {
-         const date = encodeURI('2022-10-30 09:30');
-         const data = await request(app.getHttpServer()).get(`/liveevent/${date}`);
+         const date = encodeURI('2022-10-30');
+         const data = await request(app.getHttpServer())
+            .get(`/liveevent/${date}`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
-         const expectedResult = dataList.filter((data) => data.date === '2022-10-30 09:30');
+         console.log(data.body);
+
+         const expectedResult = {
+            main: [
+               {
+                  title: 'タイトル1',
+                  venue: '会場1',
+                  descriptions: '説明1',
+                  date: '2022-10-30 09:30',
+                  stage: 'main',
+                  start_time: '2022-10-30 09:30',
+                  end_time: '2022-10-30 11:00',
+               },
+            ],
+            sub: [
+               {
+                  title: 'タイトル4',
+                  venue: '会場4',
+                  descriptions: '説明4',
+                  date: '2022-10-30 09:30',
+                  stage: 'sub',
+                  start_time: '2022-10-30 09:30',
+                  end_time: '2022-10-30 12:00',
+               },
+            ],
+            live: [
+               {
+                  title: 'タイトル6',
+                  venue: '会場6',
+                  descriptions: '説明6',
+                  date: '2022-10-30 09:00',
+                  stage: 'live',
+                  start_time: '2022-10-30 09:00',
+                  end_time: '2022-10-30 13:00',
+               },
+               {
+                  title: 'タイトル5',
+                  venue: '会場5',
+                  descriptions: '説明5',
+                  date: '2022-10-30 14:30',
+                  stage: 'live',
+                  start_time: '2022-10-31 14:30',
+                  end_time: '2022-10-31 16:00',
+               },
+            ],
+            game: [
+               {
+                  title: 'タイトル7',
+                  venue: '会場7',
+                  descriptions: '説明7',
+                  date: '2022-10-30 09:30',
+                  stage: 'game',
+                  start_time: '2022-10-31 09:30',
+                  end_time: '2022-10-30 11:00',
+               },
+            ],
+         };
 
          expect(data.body).toEqual(expectedResult);
       });
 
       it('getById', async () => {
-         const res = await request(app.getHttpServer()).get('/liveevent/id/1');
+         const res = await request(app.getHttpServer())
+            .get('/liveevent/id/1')
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          const expectedResult = {
             id: 1,
@@ -748,7 +945,10 @@ describe('App (e2e)', () => {
             title: '変更後のタイトル',
          };
 
-         const res = await request(app.getHttpServer()).put('/liveevent/1').send(data);
+         const res = await request(app.getHttpServer())
+            .put('/liveevent/1')
+            .send(data)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          const expectedResult: LiveEvent = {
             ...dataList[0],
@@ -761,10 +961,14 @@ describe('App (e2e)', () => {
 
       it('delete', async () => {
          for (let id = 1; id <= dataList.length; id++) {
-            await request(app.getHttpServer()).delete(`/liveevent/${id}`);
+            await request(app.getHttpServer())
+               .delete(`/liveevent/${id}`)
+               .set({ Authorization: `Bearer ${jwt_token}` });
          }
 
-         const res = await request(app.getHttpServer()).get('/liveevent');
+         const res = await request(app.getHttpServer())
+            .get('/liveevent')
+            .set({ Authorization: `Bearer ${jwt_token}` });
          expect(res.body).toEqual({ game: [], live: [], main: [], sub: [] });
       });
    });
@@ -796,7 +1000,10 @@ describe('App (e2e)', () => {
             ...bazaarData,
             prices: pricesData,
          };
-         const res = await request(app.getHttpServer()).post('/bazaar').send(data);
+         const res = await request(app.getHttpServer())
+            .post('/bazaar')
+            .send(data)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          const expectedResult = {
             id: 1,
@@ -846,9 +1053,14 @@ describe('App (e2e)', () => {
             prices: pricesData,
          };
 
-         const res = await request(app.getHttpServer()).put('/bazaar/1').send(data);
+         const res = await request(app.getHttpServer())
+            .put('/bazaar/1')
+            .send(data)
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
-         const priceres = await request(app.getHttpServer()).get('/bazaarprices');
+         const priceres = await request(app.getHttpServer())
+            .get('/bazaarprices')
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          const expectedResult = {
             ...bazaarData,
@@ -859,8 +1071,12 @@ describe('App (e2e)', () => {
       });
 
       it('delete', async () => {
-         await request(app.getHttpServer()).delete(`/bazaar/1`);
-         const res = await request(app.getHttpServer()).get('/bazaar');
+         await request(app.getHttpServer())
+            .delete(`/bazaar/1`)
+            .set({ Authorization: `Bearer ${jwt_token}` });
+         const res = await request(app.getHttpServer())
+            .get('/bazaar')
+            .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(res.body).toEqual([]);
       });

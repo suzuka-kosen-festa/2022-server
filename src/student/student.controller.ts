@@ -1,13 +1,15 @@
 //'Body' is already defined as a built-in global variable. が出る
 // eslint-disable-next-line no-redeclare
-import { Post, Controller, Body, Get, Put, Param, Delete } from '@nestjs/common';
+import { Post, Controller, Body, Get, Put, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Guest, Prisma, Student } from '@prisma/client';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { createStudentDto, updateStudentDto } from './dto/student.dto';
 import { StudentEntity, StudentwithGuestEntity } from './entities/student.entity';
 import { StudentService } from './student.service';
 
 @ApiTags('student')
+@UseGuards(JwtAuthGuard)
 @Controller('student')
 export class StudentController {
    constructor(private readonly studentService: StudentService) {}

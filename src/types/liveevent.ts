@@ -4,6 +4,10 @@ export type SeparationEventList = {
    [key in LiveStage]: LiveEvent[] | [];
 };
 
+export type EventInterval = {
+   [key in LiveStage]: ReadonlyArray<number>;
+};
+
 export type LiveEventWithoutId = {
    title: string;
    descriptions: string;

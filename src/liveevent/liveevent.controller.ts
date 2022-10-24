@@ -1,13 +1,20 @@
 // eslint-disable-next-line no-redeclare
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LiveEvent, Prisma } from '@prisma/client';
 import { CreateEventDto, UpdateEventDto } from './dto/liveEvent.sto';
-import { LiveEventEntity, LiveEventWithIdEntity, SeparationEventListEntity } from './entity/liveEvent.entity';
+import {
+   EventIntervalEntity,
+   LiveEventEntity,
+   LiveEventWithIdEntity,
+   SeparationEventListEntity,
+} from './entity/liveEvent.entity';
 import { LiveeventService } from './liveevent.service';
-import { SeparationEventList } from '../types/liveevent';
+import { EventInterval, SeparationEventList } from '../types/liveevent';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('LiveEvent')
+@UseGuards(JwtAuthGuard)
 @Controller('liveevent')
 export class LiveeventController {
    constructor(private readonly service: LiveeventService) {}
@@ -31,6 +38,13 @@ export class LiveeventController {
    @ApiOkResponse({ type: LiveEventWithIdEntity })
    async getEventBydate(@Param('date') date: string) {
       return this.service.getByDate({ date });
+   }
+
+   @Get('interval/:date')
+   @ApiOperation({ summary: 'イベントの間隔を取得' })
+   @ApiOkResponse({ type: EventIntervalEntity })
+   async getEventInterval(@Param('date') date: string): Promise<EventInterval> {
+      return this.service.getEventInterval({ date });
    }
 
    @Get('/id/:id')
@@ -74,5 +88,11 @@ export class LiveeventController {
       return this.service.delete({
          id: Number(id),
       });
+   }
+
+   @Delete()
+   @ApiOperation({ summary: 'レコードの全削除' })
+   async deleteAllEvent(): Promise<Prisma.BatchPayload> {
+      return this.service.deleteAll();
    }
 }
