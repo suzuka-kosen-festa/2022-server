@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 describe('AuthController', () => {
    let controller: AuthController;
 
-   beforeEach(async () => {
+   beforeAll(async () => {
       const module: TestingModule = await Test.createTestingModule({
          controllers: [AuthController],
          providers: [AuthService, JwtService],
