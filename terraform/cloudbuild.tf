@@ -10,7 +10,7 @@ resource "google_cloudbuild_worker_pool" "pool" {
 resource "google_cloudbuild_trigger" "include-build-logs-trigger" {
   location = var.region
   name     = "container-builder"
-  filename = "cloudbuild.yaml"
+  filename = "./terraform/cloudbuild.yaml"
 
   github {
     owner = "suzuka-kosen-festa"
