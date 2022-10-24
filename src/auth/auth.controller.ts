@@ -13,13 +13,13 @@ export class AuthController {
    @UseGuards(LocalAuthGuard)
    @Post('')
    getHello(@Res({ passthrough: true }) response: Response) {
-     response.cookie('token', this.service.sign(), {
-       signed: false,
-       expires: new Date('2022-11-02'),
-       httpOnly: false,
-       secure: true,
-     })
-     return this.service.sign()
+      response.cookie('token', this.service.sign(), {
+         signed: false,
+         expires: new Date('2022-11-02'),
+         httpOnly: false,
+         secure: true,
+      });
+      return this.service.sign();
    }
 
    @UseGuards(JwtAuthGuard) // jwtテスト用
