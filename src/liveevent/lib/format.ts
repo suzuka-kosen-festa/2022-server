@@ -36,7 +36,7 @@ const substractArrayDate = (array: LiveEvent[]): number[] => {
          intervalArray.push(term)
 
          const from = dayjs(array[i].end_time);
-         const to =  i != array.length-1 ? dayjs(array[i+1].start_time) : dayjs(`${eventDate} 16:00`)
+         const to =  i != array.length-1 ? dayjs(array[i+1].start_time) : end
 
          const interval = to.diff(from, 'minute') / 15
          intervalArray.push(interval);
