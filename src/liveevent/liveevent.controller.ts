@@ -81,7 +81,7 @@ export class LiveeventController {
       });
    }
 
-   @Delete(':id')
+   @Delete('/id/:id')
    @ApiOperation({ summary: 'レコード削除' })
    @ApiOkResponse({ type: LiveEventWithIdEntity })
    async deleteEvent(@Param('id') id: string): Promise<LiveEvent> {
@@ -90,7 +90,7 @@ export class LiveeventController {
       });
    }
 
-   @Delete()
+   @Delete('/all')
    @ApiOperation({ summary: 'レコードの全削除' })
    async deleteAllEvent(): Promise<Prisma.BatchPayload> {
       return this.service.deleteAll();

@@ -54,7 +54,7 @@ export class SponsorcompanyController {
       });
    }
 
-   @Delete(':id')
+   @Delete('/id/:id')
    @ApiOperation({ summary: 'レコード削除' })
    @ApiOkResponse({ type: SponsorComEntity })
    async deleteSponsorCom(@Param('id') id: string): Promise<SponsorCompany> {
@@ -63,7 +63,7 @@ export class SponsorcompanyController {
       });
    }
 
-   @Delete()
+   @Delete('/all')
    @ApiOperation({ summary: 'レコード全削除' })
    async deleteAllSponsorCom(): Promise<Prisma.BatchPayload> {
       return this.service.deleteAll();

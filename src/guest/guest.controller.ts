@@ -40,7 +40,7 @@ export class GuestController {
       return this.service.checkGuestExist({ guestId: id });
    }
 
-   @Delete(':uuid')
+   @Delete('/id/:uuid')
    @ApiOperation({ summary: '招待客ののデータの削除' })
    @ApiResponse({ type: GuestEntity })
    async delete(@Param('uuid') uuid: string): Promise<Guest> {
