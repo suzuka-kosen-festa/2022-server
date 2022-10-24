@@ -1,10 +1,35 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GuestModule } from './guest/guest.module';
+import { HealthModule } from './health/health.module';
+import { JhsModule } from './jhs/jhs.module';
+import { ObModule } from './ob/ob.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { SponsorModule } from './sponsor/sponsor.module';
+import { StudentModule } from './student/student.module';
+import { AdminModule } from './admin/admin.module';
+import { HistoryModule } from './history/history.module';
+import { SponsorcompanyModule } from './sponsorcompany/sponsorcompany.module';
+import { LiveeventModule } from './liveevent/liveevent.module';
+import { BazaarModule } from './bazaar/bazaar.module';
+import { BazaarpricesModule } from './bazaarprices/bazaarprices.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-   imports: [],
-   controllers: [AppController],
-   providers: [AppService],
+   imports: [
+      StudentModule,
+      PrismaModule,
+      HealthModule,
+      GuestModule,
+      JhsModule,
+      ObModule,
+      SponsorModule,
+      AdminModule,
+      HistoryModule,
+      SponsorcompanyModule,
+      LiveeventModule,
+      BazaarModule,
+      BazaarpricesModule,
+      AuthModule,
+   ],
 })
 export class AppModule {}

@@ -11,6 +11,7 @@ datasource db {
 }
 
 //学生用テーブル。QRコードを送り返すときと招待客との関係性もここで確認する。
+//kanaは読み仮名に限定する(祖父母が生徒の漢字がわからなかったときのため)
 model Student {
   studentId String  @unique @default(uuid())
   kana      String
@@ -20,37 +21,102 @@ model Student {
 
 //招待客テーブル。情報を残すために色々項目が多い
 model Guest {
-  guestId  String    @unique @default(uuid())
-  sex      String
-  jobs     String
-  RealName String
-  host     Student   @relation(fields: [hostId], references: [studentId])
-  hostId   String    @unique
-  History  History[]
+  guestId   String     @unique @default(uuid())
+  sex       String
+  jobs      String
+  name      String
+  host      Student?   @relation(fields: [hostId], references: [studentId], onDelete: Cascade)
+  hostId    String?
+  History   History[]
+  hostJhs   JHStudent? @relation(fields: [hostJhsId], references: [jhsId], onDelete: Cascade)
+  hostJhsId String?
 }
 
-//スポンサー用テーブル。とりま取る情報知らんからemailだけ入れといた
+//スポンサー用テーブル。返送用emailとリカバリー用の名前
 model Sponsor {
   sponsorId String    @unique @default(uuid())
   email     String    @unique
+  name      String
   History   History[]
 }
 
 //中学生用テーブル。とりあえず年齢と送り返す用のメルアドだけ
 model JHStudent {
   jhsId   String    @unique @default(uuid())
-  age     Int
+  age     String
+  name    String
+  email   String    @unique
+  parents Guest[]
+  History History[]
+}
+
+//OBテーブル。難しい事考えたくないので招待客とテーブル分けた
+//あとGuestテーブルが単独で存在するの嫌だし
+model OB {
+  obId    String    @unique @default(uuid())
+  name    String
   email   String    @unique
   History History[]
 }
 
 model History {
-  id           Int        @id @default(autoincrement())
-  timeStamp    DateTime   @default(now())
-  Guest        Guest?     @relation(fields: [guestGuestId], references: [guestId])
-  guestGuestId String?
-  Sponsor      Sponsor?   @relation(fields: [sponsorId], references: [sponsorId])
-  sponsorId    String?
-  JHStudent    JHStudent? @relation(fields: [JHStudentId], references: [jhsId])
-  JHStudentId  String?
+  id        Int        @id @default(autoincrement())
+  timeStamp DateTime   @default(now()) @db.Timestamptz(3)
+  Guest     Guest?     @relation(fields: [guestId], references: [guestId], onDelete: Cascade)
+  guestId   String?
+  Sponsor   Sponsor?   @relation(fields: [sponsorId], references: [sponsorId], onDelete: Cascade)
+  sponsorId String?
+  JHStudent JHStudent? @relation(fields: [jhsId], references: [jhsId], onDelete: Cascade)
+  jhsId     String?
+  OB        OB?        @relation(fields: [obId], references: [obId], onDelete: Cascade)
+  obId      String?
+}
+
+//
+// HP用DBテーブル郡
+//
+
+model SponsorCompany {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+enum LiveStage {
+  main
+  sub
+  live
+  game
+}
+
+model LiveEvent {
+  id           Int       @id @default(autoincrement())
+  title        String
+  descriptions String
+  date         String
+  venue        String
+  start_time   String
+  end_time     String
+  stage        LiveStage
+}
+
+enum BazaarType {
+  eating
+  recreation
+}
+
+model Bazaar {
+  id           Int @id @default(autoincrement())
+  name         String
+  descriptions String
+  image        String
+  group        String
+  prices       BazaarPrices[]
+  group_type   BazaarType
+}
+
+model BazaarPrices {
+  id        Int @id @default(autoincrement())
+  price     String
+  Bazaar    Bazaar @relation(fields: [bazaarId], references: [id], onDelete: Cascade)
+  bazaarId  Int
 }

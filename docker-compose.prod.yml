@@ -1,6 +1,13 @@
-web:
-  build: 
-    context: .
-    dockerfile: ./Dockerfiles/prod.Dockerfile
-  volumes:
-    - ./app
+version: '3'
+services:
+  server:
+    container_name: server
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/prod.Dockerfile
+    tty: true
+    working_dir: /app
+    ports:
+      - 7000:7000
+    env_file:
+      - .env.prod
