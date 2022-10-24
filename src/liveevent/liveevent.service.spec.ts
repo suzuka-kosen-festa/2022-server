@@ -58,7 +58,7 @@ const eventArray: LiveEvent[] = [
 ];
 
 const intervalArray = {
-   main: [12,2,1,1,1,1,10],
+   main: [12, 2, 1, 1, 1, 1, 10],
    sub: [],
    live: [],
    game: [],
