@@ -207,7 +207,7 @@ describe('App (e2e)', () => {
 
       it('delete', async () => {
          await request(app.getHttpServer())
-            .delete(`/student/${result[0].studentId}`)
+            .delete(`/student/id/${result[0].studentId}`)
             .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(
@@ -312,7 +312,7 @@ describe('App (e2e)', () => {
 
       it('delete', async () => {
          await request(app.getHttpServer())
-            .delete(`/jhs/${result[0].jhsId}`)
+            .delete(`/jhs/id/${result[0].jhsId}`)
             .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(
@@ -375,7 +375,7 @@ describe('App (e2e)', () => {
 
       it('delete', async () => {
          await request(app.getHttpServer())
-            .delete(`/ob/${result[0].obId}`)
+            .delete(`/ob/id/${result[0].obId}`)
             .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(
@@ -438,7 +438,7 @@ describe('App (e2e)', () => {
 
       it('delete', async () => {
          await request(app.getHttpServer())
-            .delete(`/sponsor/${result[0].sponsorId}`)
+            .delete(`/sponsor/id/${result[0].sponsorId}`)
             .set({ Authorization: `Bearer ${jwt_token}` });
 
          expect(
@@ -671,7 +671,7 @@ describe('App (e2e)', () => {
 
       it('delete', async () => {
          await request(app.getHttpServer())
-            .delete(`/sponsorcompany/${result[0].id}`)
+            .delete(`/sponsorcompany/id/${result[0].id}`)
             .set({ Authorization: `Bearer ${jwt_token}` });
 
          const res = await request(app.getHttpServer())
@@ -962,7 +962,7 @@ describe('App (e2e)', () => {
       it('delete', async () => {
          for (let id = 1; id <= dataList.length; id++) {
             await request(app.getHttpServer())
-               .delete(`/liveevent/${id}`)
+               .delete(`/liveevent/id/${id}`)
                .set({ Authorization: `Bearer ${jwt_token}` });
          }
 
@@ -1072,7 +1072,7 @@ describe('App (e2e)', () => {
 
       it('delete', async () => {
          await request(app.getHttpServer())
-            .delete(`/bazaar/1`)
+            .delete(`/bazaar/id/1`)
             .set({ Authorization: `Bearer ${jwt_token}` });
          const res = await request(app.getHttpServer())
             .get('/bazaar')
