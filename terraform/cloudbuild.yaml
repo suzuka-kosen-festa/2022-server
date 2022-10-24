@@ -2,12 +2,11 @@ steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build','-f', './Dockerfiles/prod.Dockerfile','-t', 'us-west1-docker.pkg.dev/kosen-festa-server/my-repository/server-image', '.']
-# Push the container image to Container Registry
+
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-west1-docker.pkg.dev/kosen-festa-server/my-repository/server-image']
-# Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'server', '--image', 'us-west1-docker.pkg.dev/kosen-festa-server/my-repository/server-image', '--region', 'us-west1'. '--port', '7000']
+  args: ['run', 'deploy', 'server', '--image', 'us-west1-docker.pkg.dev/kosen-festa-server/my-repository/server-image', '--region', 'us-west1', '--port', '7000']
 images:
 - us-west1-docker.pkg.dev/kosen-festa-server/my-repository/server-image
