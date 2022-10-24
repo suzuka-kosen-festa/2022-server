@@ -59,7 +59,7 @@ export class JhsController {
       });
    }
 
-   @Delete(':uuid')
+   @Delete('/id/:uuid')
    @ApiOperation({ summary: '学生のデータの削除' })
    @ApiResponse({ type: JhsEntity })
    async delete(@Param('uuid') uuid: string): Promise<JHStudent> {
@@ -68,7 +68,7 @@ export class JhsController {
       });
    }
 
-   @Delete()
+   @Delete('/all')
    @ApiOperation({ summary: '学生のデータの削除' })
    @ApiResponse({ type: JhsEntity })
    async deleteAllJhs(): Promise<Prisma.BatchPayload> {

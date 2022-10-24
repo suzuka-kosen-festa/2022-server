@@ -52,7 +52,7 @@ export class StudentController {
       });
    }
 
-   @Delete(':uuid')
+   @Delete('/id/:uuid')
    @ApiOperation({ summary: '学生のデータの削除' })
    @ApiResponse({ type: StudentEntity })
    async delete(@Param('uuid') uuid: string): Promise<Student> {
@@ -61,7 +61,7 @@ export class StudentController {
       });
    }
 
-   @Delete()
+   @Delete("/all")
    @ApiOperation({ summary: '全削除' })
    async deleteManyStudent(): Promise<Prisma.BatchPayload> {
       return this.studentService.deleteAll();

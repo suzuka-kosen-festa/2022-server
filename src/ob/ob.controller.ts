@@ -60,14 +60,14 @@ export class ObController {
       return this.service.update({ where: { obId: uuid }, data });
    }
 
-   @Delete(':uuid')
+   @Delete('/id/:uuid')
    @ApiOperation({ summary: 'OBレコードの削除' })
    @ApiResponse({ type: ObEntity })
    async delete(@Param('uuid') uuid: string): Promise<OB> {
       return this.service.deleteOb({ obId: uuid });
    }
 
-   @Delete()
+   @Delete('/all')
    @ApiOperation({ summary: 'OBレコードを全削除' })
    async deleteAllOb(): Promise<Prisma.BatchPayload> {
       return this.service.deleteAll();

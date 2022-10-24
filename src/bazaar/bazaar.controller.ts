@@ -49,14 +49,14 @@ export class BazaarController {
       return this.service.update({ where: { id: Number(id) }, data });
    }
 
-   @Delete(':id')
+   @Delete('/id/:id')
    @ApiOperation({ summary: 'レコードの削除' })
    @ApiOkResponse({ type: BazaarEntity })
    async deleteBazaar(@Param('id') id: string): Promise<Bazaar> {
       return this.service.delete({ id: Number(id) });
    }
 
-   @Delete()
+   @Delete('/all')
    @ApiOperation({ summary: 'レコードを全削除' })
    async deleteAllBazaar(): Promise<Prisma.BatchPayload> {
       return this.service.deleteAll();

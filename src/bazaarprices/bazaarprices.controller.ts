@@ -35,7 +35,7 @@ export class BazaarpricesController {
       return this.service.update({ where: { id: Number(id) }, data });
    }
 
-   @Delete(':id')
+   @Delete('/id/:id')
    @ApiOperation({ summary: 'レコードの削除' })
    @ApiOkResponse({ type: BazaarEntity })
    async deleteBazaarPrices(@Param('id') id: string): Promise<BazaarPrices> {

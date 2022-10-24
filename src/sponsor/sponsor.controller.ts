@@ -61,14 +61,14 @@ export class SponsorController {
       return this.service.update({ where: { sponsorId: uuid }, data });
    }
 
-   @Delete(':uuid')
+   @Delete('/id/:uuid')
    @ApiOperation({ summary: 'Sponsorレコードの削除' })
    @ApiOkResponse({ type: SponsorEntity })
    async delete(@Param('uuid') uuid: string): Promise<Sponsor> {
       return this.service.deleteSponsor({ sponsorId: uuid });
    }
 
-   @Delete()
+   @Delete('/all')
    @ApiOperation({ summary: '全削除' })
    async deleteAllSponsor(): Promise<Prisma.BatchPayload> {
       return this.service.deleteAll();
