@@ -4,7 +4,6 @@ import { AppModule } from '../src/app.module';
 import { Bazaar, LiveEvent, Prisma, SponsorCompany } from '@prisma/client';
 import * as request from 'supertest';
 import { JhsTestRecord, StudentTestRecord, ObTestRecord, SponsorTestRecord } from './types';
-import { dateSort } from '../src/liveevent/lib/format';
 
 describe('App (e2e)', () => {
    let app: INestApplication;
