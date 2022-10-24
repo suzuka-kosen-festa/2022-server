@@ -14,9 +14,9 @@ export class AuthController {
       return this.service.sign();
    }
 
-  @UseGuards(JwtAuthGuard) // jwtテスト用
-  @Get('test')
-  async getProfile() {
-    return "success";
-  }
+   @UseGuards(JwtAuthGuard) // jwtテスト用
+   @Get('test')
+   async getProfile() {
+      return 'success';
+   }
 }
