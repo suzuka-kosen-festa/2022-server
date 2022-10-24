@@ -8,11 +8,8 @@ import { JWT_SEACRET_KEY } from './seacret';
 import { AuthController } from './auth.controller';
 
 @Module({
-  imports:[
-    PassportModule,
-    JwtModule.register({secret: JWT_SEACRET_KEY,signOptions:{expiresIn:"1d"}})
-  ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
-  controllers: [AuthController]
+   imports: [PassportModule, JwtModule.register({ secret: JWT_SEACRET_KEY, signOptions: { expiresIn: '1d' } })],
+   providers: [AuthService, LocalStrategy, JwtStrategy],
+   controllers: [AuthController],
 })
 export class AuthModule {}

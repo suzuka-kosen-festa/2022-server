@@ -6,17 +6,17 @@ import { LocalAuthGuard } from './local.auth.guard';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private service: AuthService) {}
+   constructor(private service: AuthService) {}
 
-  @UseGuards(LocalAuthGuard)
-  @Post()
-  login() {
-    return this.service.sign();
-  }
+   @UseGuards(LocalAuthGuard)
+   @Post()
+   login() {
+      return this.service.sign();
+   }
 
-  @UseGuards(JwtAuthGuard) // passport-jwt戦略を付与する
-  @Get('profile')
-  async getProfile() {
-    return "success";
-  }
+   @UseGuards(JwtAuthGuard) // passport-jwt戦略を付与する
+   @Get('profile')
+   async getProfile() {
+      return 'success';
+   }
 }

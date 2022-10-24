@@ -28,16 +28,16 @@ export class LiveeventService {
          },
       });
 
-      const filterData =  dateSort(allData, where.date as string)
+      const filterData = dateSort(allData, where.date as string);
 
-      return formatEvent(filterData)
+      return formatEvent(filterData);
    }
 
-   async getEventInterval(where: Prisma.LiveEventWhereInput) : Promise<EventInterval>{
-      const allData = await this.prisma.liveEvent.findMany()
-      const filterData =  dateSort(allData, where.date as string)
+   async getEventInterval(where: Prisma.LiveEventWhereInput): Promise<EventInterval> {
+      const allData = await this.prisma.liveEvent.findMany();
+      const filterData = dateSort(allData, where.date as string);
 
-      return filterAndGetInterval(filterData)
+      return filterAndGetInterval(filterData);
    }
 
    async getNearTime(): Promise<LiveEvent[]> {

@@ -8,7 +8,7 @@ import { BazaarpricesService } from './bazaarprices.service';
 import { UpdatePricesDto } from './dto/bazaarprices.dto';
 import { BazaarPricesEntity } from './entity/bazaarprices.entity';
 
-@ApiTags("bazaarprices")
+@ApiTags('bazaarprices')
 @UseGuards(JwtAuthGuard)
 @Controller('bazaarprices')
 export class BazaarpricesController {
