@@ -49,7 +49,7 @@ resource "google_cloud_run_service" "default" {
 
         env {
           name = "JWT_SECRET_KEY"
-          value = var.jwt_secret_key
+          value = var.jwt_seacret_key
         }
 
         env {
