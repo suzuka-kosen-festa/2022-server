@@ -14,8 +14,8 @@ export class AuthController {
     return this.service.sign();
   }
 
-  @UseGuards(JwtAuthGuard) // passport-jwt戦略を付与する
-  @Get('profile')
+  @UseGuards(JwtAuthGuard) // jwtテスト用
+  @Get('test')
   async getProfile() {
     return "success";
   }
