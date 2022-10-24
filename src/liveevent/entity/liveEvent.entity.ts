@@ -60,3 +60,14 @@ export class LiveEventWithIdEntity {
    @ApiProperty()
    stage: 'main' | 'sub' | 'live' | 'game';
 }
+
+export class EventIntervalEntity {
+   @ApiProperty()
+   main: ReadonlyArray<number> | [];
+   @ApiProperty()
+   sub: ReadonlyArray<number> | [];
+   @ApiProperty()
+   live: ReadonlyArray<number> | [];
+   @ApiProperty()
+   game: ReadonlyArray<number> | [];
+}
