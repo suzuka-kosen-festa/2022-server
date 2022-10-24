@@ -36,7 +36,6 @@ export class LiveeventService {
    async getEventInterval(where: Prisma.LiveEventWhereInput): Promise<EventInterval> {
       const allData = await this.prisma.liveEvent.findMany();
       const filterData = dateSort(allData, where.date as string);
-
       return filterAndGetInterval(filterData);
    }
 

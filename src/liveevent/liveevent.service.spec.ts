@@ -99,7 +99,7 @@ describe('LiveeventService', () => {
    });
 
    it('getByDate', async () => {
-      const data = await service.getByDate({ date: '2022-10-30 12:10' });
+      const data = await service.getByDate({ date: '2022-10-30' });
       expect(data).toEqual(eventArray[0]);
    });
 
