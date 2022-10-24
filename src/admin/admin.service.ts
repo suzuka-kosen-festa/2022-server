@@ -50,6 +50,7 @@ export class AdminService {
       return obList.map((data) => {
          return {
             email: data.email,
+            name: data.name,
             obId: 'O' + data.obId,
          };
       });
@@ -60,6 +61,7 @@ export class AdminService {
       return sponsorList.map((data) => {
          return {
             email: data.email,
+            name: data.name,
             sponsorId: 'S' + data.sponsorId,
          };
       });
