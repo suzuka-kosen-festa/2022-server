@@ -20,15 +20,28 @@ export const dateSort = (array: LiveEventWithoutId[], date: string) => {
 };
 
 const substractArrayDate = (array: LiveEvent[]): number[] => {
-   let diffArray: number[] = [];
-   for (let i = 1; i < array.length; i++) {
-      const from = dayjs(array[i - 1].end_time);
-      const to = dayjs(array[i].start_time);
+   const intervalArray: number[] = [];
+   const eventDate = `${dayjs(array[0].date).year()}-${dayjs(array[0].date).month()}-${dayjs(array[0].date).date()}`
+   const start = dayjs(`${eventDate} 09:00`)
+   const end = dayjs(`${eventDate} 16:00`)
 
-      diffArray.push(to.diff(from, 'minute') / 15);
+   intervalArray.push(start.diff(dayjs(array[0].start_time), "minute") / 15)
+
+   for (let i = 0; i < array.length; i++) {
+      const term = dayjs(array[i].end_time).diff(dayjs(array[i].start_time))
+
+      intervalArray.push(term)
+
+      const from = dayjs(array[i].end_time);
+      const to =  i != array.length-1 ? dayjs(array[i+1].start_time) : dayjs(`${eventDate} 16:00`)
+
+      const interval = to.diff(from, 'minute') / 15
+      intervalArray.push(interval);
    }
 
-   return diffArray;
+   intervalArray.push(dayjs(array[array.length -1].date).diff(end, "minute"))
+
+   return intervalArray;
 };
 
 export const filterAndGetInterval = (array: LiveEvent[]) => {
