@@ -5,8 +5,8 @@ export type SeparationEventList = {
 };
 
 export type EventInterval = {
-   [key in LiveStage] : ReadonlyArray<number>
-}
+   [key in LiveStage]: ReadonlyArray<number>;
+};
 
 export type LiveEventWithoutId = {
    title: string;

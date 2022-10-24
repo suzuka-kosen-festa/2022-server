@@ -6,13 +6,13 @@ import { LocalAuthGuard } from './local.auth.guard';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private service: AuthService) {}
+   constructor(private service: AuthService) {}
 
-  @UseGuards(LocalAuthGuard)
-  @Post()
-  login() {
-    return this.service.sign();
-  }
+   @UseGuards(LocalAuthGuard)
+   @Post()
+   login() {
+      return this.service.sign();
+   }
 
   @UseGuards(JwtAuthGuard) // jwtテスト用
   @Get('test')

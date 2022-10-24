@@ -20,7 +20,7 @@ async function bootstrap() {
    app.enableCors({
       origin: '*',
       allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
-    });
+   });
 
    const port = Number(process.env.PORT) || 7000;
    await app.listen(port);

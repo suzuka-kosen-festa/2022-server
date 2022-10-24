@@ -32,13 +32,13 @@ class GameStageEntity extends LiveEventEntity {
    stage: 'game';
 }
 export class SeparationEventListEntity {
-   @ApiProperty({type : [MainStageEntity]})
+   @ApiProperty({ type: [MainStageEntity] })
    main: ReadonlyArray<MainStageEntity> | [];
-   @ApiProperty({type : [MainStageEntity]})
+   @ApiProperty({ type: [MainStageEntity] })
    sub: ReadonlyArray<SubStageEntity> | [];
-   @ApiProperty({type : [MainStageEntity]})
+   @ApiProperty({ type: [MainStageEntity] })
    live: ReadonlyArray<LiveStageEntity> | [];
-   @ApiProperty({type : [MainStageEntity]})
+   @ApiProperty({ type: [MainStageEntity] })
    game: ReadonlyArray<GameStageEntity> | [];
 }
 

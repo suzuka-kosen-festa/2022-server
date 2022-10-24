@@ -3,11 +3,11 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService : JwtService){}
+   constructor(private readonly jwtService: JwtService) {}
 
-  sign(){
-    return {
-      access_token: this.jwtService.sign({ isAdmin: true }),
-    }
-  }
+   sign() {
+      return {
+         access_token: this.jwtService.sign({ isAdmin: true }),
+      };
+   }
 }
