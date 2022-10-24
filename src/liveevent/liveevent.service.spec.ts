@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LiveEvent, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { dateSort, filterAndGetInterval } from './lib/format';
 import { LiveeventService } from './liveevent.service';
 
 const eventArray: LiveEvent[] = [
@@ -56,6 +57,13 @@ const eventArray: LiveEvent[] = [
    },
 ];
 
+const intervalArray = {
+   "main": [1,1],
+   "sub": [],
+   "live": [],
+   "game": []
+}
+
 describe('LiveeventService', () => {
    let service: LiveeventService;
 
@@ -71,6 +79,7 @@ describe('LiveeventService', () => {
                   create: jest.fn().mockResolvedValue(eventArray[0]),
                   update: jest.fn().mockResolvedValue(eventArray[0]),
                   delete: jest.fn().mockResolvedValue(eventArray[0]),
+                  getEventInterval : jest.fn().mockResolvedValue(intervalArray)
                },
             },
             PrismaService,
@@ -126,6 +135,48 @@ describe('LiveeventService', () => {
 
       expect(data).toEqual(eventArray[0]);
    });
+
+   it("getEventInterval", async () =>{
+      const eventData : LiveEvent[] = [
+         {
+            id : 1,
+            title: "てすとイベント1",
+            descriptions: "説明1",
+            date: "2022-10-31 12:00",
+            venue: "会場1",
+            start_time: "2022-10-31 12:00",
+            end_time: "2022-10-31 12:30",
+            stage: "main"
+         },
+         {
+            id : 2,
+            title: "てすとイベント1",
+            descriptions: "説明1",
+            date: "2022-10-31 13:15",
+            venue: "会場1",
+            start_time: "2022-10-31 13:15",
+            end_time: "2022-10-31 13:30",
+            stage: "main"
+         },
+         {
+            id : 3,
+            title: "てすとイベント1",
+            descriptions: "説明1",
+            date: "2022-10-31 12:45",
+            venue: "会場1",
+            start_time: "2022-10-31 12:45",
+            end_time: "2022-10-31 13:00",
+            stage: "main"
+         }
+      ]
+
+      const sortData = dateSort(eventData,"2022-10-31")
+      const intervalData = filterAndGetInterval(sortData)
+      
+      const data = await service.getEventInterval({date : "2022-10-31"})
+      
+      expect(data).toEqual(intervalData)
+   })
 
    it('delete', async () => {
       const data = await service.delete({ id: 1 });
