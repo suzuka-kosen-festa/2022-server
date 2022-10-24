@@ -22,23 +22,25 @@ export const dateSort = (array: LiveEventWithoutId[], date: string) => {
 const substractArrayDate = (array: LiveEvent[]): number[] => {
    const intervalArray: number[] = [];
 
-   if(array.length != 0 ){
-      const eventDate = `${dayjs(array[0].date).year()}-${dayjs(array[0].date).month() +1 }-${dayjs(array[0].date).date()}`
-      
-      const start = dayjs(`${eventDate} 09:00`)
-      const end = dayjs(`${eventDate} 16:00`)
+   if (array.length != 0) {
+      const eventDate = `${dayjs(array[0].date).year()}-${dayjs(array[0].date).month() + 1}-${dayjs(
+         array[0].date,
+      ).date()}`;
 
-      intervalArray.push(dayjs(array[0].start_time).diff(start, "minute") / 15)
+      const start = dayjs(`${eventDate} 09:00`);
+      const end = dayjs(`${eventDate} 16:00`);
+
+      intervalArray.push(dayjs(array[0].start_time).diff(start, 'minute') / 15);
 
       for (let i = 0; i < array.length; i++) {
-         const term = dayjs(array[i].end_time).diff(dayjs(array[i].start_time),"minutes") /15
+         const term = dayjs(array[i].end_time).diff(dayjs(array[i].start_time), 'minutes') / 15;
 
-         intervalArray.push(term)
+         intervalArray.push(term);
 
          const from = dayjs(array[i].end_time);
-         const to =  i != array.length-1 ? dayjs(array[i+1].start_time) : dayjs(`${eventDate} 16:00`)
+         const to = i != array.length - 1 ? dayjs(array[i + 1].start_time) : dayjs(`${eventDate} 16:00`);
 
-         const interval = to.diff(from, 'minute') / 15
+         const interval = to.diff(from, 'minute') / 15;
          intervalArray.push(interval);
       }
    }
