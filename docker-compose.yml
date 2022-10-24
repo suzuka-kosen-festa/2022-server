@@ -19,7 +19,7 @@ services:
       - 7000:7000
 
   db:
-    image: postgres:14.4
+    image: postgres:14.5
     container_name: db
     ports:
       - 5432:5432
