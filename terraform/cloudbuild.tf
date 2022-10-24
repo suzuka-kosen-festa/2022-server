@@ -1,6 +1,6 @@
 resource "google_cloudbuild_worker_pool" "pool" {
   name     = "my-pool"
-  location = var.region
+  location = "us-west2"
   worker_config {
     disk_size_gb = 100
     machine_type = "e2-standard-2"
