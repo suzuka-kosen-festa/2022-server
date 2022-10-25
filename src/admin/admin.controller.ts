@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Guest, JHStudent, OB, Sponsor, Student } from '@prisma/client';
 import { AdminService } from './admin.service';
@@ -9,8 +9,10 @@ import {
    ExportStudentGuestEntity,
 } from './entity/admin.entity';
 import { ExportJhsGuest, ExportOb, ExportSponsor, ExportStudentGuest } from '../types/admin';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('admin')
+@UseGuards(JwtAuthGuard)
 @Controller('admin')
 export class AdminController {
    constructor(private readonly service: AdminService) {}
