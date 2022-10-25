@@ -35,9 +35,7 @@ COPY --from=build /build/dist /app/dist
 COPY --from=deps /deps/node_modules /app/node_modules
 COPY prisma ./prisma
 COPY package.json ./
-COPY ./start.sh ./
-
 
 EXPOSE 7000
 
-CMD ["./start.sh"]
+CMD ["npm","run","deploy"]
