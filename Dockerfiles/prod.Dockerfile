@@ -40,4 +40,4 @@ COPY ./start.sh ./
 
 EXPOSE 7000
 
-CMD ["npm","run","deploy"]
+CMD ["./start.sh"]
