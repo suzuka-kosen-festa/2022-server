@@ -19,6 +19,8 @@ export class ExportJhsGuestEntity {
    email: string;
    @ApiProperty()
    jhsId: string;
+   @ApiProperty()
+   name: string;
    @ApiProperty({ type: [ExportGuestEntity] })
    parents: ExportGuestEntity;
 }
@@ -27,12 +29,16 @@ export class ExportObEntity {
    @ApiProperty()
    email: string;
    @ApiProperty()
+   name : string
+   @ApiProperty()
    obId: string;
 }
 
 export class ExportSponsorEntity {
    @ApiProperty()
    email: string;
+   @ApiProperty()
+   name : string
    @ApiProperty()
    sponsorid: string;
 }

@@ -11,10 +11,12 @@ export type ExportJhsGuest = {
 
 export type ExportOb = {
    email: string;
+   name: string;
    obId: string;
 };
 
 export type ExportSponsor = {
    email: string;
+   name: string;
    sponsorId: string;
 };

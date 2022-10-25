@@ -562,6 +562,7 @@ describe('App (e2e)', () => {
          const expectData = [
             {
                email: obData.email,
+               name: obData.name,
                obId: 'O' + obResData.body.obId,
             },
          ];
@@ -592,6 +593,7 @@ describe('App (e2e)', () => {
          const expectData = [
             {
                email: sponsorData.email,
+               name: sponsorData.name,
                sponsorId: 'S' + sponsorResData.body.sponsorId,
             },
          ];
