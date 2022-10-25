@@ -1,6 +1,6 @@
 resource "google_cloudbuild_worker_pool" "pool" {
   name     = "my-pool"
-  location = "us-west2"
+  location = "us-central1"
   worker_config {
     disk_size_gb = 100
     machine_type = "e2-standard-2"
@@ -8,7 +8,7 @@ resource "google_cloudbuild_worker_pool" "pool" {
 }
 
 resource "google_cloudbuild_trigger" "include-build-logs-trigger" {
-  location = var.region
+  location = "us-central1"
   name     = "container-builder"
   filename = "./terraform/cloudbuild.yaml"
 
