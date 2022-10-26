@@ -45,7 +45,7 @@ model JHStudent {
   jhsId   String    @unique @default(uuid())
   age     String
   name    String
-  email   String    @unique
+  email   String    
   parents Guest[]
   History History[]
 }
