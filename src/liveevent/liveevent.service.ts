@@ -29,7 +29,6 @@ export class LiveeventService {
       });
 
       const filterData = dateSort(allData, where.date as string);
-
       return formatEvent(filterData);
    }
 

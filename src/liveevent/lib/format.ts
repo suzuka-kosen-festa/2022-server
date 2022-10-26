@@ -75,6 +75,7 @@ export const formatEvent = (array: LiveEvent[]): SeparationEventList => {
       sub: subStage,
       live: liveStage,
       game: gameStage,
+      interval : filterAndGetInterval(array)
    };
 
    return object;
