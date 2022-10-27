@@ -8,7 +8,6 @@ import { SponsorEntity, SponsorWithHistoryEntity } from './entity/sponsor.entity
 import { SponsorService } from './sponsor.service';
 
 @ApiTags('sponsor')
-@UseGuards(JwtAuthGuard)
 @Controller('sponsor')
 export class SponsorController {
    constructor(private readonly service: SponsorService) {}
