@@ -29,7 +29,7 @@ export class ExportObEntity {
    @ApiProperty()
    email: string;
    @ApiProperty()
-   name : string
+   name: string;
    @ApiProperty()
    obId: string;
 }
@@ -38,7 +38,7 @@ export class ExportSponsorEntity {
    @ApiProperty()
    email: string;
    @ApiProperty()
-   name : string
+   name: string;
    @ApiProperty()
    sponsorid: string;
 }
