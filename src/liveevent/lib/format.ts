@@ -29,9 +29,9 @@ const substractArrayDate = (array: LiveEvent[]): number[] => {
 
       const start = dayjs(`${eventDate} 09:00`);
       const end = dayjs(`${eventDate} 16:00`);
-      const startDiff = dayjs(array[0].start_time).diff(start, 'minute')
+      const startDiff = dayjs(array[0].start_time).diff(start, 'minute');
 
-      if(startDiff != 0){
+      if (startDiff != 0) {
          intervalArray.push(dayjs(array[0].start_time).diff(start, 'minute') / 15);
       }
       for (let i = 0; i < array.length; i++) {
@@ -41,9 +41,9 @@ const substractArrayDate = (array: LiveEvent[]): number[] => {
 
          const from = dayjs(array[i].end_time);
          const to = i != array.length - 1 ? dayjs(array[i + 1].start_time) : end;
-         
+
          const interval = to.diff(from, 'minute') / 15;
-         if(interval != 0){
+         if (interval != 0) {
             intervalArray.push(interval);
          }
       }
@@ -79,7 +79,7 @@ export const formatEvent = (array: LiveEvent[]): SeparationEventList => {
       sub: subStage,
       live: liveStage,
       game: gameStage,
-      interval : filterAndGetInterval(array)
+      interval: filterAndGetInterval(array),
    };
 
    return object;

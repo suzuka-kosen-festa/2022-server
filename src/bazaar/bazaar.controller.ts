@@ -1,8 +1,7 @@
 // eslint-disable-next-line no-redeclare
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Bazaar, BazaarType, Prisma } from '@prisma/client';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { BazaarWithId, BazaarWithoutId } from '../types/bazaar';
 import { BazaarService } from './bazaar.service';
 import { CreateBazaarDto, UpdateBazaarDto } from './dto/bazaar.dto';

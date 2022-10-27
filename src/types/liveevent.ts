@@ -2,7 +2,7 @@ import { LiveEvent, LiveStage } from './prisma';
 
 export type SeparationEventList = {
    [key in LiveStage]: LiveEvent[] | [];
-} & {interval: EventInterval}
+} & { interval: EventInterval };
 
 export type EventInterval = {
    [key in LiveStage]: ReadonlyArray<number>;

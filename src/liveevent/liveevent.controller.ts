@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-redeclare
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LiveEvent, Prisma } from '@prisma/client';
 import { CreateEventDto, UpdateEventDto } from './dto/liveEvent.sto';
@@ -11,7 +11,6 @@ import {
 } from './entity/liveEvent.entity';
 import { LiveeventService } from './liveevent.service';
 import { EventInterval, SeparationEventList } from '../types/liveevent';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('LiveEvent')
 @Controller('liveevent')
