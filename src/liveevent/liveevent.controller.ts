@@ -14,7 +14,6 @@ import { EventInterval, SeparationEventList } from '../types/liveevent';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('LiveEvent')
-@UseGuards(JwtAuthGuard)
 @Controller('liveevent')
 export class LiveeventController {
    constructor(private readonly service: LiveeventService) {}

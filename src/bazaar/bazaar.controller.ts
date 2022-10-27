@@ -9,7 +9,6 @@ import { CreateBazaarDto, UpdateBazaarDto } from './dto/bazaar.dto';
 import { BazaarEntity, BazaarWithoutIdEntity } from './entity/bazaar.entity';
 
 @ApiTags('Bazaar')
-@UseGuards(JwtAuthGuard)
 @Controller('bazaar')
 export class BazaarController {
    constructor(private readonly service: BazaarService) {}
