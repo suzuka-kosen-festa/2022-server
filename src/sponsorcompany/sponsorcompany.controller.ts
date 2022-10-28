@@ -8,7 +8,6 @@ import { SponsorComEntity } from './entity/sponsorCom.entity';
 import { SponsorcompanyService } from './sponsorcompany.service';
 
 @ApiTags('SponsorCompany')
-@UseGuards(JwtAuthGuard)
 @Controller('sponsorcompany')
 export class SponsorcompanyController {
    constructor(private readonly service: SponsorcompanyService) {}
