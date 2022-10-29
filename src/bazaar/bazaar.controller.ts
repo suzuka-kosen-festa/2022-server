@@ -33,30 +33,30 @@ export class BazaarController {
       return this.service.getByType({ group_type: type });
    }
 
-   @Post()
-   @ApiOperation({ summary: 'レコードの作成' })
-   @ApiCreatedResponse({ type: BazaarEntity })
-   async createBazaar(@Body() data: CreateBazaarDto): Promise<Bazaar> {
-      return this.service.create(data);
-   }
+   // @Post()
+   // @ApiOperation({ summary: 'レコードの作成' })
+   // @ApiCreatedResponse({ type: BazaarEntity })
+   // async createBazaar(@Body() data: CreateBazaarDto): Promise<Bazaar> {
+   //    return this.service.create(data);
+   // }
 
-   @Put(':id')
-   @ApiOperation({ summary: 'レコードのアップデート' })
-   @ApiOkResponse({ type: BazaarEntity })
-   async updateBazaar(@Param('id') id: string, @Body() data: UpdateBazaarDto): Promise<Bazaar> {
-      return this.service.update({ where: { id: Number(id) }, data });
-   }
+   // @Put(':id')
+   // @ApiOperation({ summary: 'レコードのアップデート' })
+   // @ApiOkResponse({ type: BazaarEntity })
+   // async updateBazaar(@Param('id') id: string, @Body() data: UpdateBazaarDto): Promise<Bazaar> {
+   //    return this.service.update({ where: { id: Number(id) }, data });
+   // }
 
-   @Delete('/id/:id')
-   @ApiOperation({ summary: 'レコードの削除' })
-   @ApiOkResponse({ type: BazaarEntity })
-   async deleteBazaar(@Param('id') id: string): Promise<Bazaar> {
-      return this.service.delete({ id: Number(id) });
-   }
+   // @Delete('/id/:id')
+   // @ApiOperation({ summary: 'レコードの削除' })
+   // @ApiOkResponse({ type: BazaarEntity })
+   // async deleteBazaar(@Param('id') id: string): Promise<Bazaar> {
+   //    return this.service.delete({ id: Number(id) });
+   // }
 
-   @Delete('/all')
-   @ApiOperation({ summary: 'レコードを全削除' })
-   async deleteAllBazaar(): Promise<Prisma.BatchPayload> {
-      return this.service.deleteAll();
-   }
+   // @Delete('/all')
+   // @ApiOperation({ summary: 'レコードを全削除' })
+   // async deleteAllBazaar(): Promise<Prisma.BatchPayload> {
+   //    return this.service.deleteAll();
+   // }
 }

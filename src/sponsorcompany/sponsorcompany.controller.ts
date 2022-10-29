@@ -26,45 +26,45 @@ export class SponsorcompanyController {
       return this.service.getById({ id: Number(id) });
    }
 
-   @Post()
-   @ApiOperation({ summary: 'レコード作成' })
-   @ApiOkResponse({ type: SponsorComEntity })
-   async createSponsorCom(@Body() data: CreateSponsorComDto): Promise<SponsorCompany> {
-      return this.service.create(data);
-   }
+   // @Post()
+   // @ApiOperation({ summary: 'レコード作成' })
+   // @ApiOkResponse({ type: SponsorComEntity })
+   // async createSponsorCom(@Body() data: CreateSponsorComDto): Promise<SponsorCompany> {
+   //    return this.service.create(data);
+   // }
 
-   @Post('many')
-   @ApiOperation({ summary: 'レコード作成' })
-   async createManySponsorCom(@Body() data: Prisma.SponsorCompanyCreateManyInput): Promise<Prisma.BatchPayload> {
-      return this.service.createMany(data);
-   }
+   // @Post('many')
+   // @ApiOperation({ summary: 'レコード作成' })
+   // async createManySponsorCom(@Body() data: Prisma.SponsorCompanyCreateManyInput): Promise<Prisma.BatchPayload> {
+   //    return this.service.createMany(data);
+   // }
 
-   @Put(':id')
-   @ApiOperation({ summary: 'レコード更新' })
-   @ApiOkResponse({ type: SponsorComEntity })
-   async updateSponsorCom(@Param('id') id: string, @Body() data: UpdateSponsorComDto): Promise<SponsorCompany> {
-      return this.service.update({
-         where: {
-            id: Number(id),
-         },
-         data: {
-            name: data.name,
-         },
-      });
-   }
+   // @Put(':id')
+   // @ApiOperation({ summary: 'レコード更新' })
+   // @ApiOkResponse({ type: SponsorComEntity })
+   // async updateSponsorCom(@Param('id') id: string, @Body() data: UpdateSponsorComDto): Promise<SponsorCompany> {
+   //    return this.service.update({
+   //       where: {
+   //          id: Number(id),
+   //       },
+   //       data: {
+   //          name: data.name,
+   //       },
+   //    });
+   // }
 
-   @Delete('/id/:id')
-   @ApiOperation({ summary: 'レコード削除' })
-   @ApiOkResponse({ type: SponsorComEntity })
-   async deleteSponsorCom(@Param('id') id: string): Promise<SponsorCompany> {
-      return this.service.delete({
-         id: Number(id),
-      });
-   }
+   // @Delete('/id/:id')
+   // @ApiOperation({ summary: 'レコード削除' })
+   // @ApiOkResponse({ type: SponsorComEntity })
+   // async deleteSponsorCom(@Param('id') id: string): Promise<SponsorCompany> {
+   //    return this.service.delete({
+   //       id: Number(id),
+   //    });
+   // }
 
-   @Delete('/all')
-   @ApiOperation({ summary: 'レコード全削除' })
-   async deleteAllSponsorCom(): Promise<Prisma.BatchPayload> {
-      return this.service.deleteAll();
-   }
+   // @Delete('/all')
+   // @ApiOperation({ summary: 'レコード全削除' })
+   // async deleteAllSponsorCom(): Promise<Prisma.BatchPayload> {
+   //    return this.service.deleteAll();
+   // }
 }

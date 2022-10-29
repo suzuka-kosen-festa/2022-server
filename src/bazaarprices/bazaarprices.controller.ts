@@ -28,17 +28,17 @@ export class BazaarpricesController {
       return this.service.getById({ id: Number(id) });
    }
 
-   @Put(':id')
-   @ApiOperation({ summary: 'idで更新' })
-   @ApiOkResponse({ type: BazaarEntity })
-   async updateBazaarPrices(@Param('id') id: string, @Body() data: UpdatePricesDto): Promise<BazaarPrices> {
-      return this.service.update({ where: { id: Number(id) }, data });
-   }
+   // @Put(':id')
+   // @ApiOperation({ summary: 'idで更新' })
+   // @ApiOkResponse({ type: BazaarEntity })
+   // async updateBazaarPrices(@Param('id') id: string, @Body() data: UpdatePricesDto): Promise<BazaarPrices> {
+   //    return this.service.update({ where: { id: Number(id) }, data });
+   // }
 
-   @Delete('/id/:id')
-   @ApiOperation({ summary: 'レコードの削除' })
-   @ApiOkResponse({ type: BazaarEntity })
-   async deleteBazaarPrices(@Param('id') id: string): Promise<BazaarPrices> {
-      return this.service.delete({ id: Number(id) });
-   }
+   // @Delete('/id/:id')
+   // @ApiOperation({ summary: 'レコードの削除' })
+   // @ApiOkResponse({ type: BazaarEntity })
+   // async deleteBazaarPrices(@Param('id') id: string): Promise<BazaarPrices> {
+   //    return this.service.delete({ id: Number(id) });
+   // }
 }
