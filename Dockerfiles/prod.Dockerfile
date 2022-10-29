@@ -1,4 +1,4 @@
-FROM node:16 AS build
+FROM node:19 AS build
 
 WORKDIR /build
 
@@ -15,7 +15,7 @@ yarn run prisma generate
 COPY . ./
 RUN yarn build
 
-FROM node:16 AS deps
+FROM node:19 AS deps
 
 WORKDIR /deps
 
@@ -25,7 +25,7 @@ COPY package.json yarn.lock ./
 
 RUN yarn install --immutable
 
-FROM node:16
+FROM node:19
 
 WORKDIR /app
 
