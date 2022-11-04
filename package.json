@@ -24,7 +24,7 @@
     "test:actions": "yarn prisma migrate reset --force && prisma migrate dev && yarn test:e2e"
   },
   "dependencies": {
-    "@nestjs/axios": "0.1.0",
+    "@nestjs/axios": "1.0.0",
     "@nestjs/common": "9.1.6",
     "@nestjs/core": "9.1.6",
     "@nestjs/jwt": "9.0.0",
