@@ -1,9 +1,7 @@
 // eslint-disable-next-line no-redeclare
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Prisma, SponsorCompany } from '@prisma/client';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CreateSponsorComDto, UpdateSponsorComDto } from './dto/sponsorCompany.dto';
+import { SponsorCompany } from '@prisma/client';
 import { SponsorComEntity } from './entity/sponsorCom.entity';
 import { SponsorcompanyService } from './sponsorcompany.service';
 
